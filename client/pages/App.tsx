@@ -7,8 +7,10 @@ export default function App() {
   return (
     <>
       <Header />
-      <h1 className="text-2xl font-bold underline">Hello world!</h1>
-      <Outlet />
+      <h1 className="text-2xl font-bold underline">Hello world People!</h1>
+      <div className="app">
+        <Outlet />
+      </div>
       <Footer />
     </>
   )

@@ -22,22 +22,22 @@ const SOCIAL_NETWORKS = [
   {
     label: 'Facebook',
     url: `https://facebook.com/SMTanimur`,
-    icon: <Icons.facebook className="w-3" />,
+    // icon: <Icons.facebook className="w-3" />,
   },
 
   {
     label: 'Twitter',
     url: `https://twitter.com/SMTanimur`,
-    icon: <Icons.twitter className="w-5" />,
+    // icon: <Icons.twitter className="w-5" />,
   },
   {
     label: 'GitHub',
     url: `https://github.com/SMTanimur`,
-    icon: <Icons.gitHub className="w-5" />,
+    // icon: <Icons.gitHub className="w-5" />,
   },
 ]
 
-export const Footer = () => {
+export default function Footer() {
   return (
     <footer className="text-white">
       <div className="bg-gray-700">
@@ -132,7 +132,7 @@ export const Footer = () => {
                     rel="noopener noreferrer"
                     className="hover:scale-105"
                   >
-                    {network.icon}
+                    icon
                   </Link>
                 ))}
               </div>
