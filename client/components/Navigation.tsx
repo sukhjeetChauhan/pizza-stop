@@ -7,7 +7,7 @@ export default function Navigation() {
     <div className="border border-slate-300">
       <ul className="flex list-none ml-20 ">
         {pages.map((item) => (
-          <li className="p-3 border border-slate-300">
+          <li key={item} className="p-3 border border-slate-300">
             <Button className="bg-white text-red-500 uppercase">{item}</Button>
           </li>
         ))}
