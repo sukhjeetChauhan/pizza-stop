@@ -1,30 +1,68 @@
-import styled from 'styled-components'
-import tw from 'twin.macro'
+// import React from 'react';
 
-const Container = tw.div`relative`
+const Container = ({ children }) => <div className="relative">{children}</div>
 
-const SingleColumn = tw.div`max-w-screen-xl mx-auto py-20 lg:py-24`
+const SingleColumn = ({ children }) => (
+  <div className="max-w-screen-xl mx-auto py-20 lg:py-24">{children}</div>
+)
 
-const HeadingInfoContainer = tw.div`flex flex-col items-center`
-const HeadingDescription = tw.p`mt-4 font-medium text-gray-600 text-center max-w-sm`
+const HeadingInfoContainer = ({ children }) => (
+  <div className="flex flex-col items-center">{children}</div>
+)
 
-const Content = tw.div`mt-16`
+const HeadingDescription = ({ children }) => (
+  <p className="mt-4 font-medium text-gray-600 text-center max-w-sm">
+    {children}
+  </p>
+)
 
-const Card = styled.div((props) => [
-  tw`mt-24 md:flex justify-center items-center`,
-  props.reversed ? tw`flex-row-reverse` : 'flex-row',
-])
-const Image = styled.div((props) => [
-  `background-image: url("${props.imageSrc}");`,
-  tw`rounded md:w-1/2 lg:w-5/12 xl:w-1/3 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4 lg:mx-8`,
-])
-const Details = tw.div`mt-4 md:mt-0 md:max-w-md mx-4 sm:mx-8 md:mx-4 lg:mx-8`
-const Subtitle = tw.div`font-bold tracking-wide text-secondary-100`
-const Title = tw.h4`text-3xl font-bold text-gray-900`
-const Description = tw.p`mt-2 text-sm leading-loose`
-const Link = tw.a`inline-block mt-4 text-sm text-primary-500 font-bold cursor-pointer transition duration-300 border-b-2 border-transparent hover:border-primary-500`
+const Content = ({ children }) => <div className="mt-16">{children}</div>
 
-export default () => {
+const Card = ({ children, reversed }) => (
+  <div
+    className={`mt-24 md:flex justify-center items-center ${
+      reversed ? 'flex-row-reverse' : 'flex-row'
+    }`}
+  >
+    {children}
+  </div>
+)
+
+const Image = ({ imageSrc }) => (
+  <div
+    className="rounded md:w-1/2 lg:w-5/12 xl:w-1/3 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4 lg:mx-8"
+    style={{ backgroundImage: `url("${imageSrc}")` }}
+  />
+)
+
+const Details = ({ children }) => (
+  <div className="mt-4 md:mt-0 md:max-w-md mx-4 sm:mx-8 md:mx-4 lg:mx-8">
+    {children}
+  </div>
+)
+
+const Subtitle = ({ children }) => (
+  <div className="font-bold tracking-wide text-secondary-100">{children}</div>
+)
+
+const Title = ({ children }) => (
+  <h4 className="text-3xl font-bold text-gray-900">{children}</h4>
+)
+
+const Description = ({ children }) => (
+  <p className="mt-2 text-sm leading-loose">{children}</p>
+)
+
+const Link = ({ href, children }) => (
+  <a
+    href={href}
+    className="inline-block mt-4 text-sm text-primary-500 font-bold cursor-pointer transition duration-300 border-b-2 border-transparent hover:border-primary-500"
+  >
+    {children}
+  </a>
+)
+
+const PopularEvents = () => {
   const cards = [
     {
       imageSrc:
@@ -35,7 +73,6 @@ export default () => {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       url: 'https://timerse.com',
     },
-
     {
       imageSrc:
         'https://images.unsplash.com/photo-1543423924-b9f161af87e4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
@@ -45,7 +82,6 @@ export default () => {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       url: 'https://timerse.com',
     },
-
     {
       imageSrc:
         'https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=658&q=80',
@@ -67,7 +103,6 @@ export default () => {
             professionals.
           </HeadingDescription>
         </HeadingInfoContainer>
-
         <Content>
           {cards.map((card, i) => (
             <Card key={i} reversed={i % 2 === 1}>
@@ -85,3 +120,5 @@ export default () => {
     </Container>
   )
 }
+
+export default PopularEvents
