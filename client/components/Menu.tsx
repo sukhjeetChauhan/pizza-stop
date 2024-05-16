@@ -35,12 +35,8 @@ const Card = styled(motion.a)`
     margin-right: 0;
   }
 `
-
 const CardImageContainer = styled.div<CardImageContainerProps>`
-  ${({ imageSrc }) =>
-    css`
-      background-image: url('${imageSrc}');
-    `}
+  background-image: ${(props) => `url('${props.imagesrc}')`};
   height: 14rem; /* Equivalent to h-56 */
   @media (min-width: 1280px) {
     height: 16rem; /* Equivalent to xl:h-64 */
@@ -213,7 +209,7 @@ export default ({ heading = 'Checkout the Menu' }) => {
                 whileHover="hover"
                 animate="rest"
               >
-                <CardImageContainer imageSrc={card.imageSrc}>
+                <CardImageContainer imagesrc={card.imageSrc}>
                   <CardRatingContainer>
                     <CardRating>
                       <StarIcon />
