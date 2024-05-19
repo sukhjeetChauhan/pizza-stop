@@ -9,7 +9,7 @@ const routes = createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<Landing />} />
     </Route>
-    <Route path="/order" element={<Order />} />
+    <Route path="/order/:name" element={<Order />} />
   </>
 )
 

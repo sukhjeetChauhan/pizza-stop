@@ -7,6 +7,7 @@ import { Container, ContentWithPaddingXl } from '../utils/Containers'
 
 import { ReactNode } from 'react'
 import { menuItem } from '../../types/menu'
+// import { useParams } from 'react-router-dom'
 
 interface CardImageContainerProps {
   imagesrc: string
