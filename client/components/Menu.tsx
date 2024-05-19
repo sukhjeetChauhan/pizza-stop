@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import Button from '../utils/Button'
 
 import { Container, ContentWithPaddingXl } from '../utils/Containers'
@@ -9,7 +9,7 @@ import { ReactNode } from 'react'
 import { menuItem } from '../../types/menu'
 
 interface CardImageContainerProps {
-  imageSrc: string
+  imagesrc: string
 }
 
 interface Props {
@@ -200,7 +200,7 @@ export default ({ heading = 'Checkout the Menu' }) => {
           {menu.map((card, index) => (
             <div
               key={index}
-              className="mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12"
+              className="mt-10 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 sm:pr-10 md:pr-6 lg:pr-12"
             >
               <Card
                 className="group"
