@@ -8,3 +8,12 @@ export interface menuItem {
   reviews: string
   url: string
 }
+
+export interface MenuItem {
+  id: number
+  name: string
+  price: number
+  rating: number
+  imgUrl: string
+  description: string
+}

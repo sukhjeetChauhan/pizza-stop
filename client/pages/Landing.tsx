@@ -1,5 +1,5 @@
 import Features from '../components/Features'
-import Menu from '../components/Menu'
+// import Menu from '../components/Menu'
 import Button from '../utils/Button'
 
 export default function Landing() {
@@ -11,7 +11,6 @@ export default function Landing() {
         </Button>
       </div>
       <Features />
-      <Menu />
     </>
   )
 }

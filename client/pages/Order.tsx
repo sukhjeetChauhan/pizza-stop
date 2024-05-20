@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom'
 import Header from '../components/Header'
 import Menu from '../components/Menu'
 import Sidebar from '../components/Sidebar'
+import { productData } from '../../data/products'
 
 export default function Order() {
   const { name } = useParams()
-  console.log(name)
+  console.log(productData)
+
   return (
     <div style={{ width: '77%' }}>
       <main>
@@ -14,14 +16,14 @@ export default function Order() {
           <Header />
         </div>
         <div className="px-16">
-          <Menu />
+          <Menu data={productData[name]} />
         </div>
       </main>
       <aside
         style={{ width: '23%' }}
-        className="fixed top-0 right-0 h-screen bg-red-700"
+        className="fixed top-0 right-0 h-screen shadow-inner"
       >
-        <Sidebar />
+        <Sidebar data={productData.sides} />
       </aside>
     </div>
   )
