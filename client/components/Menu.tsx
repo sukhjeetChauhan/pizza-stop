@@ -4,6 +4,9 @@ import styled from 'styled-components'
 import Button from '../utils/Button'
 
 import { Container, ContentWithPaddingXl } from '../utils/Containers'
+import { useEffect, useRef, useState } from 'react'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import Modal from '../components/Modal'
 
 import { ReactNode } from 'react'
 import { menuItem, MenuItem } from '../../types/menu'
@@ -93,9 +96,7 @@ const CardTitle: React.FC<Props> = ({ children }) => (
   </h5>
 )
 
-const CardContent: React.FC<Props> = ({ children }) => (
-  <p className="mt-1 text-sm font-medium text-gray-600">{children}</p>
-)
+s
 
 const CardPrice: React.FC<Props> = ({ children }) => (
   <p className="mt-4 text-xl font-bold">{children}</p>
@@ -191,9 +192,30 @@ const StarIcon = () => (
 // ]
 
 export default ({ heading = 'Checkout the Menu', data }) => {
-  console.log(data)
+
+  const [modalStatus, setModalStatus] = useState(true)
+  const modalRef = useRef(null)
+  useEffect(() => {
+    if (modalRef.current) {
+      modalStatus
+        ? disableBodyScroll(modalRef.current)
+        : enableBodyScroll(modalRef.current)
+    }
+  }, [modalStatus])
+  
   const menu: MenuItem[] = data
   return (
+    <div>
+      </div>
+
+    {modalStatus && (
+      <div className="fixed top-0 left-0 z-10 h-screen w-screen bg-gray-800 opacity-50"></div>
+    )}
+    {modalStatus && (
+      <Modal setStatus={setModalStatus}>
+        <h1>Landing page modal</h1>
+      </Modal>
+  )}
     <Container>
       <ContentWithPaddingXl>
         <HeaderRow>
@@ -203,7 +225,7 @@ export default ({ heading = 'Checkout the Menu', data }) => {
           {menu.map((card, index) => (
             <div
               key={index}
-              className="mt-10 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 sm:pr-10 md:pr-6 lg:pr-12"
+              className="mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12"
             >
               <Card
                 className="group"

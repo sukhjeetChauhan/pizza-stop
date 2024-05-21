@@ -1,4 +1,6 @@
-export const productData = {
+import { ProductDataInterface } from '../types/productData'
+
+export const productData: ProductDataInterface = {
   pizzas: [
     {
       id: 1,

@@ -4,6 +4,11 @@ import Header from '../components/Header'
 import Menu from '../components/Menu'
 import Sidebar from '../components/Sidebar'
 import { productData } from '../../data/products'
+import { MenuItem } from '../../types/menu'
+
+// interface DataType {
+//   [key: string]: MenuItem[] // Adjust the type according to your data structure
+// }
 
 export default function Order() {
   const { name } = useParams()
@@ -16,7 +21,7 @@ export default function Order() {
           <Header />
         </div>
         <div className="px-16">
-          <Menu data={productData[name]} />
+          <Menu data={productData[name as string]} />
         </div>
       </main>
       <aside
