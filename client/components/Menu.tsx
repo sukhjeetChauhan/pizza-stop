@@ -1,112 +1,14 @@
-import { motion } from 'framer-motion'
-
-import styled from 'styled-components'
 import Button from '../utils/Button'
+import * as Components from '../utils/menuPageUtils'
 
 import { Container, ContentWithPaddingXl } from '../utils/Containers'
 import { useEffect, useRef, useState } from 'react'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import Modal from '../components/Modal'
 
-import { ReactNode } from 'react'
 import { menuItem, MenuItem } from '../../types/menu'
+import CustomizedOrder from './CustomizedOrder'
 // import { useParams } from 'react-router-dom'
-
-interface CardImageContainerProps {
-  imagesrc: string
-}
-
-interface Props {
-  children: ReactNode
-}
-
-const HeaderRow: React.FC<Props> = ({ children }) => (
-  <div className="flex justify-between items-center flex-col xl:flex-row">
-    {children}
-  </div>
-)
-
-const Card = styled(motion.a)`
-  background-color: #edf2f7; /* Adjusted color to match Tailwind's bg-gray-200 */
-  border-radius: 0.375rem;
-  display: block;
-  max-width: 20rem;
-  margin: auto;
-
-  @media (min-width: 640px) {
-    max-width: none;
-    margin-left: 0;
-    margin-right: 0;
-  }
-`
-const CardImageContainer = styled.div<CardImageContainerProps>`
-  background-image: ${(props) => `url('${props.imagesrc}')`};
-  height: 14rem; /* Equivalent to h-56 */
-  @media (min-width: 1280px) {
-    height: 16rem; /* Equivalent to xl:h-64 */
-  }
-  background-position: center;
-  background-size: cover;
-  position: relative;
-  border-top-left-radius: 0.375rem; /* Equivalent to rounded-t */
-  border-top-right-radius: 0.375rem; /* Equivalent to rounded-t */
-`
-
-const CardRatingContainer: React.FC<Props> = ({ children }) => (
-  <div className="leading-none absolute inline-flex bg-gray-100 bottom-0 left-0 ml-4 mb-4 rounded-full px-5 py-2 items-end">
-    {children}
-  </div>
-)
-
-const CardRating = styled.div`
-  margin-right: 0.25rem; /* Equivalent to mr-1 */
-  font-size: 0.875rem; /* Equivalent to text-sm */
-  font-weight: 600; /* Equivalent to font-bold */
-  display: flex;
-  align-items: flex-end;
-
-  svg {
-    width: 1rem; /* Equivalent to w-4 */
-    height: 1rem; /* Equivalent to h-4 */
-    fill: #f59e0b; /* Equivalent to text-orange-400 */
-    margin-right: 0.25rem; /* Equivalent to mr-1 */
-  }
-`
-
-const CardHoverOverlay = styled(motion.div)`
-  background-color: rgba(255, 255, 255, 0.5);
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const CardReview: React.FC<Props> = ({ children }) => (
-  <div className="font-medium text-xs text-gray-600">{children}</div>
-)
-
-const CardText: React.FC<Props> = ({ children }) => (
-  <div className="p-4 text-gray-900">{children}</div>
-)
-
-const CardTitle: React.FC<Props> = ({ children }) => (
-  <h5 className="text-lg font-semibold group-hover:text-primary-500">
-    {children}
-  </h5>
-)
-
-s
-
-const CardPrice: React.FC<Props> = ({ children }) => (
-  <p className="mt-4 text-xl font-bold">{children}</p>
-)
-
-const StarIcon = () => (
-  <svg viewBox="0 0 1792 1792">
-    <path d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5T1385 1619q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5T365 1569q0-6 2-20l86-500L89 695q-25-27-25-48 0-37 56-46l502-73L847 73q19-41 49-41t49 41l225 455 502 73q56 9 56 46z" />
-  </svg>
-)
 
 // const menu: menuItem[] = [
 //   {
@@ -192,8 +94,9 @@ const StarIcon = () => (
 // ]
 
 export default ({ heading = 'Checkout the Menu', data }) => {
-
-  const [modalStatus, setModalStatus] = useState(true)
+  const menu: MenuItem[] = data
+  const [modalStatus, setModalStatus] = useState(false)
+  const [modalData, setModalData] = useState<MenuItem>()
   const modalRef = useRef(null)
   useEffect(() => {
     if (modalRef.current) {
@@ -202,77 +105,88 @@ export default ({ heading = 'Checkout the Menu', data }) => {
         : enableBodyScroll(modalRef.current)
     }
   }, [modalStatus])
-  
-  const menu: MenuItem[] = data
+
+  function handleClick(data: MenuItem) {
+    setModalStatus(true)
+    console.log(data)
+    setModalData(data)
+  }
   return (
-    <div>
-      </div>
-
-    {modalStatus && (
-      <div className="fixed top-0 left-0 z-10 h-screen w-screen bg-gray-800 opacity-50"></div>
-    )}
-    {modalStatus && (
-      <Modal setStatus={setModalStatus}>
-        <h1>Landing page modal</h1>
-      </Modal>
-  )}
-    <Container>
-      <ContentWithPaddingXl>
-        <HeaderRow>
-          <h1>{heading}</h1>
-        </HeaderRow>
-        <div className="opacity-100 scale-100 flex mt-6 flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12">
-          {menu.map((card, index) => (
-            <div
-              key={index}
-              className="mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12"
-            >
-              <Card
-                className="group"
-                // href={card.url}
-                initial="rest"
-                whileHover="hover"
-                animate="rest"
+    <div ref={modalRef}>
+      {modalStatus && (
+        <div className="fixed top-0 left-0 z-10 h-screen w-screen bg-gray-800 opacity-50"></div>
+      )}
+      {modalStatus && (
+        <Modal>
+          <CustomizedOrder
+            data={modalData as MenuItem}
+            setModalStatus={setModalStatus}
+          />
+        </Modal>
+      )}
+      <Container>
+        <ContentWithPaddingXl>
+          <Components.HeaderRow>
+            <h1>{heading}</h1>
+          </Components.HeaderRow>
+          <div className="opacity-100 scale-100 flex mt-6 flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12">
+            {menu.map((card, index) => (
+              <div
+                key={index}
+                className="mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12"
               >
-                <CardImageContainer imagesrc={card.imgUrl}>
-                  <CardRatingContainer>
-                    <CardRating>
-                      <StarIcon />
-                      {card.rating}
-                    </CardRating>
-                    <CardReview>({card.rating})</CardReview>
-                  </CardRatingContainer>
-                  <CardHoverOverlay
-                    variants={{
-                      hover: {
-                        opacity: 1,
-                        height: 'auto',
-                      },
-                      rest: {
-                        opacity: 0,
-                        height: 0,
-                      },
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Button className="bg-green-500 text-white p-4 text-sm">
-                      Buy Now
-                    </Button>
-                  </CardHoverOverlay>
-                </CardImageContainer>
+                <Components.Card
+                  className="group"
+                  // href={card.url}
+                  initial="rest"
+                  whileHover="hover"
+                  animate="rest"
+                >
+                  <Components.CardImageContainer imagesrc={card.imgUrl}>
+                    <Components.CardRatingContainer>
+                      <Components.CardRating>
+                        <Components.StarIcon />
+                        {card.rating}
+                      </Components.CardRating>
+                      <Components.CardReview>
+                        ({card.rating})
+                      </Components.CardReview>
+                    </Components.CardRatingContainer>
+                    <Components.CardHoverOverlay
+                      variants={{
+                        hover: {
+                          opacity: 1,
+                          height: 'auto',
+                        },
+                        rest: {
+                          opacity: 0,
+                          height: 0,
+                        },
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Button
+                        onClick={() => handleClick(card)}
+                        className="bg-green-500 text-white p-4 text-sm"
+                      >
+                        Buy Now
+                      </Button>
+                    </Components.CardHoverOverlay>
+                  </Components.CardImageContainer>
 
-                <CardText>
-                  <CardTitle>{card.name}</CardTitle>
-                  {/* <CardContent>{card.content}</CardContent> */}
-                  <CardPrice>{card.price}</CardPrice>
-                </CardText>
-              </Card>
-            </div>
-          ))}
-        </div>
-      </ContentWithPaddingXl>
-      {/* <DecoratorBlob1 /> */}
-      {/* <DecoratorBlob2 /> */}
-    </Container>
+                  <Components.CardText>
+                    <Components.CardTitle>{card.name}</Components.CardTitle>
+                    {/* <CardContent>{card.content}</CardContent> */}
+                    <Components.CardPrice>{card.price}</Components.CardPrice>
+                  </Components.CardText>
+                </Components.Card>
+              </div>
+            ))}
+          </div>
+        </ContentWithPaddingXl>
+        {/* <DecoratorBlob1 /> */}
+        {/* <DecoratorBlob2 /> */}
+      </Container>
+    </div>
   )
 }

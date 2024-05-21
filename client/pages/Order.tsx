@@ -12,12 +12,12 @@ import { MenuItem } from '../../types/menu'
 
 export default function Order() {
   const { name } = useParams()
-  console.log(productData)
+  // console.log(productData)
 
   return (
     <div style={{ width: '77%' }}>
       <main>
-        <div className="sticky top-0 left-0 z-50 bg-white">
+        <div className="sticky top-0 left-0 z-10 bg-white">
           <Header />
         </div>
         <div className="px-16">
