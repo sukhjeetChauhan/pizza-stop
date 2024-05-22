@@ -89,7 +89,7 @@ export default function Landing() {
             </div>
             <div>
               <Button
-                className="p-3 w-72 bg-green-500 text-white my-2"
+                className="p-3 w-72 bg-green-500 text-white my-2 text-base"
                 onClick={handleOption}
               >
                 Done
