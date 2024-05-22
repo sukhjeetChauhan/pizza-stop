@@ -60,13 +60,13 @@ const Details: React.FC<ChildrenProps> = ({ children }) => (
   </div>
 )
 
-const Subtitle: React.FC<ChildrenProps> = ({ children }) => (
-  <div className="font-bold tracking-wide text-secondary-100">{children}</div>
-)
+// const Subtitle: React.FC<ChildrenProps> = ({ children }) => (
+//   <div className="font-bold tracking-wide text-secondary-100">{children}</div>
+// )
 
-const Title: React.FC<ChildrenProps> = ({ children }) => (
-  <h4 className="text-3xl font-bold text-gray-900">{children}</h4>
-)
+// const Title: React.FC<ChildrenProps> = ({ children }) => (
+//   <h4 className="text-3xl font-bold text-gray-900">{children}</h4>
+// )
 
 const Description: React.FC<ChildrenProps> = ({ children }) => (
   <p className="mt-2 text-sm leading-loose">{children}</p>
