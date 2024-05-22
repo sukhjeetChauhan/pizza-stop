@@ -7,7 +7,7 @@ export const productData: ProductDataInterface = {
       name: 'Margherita',
       price: 8.99,
       rating: 4.5,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582970-993f43f01c6c',
+      imgUrl: '/images/pizzas/Margherita-pizza-2.jpg',
       description:
         'Classic pizza with tomato sauce, mozzarella, and fresh basil.',
     },
@@ -16,7 +16,7 @@ export const productData: ProductDataInterface = {
       name: 'Pepperoni',
       price: 10.99,
       rating: 4.7,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582971-01f39b9d6204',
+      imgUrl: '/images/pizzas/Pepperoni-Pizza-Recipe-Sip-Bite-Go.jpg',
       description: 'Delicious pepperoni slices on a bed of melted cheese.',
     },
     {
@@ -24,7 +24,7 @@ export const productData: ProductDataInterface = {
       name: 'BBQ Chicken',
       price: 12.99,
       rating: 4.6,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582972-02f3f9d9d607',
+      imgUrl: '/images/pizzas/bbq-chicken-pizza-feature.jpg',
       description: 'Tangy BBQ sauce with grilled chicken and red onions.',
     },
     {
@@ -32,7 +32,8 @@ export const productData: ProductDataInterface = {
       name: 'Veggie Supreme',
       price: 9.99,
       rating: 4.4,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582973-03f4f8d8d504',
+      imgUrl:
+        '/images/pizzas/veg-supreme.6fcf716cd4ec19d7723f14b0b84459ec.1.jpg',
       description: 'Loaded with fresh vegetables and topped with mozzarella.',
     },
     {
@@ -40,7 +41,7 @@ export const productData: ProductDataInterface = {
       name: 'Hawaiian',
       price: 11.99,
       rating: 4.3,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582974-04f5f7d7d405',
+      imgUrl: '/images/pizzas/hawaiian-pizza-index-65f4641de4b08.jpg',
       description: 'Sweet pineapple and ham on a cheesy base.',
     },
     {
@@ -48,7 +49,8 @@ export const productData: ProductDataInterface = {
       name: 'Four Cheese',
       price: 13.99,
       rating: 4.8,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582975-05f6f6d6d306',
+      imgUrl:
+        '/images/pizzas/Quattro-formaggi-pizza-square-Inside-the-rustic-kitchen-500x375.jpg',
       description: 'A blend of mozzarella, cheddar, parmesan, and blue cheese.',
     },
   ],
@@ -109,7 +111,7 @@ export const productData: ProductDataInterface = {
       name: 'Garlic Bread',
       price: 4.99,
       rating: 4.7,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582982-0cf3efd0c5e3',
+      imgUrl: '/images/sides/Roundabout-Garlic-bread.jpg',
       description: 'Crispy garlic bread with a buttery topping.',
     },
     {
@@ -117,7 +119,7 @@ export const productData: ProductDataInterface = {
       name: 'Chicken Wings',
       price: 9.99,
       rating: 4.6,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582983-0df4fbd0b4f4',
+      imgUrl: '/images/sides/FEATURE_Air-Fryer-Chicken-Wings.jpg',
       description: 'Spicy and tangy chicken wings served with a dipping sauce.',
     },
     {
@@ -125,41 +127,37 @@ export const productData: ProductDataInterface = {
       name: 'Mozzarella Sticks',
       price: 6.99,
       rating: 4.5,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582984-0ef5fac0a3f5',
+      imgUrl: '/images/sides/Homemade-Mozzarella-Sticks-Recipe-1-of-1.jpg',
       description: 'Golden fried mozzarella sticks with marinara sauce.',
     },
-    {
-      id: 4,
-      name: 'Caesar Salad',
-      price: 7.99,
-      rating: 4.4,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582985-0ff6f9c092f6',
-      description: 'Crisp romaine lettuce with Caesar dressing and croutons.',
-    },
+
     {
       id: 5,
       name: 'Onion Rings',
       price: 5.99,
       rating: 4.3,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582986-0gg7f8b082f7',
+      imgUrl:
+        '/images/sides/207422_Old-Fashioned-Onion-Rings_82659_Photo-by-Tricia-Winterle-Jaeger-2000-a96820e27cb64cafa8c4925ad027a59d.jpg',
       description: 'Crunchy onion rings with a side of ketchup.',
     },
     {
       id: 6,
-      name: 'Stuffed Jalapenos',
+      name: 'Jalapenos Poppers',
       price: 6.99,
       rating: 4.2,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582987-0hh8f7a072f8',
+      imgUrl:
+        '/images/sides/20858-best-ever-jalapeno-poppers-DDMFS-4x3-69772a3d60cd4a63b6dfac0ff415db51.jpg',
       description: 'Jalapenos stuffed with cheese and fried to perfection.',
     },
   ],
   desserts: [
     {
       id: 1,
-      name: 'Chocolate Lava Cake',
+      name: 'Choc chip Dough Pint',
       price: 5.99,
       rating: 4.8,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582988-0ii9f69062f9',
+      imgUrl:
+        '/images/desserts/ETFZ-0000-0008__55800_2f833e81-5dbd-4932-81af-20388bff274b.webp',
       description: 'Warm chocolate cake with a gooey center.',
     },
     {
@@ -210,7 +208,7 @@ export const productData: ProductDataInterface = {
       name: 'Coca-Cola',
       price: 1.99,
       rating: 4.5,
-      imgUrl: 'https://images.unsplash.com/photo-1601924582994-0oofff0002ff',
+      imgUrl: '/images/drinks/coke-15l-AJ-600x600.jpg',
       description: 'Refreshing classic cola.',
     },
     {
