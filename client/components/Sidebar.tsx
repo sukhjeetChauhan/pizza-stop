@@ -14,7 +14,7 @@ export default function Sidebar({ data }: Props) {
         <h2 className="uppercase">Your Cart</h2>
         <span>-------------</span>
       </div>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center max-w-full">
         <CustomCarousel data={data} />
         <Button className="p-3 w-72 bg-green-500 text-white mb-2">
           Checkout

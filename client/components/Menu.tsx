@@ -169,7 +169,7 @@ export default ({ heading = 'Checkout the Menu', data }) => {
                         onClick={() => handleClick(card)}
                         className="bg-green-500 text-white p-4 text-sm"
                       >
-                        Buy Now
+                        Add to Cart
                       </Button>
                     </Components.CardHoverOverlay>
                   </Components.CardImageContainer>

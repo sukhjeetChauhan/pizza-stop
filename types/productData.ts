@@ -2,7 +2,7 @@ import { MenuItem } from './menu'
 
 export interface ProductDataInterface {
   pizzas: MenuItem[]
-  'meal deals': MenuItem[]
+  deals: MenuItem[]
   sides: MenuItem[]
   desserts: MenuItem[]
   drinks: MenuItem[]

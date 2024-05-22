@@ -54,7 +54,7 @@ export const productData: ProductDataInterface = {
       description: 'A blend of mozzarella, cheddar, parmesan, and blue cheese.',
     },
   ],
-  'meal deals': [
+  deals: [
     {
       id: 1,
       name: 'Family Feast',

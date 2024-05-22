@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { MenuItem } from '../../types/menu'
 import '../styles/CustomCorousel.css'
+import Button from '../utils/Button'
 // import { Data } from '../models/models'
 
 // type ShowModalFunction = (data: Data) => void
@@ -75,20 +76,33 @@ function CustomCarousel({ data }: CustomCarouselProps) {
             className={'slider__item slider__item-active-' + (activeIndex + 1)}
             key={index}
           >
-            <div key={`${product.name} ${index}`} className="product-container">
-              <button
-                className="product-btn"
-                // onClick={() => showModal(product)}
-              >
-                <img key={index} src={product.imgUrl} alt={product.name} />
-              </button>
+            <div key={`${product.name} ${index}`} className="max-w-full flex">
+              <div className="w-1/3">
+                <img
+                  key={index}
+                  src={product.imgUrl}
+                  alt={product.name}
+                  className="w-full h-full"
+                />
+              </div>
+              <div className="bg-green-50 w-2/3 flex">
+                <div>
+                  <p className="text-sm font-medium p-2 max-w-full">
+                    {product.name}
+                  </p>
+                  <p className="p-2">{product.price}</p>
+                </div>
+                <div className="self-center">
+                  <Button className="bg-green-500 p-2 text-white">Add</Button>
+                </div>
+              </div>
             </div>
           </div>
         )
       })}
 
       <button
-        className="slider__btn-next"
+        className="slider__btn-next text-green-500"
         onClick={(e) => {
           e.preventDefault()
           slideNext()
@@ -97,7 +111,7 @@ function CustomCarousel({ data }: CustomCarouselProps) {
         {'>'}
       </button>
       <button
-        className="slider__btn-prev"
+        className="slider__btn-prev text-green-500"
         onClick={(e) => {
           e.preventDefault()
           slidePrev()
