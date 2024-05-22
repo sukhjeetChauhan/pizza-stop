@@ -4,7 +4,7 @@ import Header from '../components/Header'
 import Menu from '../components/Menu'
 import Sidebar from '../components/Sidebar'
 import { productData } from '../../data/products'
-import { MenuItem } from '../../types/menu'
+// import { MenuItem } from '../../types/menu'
 
 // interface DataType {
 //   [key: string]: MenuItem[] // Adjust the type according to your data structure
