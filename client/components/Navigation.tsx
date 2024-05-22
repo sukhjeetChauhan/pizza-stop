@@ -47,7 +47,7 @@ export default function Navigation() {
           >
             <Link to={`/order/${item}`}>
               <Button
-                className={`bg-white uppercase  ${
+                className={`uppercase  ${
                   active[item] ? 'bg-red-500 text-white' : 'bg-white'
                 }`}
                 onClick={() => setActiveState(item)}

@@ -14,17 +14,16 @@ interface CustomCarouselProps {
 function CustomCarousel({ data }: CustomCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [slideDone, setSlideDone] = useState(true)
-  const [timeID, setTimeID] = useState(0)
+  const [timeID, setTimeID] = useState<number | null>(null)
 
   useEffect(() => {
     if (slideDone) {
       setSlideDone(false)
-      setTimeID(
-        setTimeout(() => {
-          slideNext()
-          setSlideDone(true)
-        }, 5000)
-      )
+      const timeoutId = setTimeout(() => {
+        slideNext()
+        setSlideDone(true)
+      }, 5000)
+      setTimeID(timeoutId as unknown as number)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slideDone])
@@ -50,8 +49,8 @@ function CustomCarousel({ data }: CustomCarouselProps) {
   }
 
   const AutoPlayStop = () => {
-    if (timeID > 0) {
-      clearTimeout(timeID)
+    if ((timeID as number) > 0) {
+      clearTimeout(timeID as number)
       // setTimeID(0)
 
       setSlideDone(false)

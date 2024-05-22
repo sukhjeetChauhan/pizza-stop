@@ -72,14 +72,14 @@ const Description: React.FC<ChildrenProps> = ({ children }) => (
   <p className="mt-2 text-sm leading-loose">{children}</p>
 )
 
-const Link = ({ href, children }) => (
-  <a
-    href={href}
-    className="inline-block mt-4 text-sm text-primary-500 font-bold cursor-pointer transition duration-300 border-b-2 border-transparent hover:border-primary-500"
-  >
-    {children}
-  </a>
-)
+// const Link = ({ href, children }) => (
+//   <a
+//     href={href}
+//     className="inline-block mt-4 text-sm text-primary-500 font-bold cursor-pointer transition duration-300 border-b-2 border-transparent hover:border-primary-500"
+//   >
+//     {children}
+//   </a>
+// )
 
 const PopularEvents = () => {
   const cards = [

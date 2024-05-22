@@ -14,7 +14,7 @@ export default function CustomizedOrder({
   return (
     <div className="flex w-[45rem]">
       <div className="w-1/4 border-r-2 border-slate-300">
-        <img src="#"></img>
+        <img src="/images/Jalapeno pizza.webp" alt="modal pizza" />
       </div>
       <div className="w-3/4 flex flex-col items-center">
         <div className="w-full p-3 border-b-2 border-slate-300">

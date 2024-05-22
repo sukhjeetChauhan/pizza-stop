@@ -25,7 +25,7 @@ export default function Footer() {
   return (
     <footer className="text-white">
       <div className="bg-gray-700 flex justify-center">
-        <div className="container pt-14 pb-12 grid grid-cols-9 gap-5 md:gap-10 justify-between md:justify-start">
+        <div className="container px-10 pt-14 pb-12 grid grid-cols-9 gap-5 md:gap-10 justify-between md:justify-start">
           <div className="space-y-3 md:space-y-6 text-center xl:text-left col-span-12 xl:col-span-4">
             <h5 className="text-xl font-medium">Order Online</h5>
             <p className="text-gray-400">
