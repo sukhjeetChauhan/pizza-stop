@@ -303,3 +303,160 @@ export const productData: ProductDataInterface = {
     },
   ],
 }
+
+// [
+//   {
+//     "Value Range": [
+//       {
+//         "description": "Cream Fraiche base, garlic sauce, mozzarella, oregano",
+//         "imgUrl": "''",
+//         "name": "Cheesy Garlic",
+//         "price": 8.99
+//       },
+//       {
+//         "description": "Tomato base, ham, pineapple, mozzarella",
+//         "imgUrl": "''",
+//         "name": "Hawaiian",
+//         "price": 8.99
+//       },
+//       {
+//         "description": "Tomato base, lots of pepperoni, mozzarella",
+//         "imgUrl": "''",
+//         "name": "Pepperoni",
+//         "price": 8.99
+//       },
+//       {
+//         "description": "BBQ base, beef, onion, mozzarella",
+//         "imgUrl": "''",
+//         "name": "Beef & Onion",
+//         "price": 8.99
+//       },
+//       {
+//         "description": "Tomato base, pineapple, mozzarella",
+//         "imgUrl": "''",
+//         "name": "Pineapple Pizza",
+//         "price": 8.99
+//       },
+//       {
+//         "description": "Tomato base, ham, mozzarella",
+//         "imgUrl": "''",
+//         "name": "Ham & Cheese",
+//         "price": 8.99
+//       },
+//       {
+//         "description": "Tomato base, lots of cheese",
+//         "imgUrl": "''",
+//         "name": "Cheese",
+//         "price": 8.99
+//       },
+//       {
+//         "description": "Tomato base, bacon, mozzarella, aioli",
+//         "imgUrl": "''",
+//         "name": "Bacon & Aioli",
+//         "price": 8.99
+//       }
+//     ]
+//   },
+//   {
+//     "Favourite Range": [
+//       {
+//         "description": "Tomato base, mushroom, pepperoni, mozzarella, oregano",
+//         "imgUrl": "''",
+//         "name": "Manhattan",
+//         "price": 11.99
+//       },
+//       {
+//         "description": "Tomato base, tomato, mozzarella, oregano, basil swirl",
+//         "imgUrl": "''",
+//         "name": "Margherita",
+//         "price": 11.99
+//       },
+//       {
+//         "description": "Tomato base, double ham, double pineapple, diced bacon, onion, capsicum & mozzarella",
+//         "imgUrl": "''",
+//         "name": "Dough Boarder",
+//         "price": 11.99
+//       },
+//       {
+//         "description": "Tomato base, pepperoni, jalapenos, mozzarella",
+//         "imgUrl": "''",
+//         "name": "Spicy Pepperoni",
+//         "price": 11.99
+//       },
+//       {
+//         "description": "Tomato base, ham, pineapple, bacon, mozzarella",
+//         "imgUrl": "''",
+//         "name": "Pacificano",
+//         "price": 11.99
+//       },
+//       {
+//         "description": "Tomato base, mozzarella, string cheese, parmesan cheese",
+//         "imgUrl": "''",
+//         "name": "The Cheese Factor",
+//         "price": 11.99
+//       }
+//     ]
+//   },
+//   {
+//     "Chicken Range": [
+//       {
+//         "description": "BBQ base, Southern-style fried chicken, red onion, mozzarella, creamy ranch swirl",
+//         "imgUrl": "''",
+//         "name": "Fried Chicken and Bacon",
+//         "price": 12.99
+//       },
+//       {
+//         "description": "Tomato base, garlic sauce, caramelized onion, chicken, jalapenos, chili flakes, mozzarella",
+//         "imgUrl": "''",
+//         "name": "Chipotle Chicken and Caramelized Onion",
+//         "price": 12.99
+//       },
+//       {
+//         "description": "Tomato base, garlic sauce, spinach, fresh avocado, chicken, mozzarella, creamy basil swirl",
+//         "imgUrl": "''",
+//         "name": "Chicken and Avocado",
+//         "price": 12.99
+//       },
+//       {
+//         "description": "Cream Fraiche base, caramelized onion, spinach, mushrooms, onions, chicken, feta, jalapenos, peri peri and hollandaise swirl",
+//         "imgUrl": "''",
+//         "name": "The Runway",
+//         "price": 12.99
+//       },
+//       {
+//         "description": "Tomato base, spinach, onion, tomatoes, peri peri chicken, peri peri swirl",
+//         "imgUrl": "''",
+//         "name": "Peri Peri Chicken",
+//         "price": 12.99
+//       },
+//       {
+//         "description": "Cranberry base, spinach, tomatoes, chicken, mozzarella, cranberry swirl",
+//         "imgUrl": "''",
+//         "name": "Cranberry Chicken Island",
+//         "price": 12.99
+//       },
+//       {
+//         "description": "Butter sauce base, spinach, tomatoes, chicken, camembert, feta, cranberry swirl",
+//         "imgUrl": "''",
+//         "name": "Chicken Camembert & Feta",
+//         "price": 12.99
+//       },
+//       {
+//         "description": "BBQ base, onion, capsicum, tomatoes, mushrooms, chicken, hollandaise swirl",
+//         "imgUrl": "''",
+//         "name": "Indian Butter Chicken",
+//         "price": 12.99
+//       }
+//     ]
+//   },
+//   {
+//     "Meat Range": [
+//       {
+//         "description": "BBQ base, Angus beef, onions, mozzarella, mayo swirl",
+//         "imgUrl": "''",
+//         "name": "The Cheeseburger",
+//         "price": 9.99
+//       }
+//     ]
+//   }
+// ]
