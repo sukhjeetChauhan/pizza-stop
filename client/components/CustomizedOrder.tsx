@@ -13,7 +13,7 @@ export default function CustomizedOrder({
   }
   return (
     <div className="flex w-[45rem]">
-      <div className="w-1/4 border-r-2 border-slate-300 bg-[url('/images/Jalapeno pizza.webp')] bg-center">
+      <div className="w-1/4 border-r-2 border-slate-300] bg-center">
         <img
           className="w-screen"
           src="/images/Jalapeno pizza.webp"
