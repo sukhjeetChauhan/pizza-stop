@@ -5,6 +5,7 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import Modal from '../components/Modal'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+// import RegistrationForm from '../components/Login'
 
 export default function Landing() {
   const [modalStatus, setModalStatus] = useState(true)
@@ -107,6 +108,7 @@ export default function Landing() {
         </Link>
       </div>
       <Features />
+      {/* <RegistrationForm /> */}
     </div>
   )
 }

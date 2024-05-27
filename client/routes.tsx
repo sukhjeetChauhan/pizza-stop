@@ -3,6 +3,7 @@ import App from './pages/App.tsx'
 
 import Landing from './pages/Landing.tsx'
 import Order from './pages/Order.tsx'
+import Login from './components/Login.tsx'
 
 const routes = createRoutesFromElements(
   <>
@@ -10,6 +11,7 @@ const routes = createRoutesFromElements(
       <Route index element={<Landing />} />
     </Route>
     <Route path="/order/:name" element={<Order />} />
+    <Route path="/login" element={<Login />} />
   </>
 )
 
