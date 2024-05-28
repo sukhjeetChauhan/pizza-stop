@@ -1,5 +1,7 @@
 import Button from '../utils/Button'
 import { MenuItem } from '../../types/menu'
+import { Collapse } from 'react-collapse'
+import '../styles/CustomizedOrder.css'
 
 export default function CustomizedOrder({
   data,
@@ -28,6 +30,9 @@ export default function CustomizedOrder({
         <h2 className="text-xl font-semibold">
           First, select your size and crust
         </h2>
+        <Collapse isOpened={true}>
+          <div className="h-72">Random content</div>
+        </Collapse>
         <Button
           className="p-3 w-96 bg-green-500 text-white my-2"
           onClick={() => handleSubmit()}

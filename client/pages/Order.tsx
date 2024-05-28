@@ -4,6 +4,8 @@ import Header from '../components/Header'
 import Menu from '../components/Menu'
 import Sidebar from '../components/Sidebar'
 import { productData } from '../../data/products'
+import { useGetData } from '../../data/hooks'
+import { sortBasedOnType } from '../../data/data_manipulation'
 // import { MenuItem } from '../../types/menu'
 
 // interface DataType {
@@ -12,24 +14,43 @@ import { productData } from '../../data/products'
 
 export default function Order() {
   const { name } = useParams()
-  // console.log(productData)
+  const { data, isLoading, isError } = useGetData(name as string)
 
-  return (
-    <div style={{ width: '77%' }}>
-      <main>
-        <div className="sticky top-0 left-0 z-10 bg-white">
-          <Header />
-        </div>
-        <div className="px-16">
-          <Menu data={productData[name as string]} />
-        </div>
-      </main>
-      <aside
-        style={{ width: '23%' }}
-        className="fixed top-0 right-0 h-screen shadow-inner"
-      >
-        <Sidebar data={productData.sides} />
-      </aside>
-    </div>
-  )
+  if (isLoading) {
+    return <p>Loading ......</p>
+  }
+
+  if (isError) {
+    console.log('Error occured')
+  }
+  if (data) {
+    const { menu, hasType } = sortBasedOnType(data)
+    const menuTypeArr = Object.keys(menu)
+    console.log(menu)
+
+    return (
+      <div style={{ width: '77%' }}>
+        <main>
+          <div className="sticky top-0 left-0 z-10 bg-white">
+            <Header />
+          </div>
+          <div className="px-16">
+            {hasType ? (
+              menuTypeArr.map((item) => <Menu data={menu[item]} title={item} />)
+            ) : (
+              <Menu data={menu} title={'Menu'} />
+            )}
+
+            {/* <Menu data={menu} title={'Menu'} /> */}
+          </div>
+        </main>
+        <aside
+          style={{ width: '23%' }}
+          className="fixed top-0 right-0 h-screen shadow-inner"
+        >
+          <Sidebar data={productData.sides} />
+        </aside>
+      </div>
+    )
+  }
 }

@@ -5,7 +5,7 @@ export const productData: ProductDataInterface = {
     {
       id: 1,
       name: 'Margherita',
-      price_large: 8.99,
+      price: 8.99,
       rating: 4.5,
       imgUrl: '/images/pizzas/Margherita-pizza-2.jpg',
       description:
@@ -14,7 +14,7 @@ export const productData: ProductDataInterface = {
     {
       id: 2,
       name: 'Pepperoni',
-      price_large: 10.99,
+      price: 10.99,
       rating: 4.7,
       imgUrl: '/images/pizzas/Pepperoni-Pizza-Recipe-Sip-Bite-Go.jpg',
       description: 'Delicious pepperoni slices on a bed of melted cheese.',
@@ -22,7 +22,7 @@ export const productData: ProductDataInterface = {
     {
       id: 3,
       name: 'BBQ Chicken',
-      price_large: 14.99,
+      price: 14.99,
       rating: 4.6,
       imgUrl: '/images/pizzas/bbq-chicken-pizza-feature.jpg',
       description: 'Tangy BBQ sauce with grilled chicken and red onions.',
@@ -30,7 +30,7 @@ export const productData: ProductDataInterface = {
     {
       id: 4,
       name: 'Veggie Supreme',
-      price_large: 9.99,
+      price: 9.99,
       rating: 4.4,
       imgUrl:
         '/images/pizzas/veg-supreme.6fcf716cd4ec19d7723f14b0b84459ec.1.jpg',
@@ -39,7 +39,7 @@ export const productData: ProductDataInterface = {
     {
       id: 5,
       name: 'Hawaiian',
-      price_large: 11.99,
+      price: 11.99,
       rating: 4.3,
       imgUrl: '/images/pizzas/hawaiian-pizza-index-65f4641de4b08.jpg',
       description: 'Sweet pineapple and ham on a cheesy base.',
@@ -47,7 +47,7 @@ export const productData: ProductDataInterface = {
     {
       id: 6,
       name: 'Four Cheese',
-      price_large: 13.99,
+      price: 13.99,
       rating: 4.8,
       imgUrl:
         '/images/pizzas/Quattro-formaggi-pizza-square-Inside-the-rustic-kitchen-500x375.jpg',
@@ -58,7 +58,7 @@ export const productData: ProductDataInterface = {
     {
       id: 1,
       name: 'Family Feast',
-      price_large: 29.99,
+      price: 29.99,
       rating: 4.9,
       imgUrl: 'https://images.unsplash.com/photo-1601924582976-06f7f5d5d207',
       description:
@@ -67,7 +67,7 @@ export const productData: ProductDataInterface = {
     {
       id: 2,
       name: "Couple's Combo",
-      price_large: 19.99,
+      price: 19.99,
       rating: 4.7,
       imgUrl: 'https://images.unsplash.com/photo-1601924582977-07f8f4d4d108',
       description: 'One medium pizza, a side of wings, and two drinks.',
@@ -75,7 +75,7 @@ export const productData: ProductDataInterface = {
     {
       id: 3,
       name: 'Party Pack',
-      price_large: 49.99,
+      price: 49.99,
       rating: 4.8,
       imgUrl: 'https://images.unsplash.com/photo-1601924582978-08f9f3d3d009',
       description: 'Three large pizzas, two sides, and a 2-liter soda.',
@@ -83,7 +83,7 @@ export const productData: ProductDataInterface = {
     {
       id: 4,
       name: 'Lunch Special',
-      price_large: 14.99,
+      price: 14.99,
       rating: 4.6,
       imgUrl: 'https://images.unsplash.com/photo-1601924582979-09f0f2d2d8f0',
       description: 'Personal pizza with a side salad and a drink.',
@@ -91,7 +91,7 @@ export const productData: ProductDataInterface = {
     {
       id: 5,
       name: 'Solo Deal',
-      price_large: 8.99,
+      price: 8.99,
       rating: 4.4,
       imgUrl: 'https://images.unsplash.com/photo-1601924582980-0af1f1d1d7f1',
       description: 'Small pizza with a side of garlic knots.',
@@ -99,7 +99,7 @@ export const productData: ProductDataInterface = {
     {
       id: 6,
       name: 'Weekend Special',
-      price_large: 24.99,
+      price: 24.99,
       rating: 4.5,
       imgUrl: 'https://images.unsplash.com/photo-1601924582981-0bf2f0d0d6f2',
       description: 'Two large pizzas and a dessert of your choice.',
@@ -109,7 +109,7 @@ export const productData: ProductDataInterface = {
     {
       id: 1,
       name: 'Garlic Bread',
-      price_large: 4.99,
+      price: 4.99,
       rating: 4.7,
       imgUrl: '/images/sides/Roundabout-Garlic-bread.jpg',
       description: 'Crispy garlic bread with a buttery topping.',
@@ -117,7 +117,7 @@ export const productData: ProductDataInterface = {
     {
       id: 2,
       name: 'Chicken Wings',
-      price_large: 9.99,
+      price: 9.99,
       rating: 4.6,
       imgUrl: '/images/sides/FEATURE_Air-Fryer-Chicken-Wings.jpg',
       description: 'Spicy and tangy chicken wings served with a dipping sauce.',
@@ -125,7 +125,7 @@ export const productData: ProductDataInterface = {
     {
       id: 3,
       name: 'Mozzarella Sticks',
-      price_large: 6.99,
+      price: 6.99,
       rating: 4.5,
       imgUrl: '/images/sides/Homemade-Mozzarella-Sticks-Recipe-1-of-1.jpg',
       description: 'Golden fried mozzarella sticks with marinara sauce.',
@@ -134,7 +134,7 @@ export const productData: ProductDataInterface = {
     {
       id: 5,
       name: 'Onion Rings',
-      price_large: 5.99,
+      price: 5.99,
       rating: 4.3,
       imgUrl:
         '/images/sides/207422_Old-Fashioned-Onion-Rings_82659_Photo-by-Tricia-Winterle-Jaeger-2000-a96820e27cb64cafa8c4925ad027a59d.jpg',
@@ -143,7 +143,7 @@ export const productData: ProductDataInterface = {
     {
       id: 6,
       name: 'Jalapenos Poppers',
-      price_large: 6.99,
+      price: 6.99,
       rating: 4.2,
       imgUrl:
         '/images/sides/20858-best-ever-jalapeno-poppers-DDMFS-4x3-69772a3d60cd4a63b6dfac0ff415db51.jpg',
@@ -154,7 +154,7 @@ export const productData: ProductDataInterface = {
     {
       id: 1,
       name: 'Choc chip Dough Pint',
-      price_large: 5.99,
+      price: 5.99,
       rating: 4.8,
       imgUrl:
         '/images/desserts/ETFZ-0000-0008__55800_2f833e81-5dbd-4932-81af-20388bff274b.webp',
@@ -163,7 +163,7 @@ export const productData: ProductDataInterface = {
     {
       id: 2,
       name: 'Cheesecake',
-      price_large: 4.99,
+      price: 4.99,
       rating: 4.7,
       imgUrl: 'https://images.unsplash.com/photo-1601924582989-0jjaf58052fa',
       description: 'Creamy cheesecake with a graham cracker crust.',
@@ -171,7 +171,7 @@ export const productData: ProductDataInterface = {
     {
       id: 3,
       name: 'Tiramisu',
-      price_large: 6.99,
+      price: 6.99,
       rating: 4.6,
       imgUrl: 'https://images.unsplash.com/photo-1601924582990-0kkbf47042fb',
       description:
@@ -180,7 +180,7 @@ export const productData: ProductDataInterface = {
     {
       id: 4,
       name: 'Ice Cream Sundae',
-      price_large: 3.99,
+      price: 3.99,
       rating: 4.5,
       imgUrl: 'https://images.unsplash.com/photo-1601924582991-0llcf36032fc',
       description: 'Vanilla ice cream topped with chocolate sauce and nuts.',
@@ -188,7 +188,7 @@ export const productData: ProductDataInterface = {
     {
       id: 5,
       name: 'Apple Pie',
-      price_large: 4.99,
+      price: 4.99,
       rating: 4.4,
       imgUrl: 'https://images.unsplash.com/photo-1601924582992-0mmdd25022fd',
       description: 'Homemade apple pie with a flaky crust.',
@@ -196,7 +196,7 @@ export const productData: ProductDataInterface = {
     {
       id: 6,
       name: 'Brownie',
-      price_large: 3.99,
+      price: 3.99,
       rating: 4.3,
       imgUrl: 'https://images.unsplash.com/photo-1601924582993-0nneeee012fe',
       description: 'Rich and fudgy chocolate brownie.',
@@ -206,7 +206,7 @@ export const productData: ProductDataInterface = {
     {
       id: 1,
       name: 'Coca-Cola',
-      price_large: 1.99,
+      price: 1.99,
       rating: 4.5,
       imgUrl: '/images/drinks/coke-15l-AJ-600x600.jpg',
       description: 'Refreshing classic cola.',
@@ -214,7 +214,7 @@ export const productData: ProductDataInterface = {
     {
       id: 2,
       name: 'Lemonade',
-      price_large: 1.99,
+      price: 1.99,
       rating: 4.6,
       imgUrl: 'https://images.unsplash.com/photo-1601924582995-0ppggg1113ff',
       description: 'Freshly squeezed lemonade.',
@@ -222,7 +222,7 @@ export const productData: ProductDataInterface = {
     {
       id: 3,
       name: 'Iced Tea',
-      price_large: 1.99,
+      price: 1.99,
       rating: 4.4,
       imgUrl: 'https://images.unsplash.com/photo-1601924582996-0qqhhh2224ff',
       description: 'Cool and refreshing iced tea.',
@@ -230,7 +230,7 @@ export const productData: ProductDataInterface = {
     {
       id: 4,
       name: 'Orange Juice',
-      price_large: 2.99,
+      price: 2.99,
       rating: 4.7,
       imgUrl: 'https://images.unsplash.com/photo-1601924582997-0rriii3335ff',
       description: 'Freshly squeezed orange juice.',
@@ -238,7 +238,7 @@ export const productData: ProductDataInterface = {
     {
       id: 5,
       name: 'Mineral Water',
-      price_large: 1.49,
+      price: 1.49,
       rating: 4.2,
       imgUrl: 'https://images.unsplash.com/photo-1601924582998-0ssjjj4446ff',
       description: 'Pure and refreshing mineral water.',
@@ -246,7 +246,7 @@ export const productData: ProductDataInterface = {
     {
       id: 6,
       name: 'Sparkling Water',
-      price_large: 1.99,
+      price: 1.99,
       rating: 4.3,
       imgUrl: 'https://images.unsplash.com/photo-1601924582999-0ttkkk5557ff',
       description: 'Carbonated sparkling water.',
@@ -256,7 +256,7 @@ export const productData: ProductDataInterface = {
     {
       id: 1,
       name: 'Corporate Lunch',
-      price_large: 199.99,
+      price: 199.99,
       rating: 4.9,
       imgUrl: 'https://images.unsplash.com/photo-1601924583000-0uullk6668ff',
       description: 'Assorted sandwiches, salads, and drinks for 20 people.',
@@ -264,7 +264,7 @@ export const productData: ProductDataInterface = {
     {
       id: 2,
       name: 'Wedding Feast',
-      price_large: 499.99,
+      price: 499.99,
       rating: 4.8,
       imgUrl: 'https://images.unsplash.com/photo-1601924583001-0vvmmj7779ff',
       description: 'Gourmet meal with multiple courses for 50 guests.',
@@ -272,7 +272,7 @@ export const productData: ProductDataInterface = {
     {
       id: 3,
       name: 'Birthday Bash',
-      price_large: 299.99,
+      price: 299.99,
       rating: 4.7,
       imgUrl: 'https://images.unsplash.com/photo-1601924583002-0wwnnk888a0f',
       description: 'Finger foods, pizzas, and desserts for 30 people.',
@@ -280,7 +280,7 @@ export const productData: ProductDataInterface = {
     {
       id: 4,
       name: 'Office Party',
-      price_large: 149.99,
+      price: 149.99,
       rating: 4.6,
       imgUrl: 'https://images.unsplash.com/photo-1601924583003-0xxool999b1f',
       description: 'Snacks, pizzas, and drinks for 15 people.',
@@ -288,7 +288,7 @@ export const productData: ProductDataInterface = {
     {
       id: 5,
       name: 'Holiday Gathering',
-      price_large: 399.99,
+      price: 399.99,
       rating: 4.5,
       imgUrl: 'https://images.unsplash.com/photo-1601924583004-0yypppaaa2f0',
       description: 'Festive meals and desserts for 40 guests.',
@@ -296,460 +296,10 @@ export const productData: ProductDataInterface = {
     {
       id: 6,
       name: 'Picnic Spread',
-      price_large: 99.99,
+      price: 99.99,
       rating: 4.4,
       imgUrl: 'https://images.unsplash.com/photo-1601924583005-0zzqqqbbb3f1',
       description: 'Assorted sandwiches, fruits, and drinks for 10 people.',
     },
   ],
 }
-
-export const newData = [
-  {
-    name: 'Cheesy Garlic',
-    description: 'Cream Fraiche base, garlic sauce, mozzarella, oregano',
-    imgUrl: '',
-    price_large: 8.99,
-    type: 'Value Range',
-  },
-  {
-    name: 'Hawaiian',
-    description: 'Tomato base, ham, pineapple, mozzarella',
-    imgUrl: '',
-    price_large: 8.99,
-    type: 'Value Range',
-  },
-  {
-    name: 'Pepperoni',
-    description: 'Tomato base, lots of pepperoni, mozzarella',
-    imgUrl: '',
-    price_large: 8.99,
-    type: 'Value Range',
-  },
-  {
-    name: 'Beef & Onion',
-    description: 'BBQ base, beef, onion, mozzarella',
-    imgUrl: '',
-    price_large: 8.99,
-    type: 'Value Range',
-  },
-  {
-    name: 'Pineapple Pizza',
-    description: 'Tomato base, pineapple, mozzarella',
-    imgUrl: '',
-    price_large: 8.99,
-    type: 'Value Range',
-  },
-  {
-    name: 'Ham & Cheese',
-    description: 'Tomato base, ham, mozzarella',
-    imgUrl: '',
-    price_large: 8.99,
-    type: 'Value Range',
-  },
-  {
-    name: 'Cheese',
-    description: 'Tomato base, lots of cheese',
-    imgUrl: '',
-    price_large: 8.99,
-    type: 'Value Range',
-  },
-  {
-    name: 'Bacon & Aioli',
-    description: 'Tomato base, bacon, mozzarella, aioli',
-    imgUrl: '',
-    price_large: 8.99,
-    type: 'Value Range',
-  },
-  {
-    name: 'Manhattan',
-    description: 'Tomato base, mushroom, pepperoni, mozzarella, oregano',
-    imgUrl: '',
-    price_large: 11.99,
-    type: 'Favourite Range',
-  },
-  {
-    name: 'Margherita',
-    description: 'Tomato base, tomato, mozzarella, oregano, basil swirl',
-    imgUrl: '',
-    price_large: 11.99,
-    type: 'Favourite Range',
-  },
-  {
-    name: 'Dough Boarder',
-    description:
-      'Tomato base, double ham, double pineapple, diced bacon, onion, capsicum & mozzarella',
-    imgUrl: '',
-    price_large: 11.99,
-    type: 'Favourite Range',
-  },
-  {
-    name: 'Spicy Pepperoni',
-    description: 'Tomato base, pepperoni, jalapenos, mozzarella',
-    imgUrl: '',
-    price_large: 11.99,
-    type: 'Favourite Range',
-  },
-  {
-    name: 'Pacificano',
-    description: 'Tomato base, ham, pineapple, bacon, mozzarella',
-    imgUrl: '',
-    price_large: 11.99,
-    type: 'Favourite Range',
-  },
-  {
-    name: 'The Cheese Factor',
-    description: 'Tomato base, mozzarella, string cheese, parmesan cheese',
-    imgUrl: '',
-    price_large: 11.99,
-    type: 'Favourite Range',
-  },
-  {
-    name: 'Surf and Turf',
-    description:
-      'Tomato base, beef, onion, mushroom, prawns, pineapple, bacon, mozzarella, ranch swirl',
-    imgUrl: '',
-    price_large: 17.99,
-    type: 'Seafood SaRange',
-  },
-  {
-    name: 'Creamy Garlic Anchovies',
-    description:
-      'Crème fraiche base, garlic sauce, spinach, red onion, fresh tomato, mozzarella cheese, anchovies, oregano & honey mustard swirl',
-    imgUrl: '',
-    price_large: 17.99,
-    type: 'Seafood SaRange',
-  },
-  {
-    name: 'Bullocky',
-    description:
-      'Creamy fraiche base, prawns, ham, bacon, onion, mushroom, aioli swirl & mozzarella',
-    imgUrl: '',
-    price_large: 17.99,
-    type: 'Seafood SaRange',
-  },
-  {
-    name: 'Garlicky Prawns',
-    description:
-      'Creamy fraiche base, spinach, tomato, mozzarella, garlic sauce, prawns & oregano',
-    imgUrl: '',
-    price_large: 17.99,
-    type: 'Seafood SaRange',
-  },
-  {
-    name: 'Butter Prawns',
-    description: 'Red onions, mushrooms, butter sauce, prawns, mozzarella',
-    imgUrl: '',
-    price_large: 17.99,
-    type: 'Seafood SaRange',
-  },
-  {
-    name: 'Seafood Deluxe',
-    description:
-      'Tomato base, mix seafood, onions, tomato, capsicum, mozzarella',
-    imgUrl: '',
-    price_large: 17.99,
-    type: 'Seafood SaRange',
-  },
-  {
-    name: 'BBQ Meat Ball Deluxe',
-    description:
-      'BBQ base, red onion, mushroom, beef meat balls, garlic flakes with mayonnaise swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Range',
-  },
-  {
-    name: 'Classic Italian',
-    description: 'Pepperoni, mushroom, ham, mozzarella, garlic flakes, oregano',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Range',
-  },
-  {
-    name: 'Fire Punch',
-    description:
-      'Tomato base, pepperoni, onion, capsicum, sausages, beef, mozzarella, jalapeño’s, chili flakes',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Range',
-  },
-  {
-    name: 'Peri-Peri Lamb',
-    description:
-      'Tomato base, garlic sauce, red onion, capsicum, lamb, black pepper, mozzarella cheese & peri-peri mayonnaise swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Range',
-  },
-  {
-    name: 'Hot & Spicy Angus Beef',
-    description:
-      'Tomato base, red onion, capsicum, angus beef, mozzarella cheese, jalapeño, chili flakes & chipotle swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Range',
-  },
-  {
-    name: 'Creamy Lamb & Feta',
-    description:
-      'Cream fraiche base, garlic, spinach, tomato, feta, lamb, mozzarella, oregano & honey mustard sauce',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Range',
-  },
-  {
-    name: 'Mr. Landlord',
-    description:
-      'BBQ base, onion, double beef, double lamb, mozzarella & mayonnaise',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Range',
-  },
-  {
-    name: 'Extravaganza',
-    description:
-      'Tomato base, pepperoni, ham, Italian sausage, beef, onion, capsicum, mushroom, black olives, mozzarella & oregano',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Range',
-  },
-  {
-    name: 'Muddy Farmer',
-    description:
-      'BBQ base, pepperoni, ham, beef, Italian sausage, mozzarella, diced bacon & BBQ sauce',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Ranges',
-  },
-  {
-    name: 'Three Meats',
-    description: 'BBQ base, pepperoni, beef, sausage & mozzarella',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Ranges',
-  },
-  {
-    name: 'Meaty Highlander',
-    description:
-      'BBQ base, onion, ham, mozzarella, diced bacon, potato wedges, garlic sauce, oregano & aioli',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Range',
-  },
-  {
-    name: 'The Cheeseburger',
-    description: 'BBQ base, Angus beef, onions, mozzarella, mayo swirl',
-    imgUrl: '',
-    price_large: 9.99,
-    type: 'Meat Range',
-  },
-  {
-    name: 'Supreme Meat',
-    description:
-      'Ham, beef, sausage, red onion, pineapple, mushroom, capsicum, tomato base, mozzarella',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Range',
-  },
-  {
-    name: 'Double Beef & Bacon',
-    description: 'Tomato base, beef, onion, bacon, mozzarella with BBQ swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Meat Range',
-  },
-  {
-    name: 'Fried Chicken and Bacon',
-    description:
-      'BBQ base, Southern-style fried chicken, red onion, mozzarella, creamy ranch swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'Chipotle Chicken and Caramelized Onion',
-    description:
-      'Tomato base, garlic sauce, caramelized onion, chicken, jalapenos, chili flakes, mozzarella',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'Chicken and Avocado',
-    description:
-      'Tomato base, garlic sauce, spinach, fresh avocado, chicken, mozzarella, creamy basil swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'The Runway',
-    description:
-      'Cream Fraiche base, caramelized onion, spinach, mushrooms, onions, chicken, feta, jalapenos, peri peri and hollandaise swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'Peri Peri Chicken',
-    description:
-      'Tomato base, spinach, onion, tomatoes, peri peri chicken, peri peri swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'Cranberry Chicken Island',
-    description:
-      'Cranberry base, spinach, tomatoes, chicken, mozzarella, cranberry swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'Chicken Camembert & Feta',
-    description:
-      'Butter sauce base, spinach, tomatoes, chicken, camembert, feta, cranberry swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'Indian Billo Butter',
-    description:
-      'BBQ base, onion, capsicum, tomatoes, mushrooms, chicken, hollandaise swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'Apricot tree',
-    description:
-      'Tomato base, capsicum, onion, mozzarella, chicken, apricot swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'BBQ Chicken & Bacon',
-    description:
-      'BBQ base, onions, mushroom, chicken, bacon, mozzarella, aioli',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'Chicken Supreme',
-    description:
-      'Tomato base, onions, pineapple, mushroom, capsicum, chicken, mozzarella',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'Buffalo Chicken',
-    description:
-      'cream fraiche base, tomato, onions, buffalo sauce, chicken, mozzarella, aioli swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'Pizza Stop Chicken',
-    description:
-      'Tomato base, baby corn, black olives, capsicum, onion, mozzarella, chicken, oregano, chilli flakes & hot sauce swirl',
-    imgUrl: '',
-    price_large: 14.99,
-    price_small: 11.99,
-    type: 'Chicken Range',
-  },
-  {
-    name: 'Butter Paneer',
-    description:
-      'Butter sauce base, onion, mushrooms, paneer (Cottage cheese), mozzarella',
-    imgUrl: '',
-    price_large: 12.99,
-    price_small: 9.99,
-    type: 'Veg Range',
-  },
-  {
-    name: 'Vege Delight',
-    description:
-      'Tomato base, onions, capsicum, mushroom, tomatoes, garlic sauce, pineapple, mozzarella, oregano',
-    imgUrl: '',
-    price_large: 12.99,
-    price_small: 9.99,
-    type: 'Veg Range',
-  },
-  {
-    name: 'Creamy BBQ veg',
-    description:
-      'Creamy BBQ base, pineapple, onions, mushroom, capsicum, jalapenos, garlic sauce, mozzarella, oregano',
-    imgUrl: '',
-    price_large: 12.99,
-    price_small: 9.99,
-    type: 'Veg Range',
-  },
-  {
-    name: 'Veg Paneer',
-    description:
-      'Tomato base, onions, paneer, capsicum, mushroom, tomatoes, olives, garlic sauce, oregano, pineapple, mozzarella, apricot swirl',
-    imgUrl: '',
-    price_large: 12.99,
-    price_small: 9.99,
-    type: 'Veg Range',
-  },
-  {
-    name: 'Veggie Fossil',
-    description:
-      'Tomato base, spinach, tomato, capsicum, onion, mushroom, mozarella, garlic sauce, Oregano',
-    imgUrl: '',
-    price_large: 12.99,
-    price_small: 9.99,
-    type: 'Veg Range',
-  },
-  {
-    name: 'Peri Peri Paneer',
-    description:
-      'Tomato base, spinach, onion, tomatoes, paneer, mozarella, peri peri swirl',
-    imgUrl: '',
-    price_large: 12.99,
-    price_small: 9.99,
-    type: 'Veg Range',
-  },
-  {
-    name: 'Satay Paneer',
-    description:
-      'Tomato base, onion, capsicum, paneer, mozzarella, garlic sauce, satay swirl',
-    imgUrl: '',
-    price_large: 12.99,
-    price_small: 9.99,
-    type: 'Veg Range',
-  },
-]

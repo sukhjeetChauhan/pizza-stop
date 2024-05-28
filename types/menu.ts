@@ -10,6 +10,7 @@ export interface menuItem {
 }
 
 export interface MenuItem {
+  [x: string]: string | number
   id: number
   name: string
   price: number

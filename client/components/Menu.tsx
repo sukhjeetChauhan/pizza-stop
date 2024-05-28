@@ -11,10 +11,12 @@ import CustomizedOrder from './CustomizedOrder'
 
 interface MenuProp {
   data: MenuItem[]
+  title: string
 }
 
-export default ({ data }: MenuProp) => {
+export default ({ data, title }: MenuProp) => {
   const menu: MenuItem[] = data
+  console.log(menu)
   const [modalStatus, setModalStatus] = useState(false)
   const [modalData, setModalData] = useState<MenuItem>()
   const modalRef = useRef(null)
@@ -47,7 +49,7 @@ export default ({ data }: MenuProp) => {
       <Container>
         <ContentWithPaddingXl>
           <Components.HeaderRow>
-            <h1 className="text-3xl font-bold">Checkout our Menu</h1>
+            <h1 className="text-3xl font-bold">{title.toUpperCase()}</h1>
           </Components.HeaderRow>
           <div className="opacity-100 scale-100 flex mt-6 flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12">
             {menu.map((card, index) => (
@@ -62,8 +64,8 @@ export default ({ data }: MenuProp) => {
                   whileHover="hover"
                   animate="rest"
                 >
-                  <Components.CardImageContainer imagesrc={card.imgUrl}>
-                    <Components.CardRatingContainer>
+                  <Components.CardImageContainer imagesrc="/images/about-us.webp">
+                    {/* <Components.CardRatingContainer>
                       <Components.CardRating>
                         <Components.StarIcon />
                         {card.rating}
@@ -71,7 +73,7 @@ export default ({ data }: MenuProp) => {
                       <Components.CardReview>
                         ({card.rating})
                       </Components.CardReview>
-                    </Components.CardRatingContainer>
+                    </Components.CardRatingContainer> */}
                     <Components.CardHoverOverlay
                       variants={{
                         hover: {
@@ -96,8 +98,10 @@ export default ({ data }: MenuProp) => {
 
                   <Components.CardText>
                     <Components.CardTitle>{card.name}</Components.CardTitle>
-                    {/* <CardContent>{card.content}</CardContent> */}
-                    <Components.CardPrice>{card.price}</Components.CardPrice>
+                    {/* <CardContent>{card.description}</CardContent> */}
+                    <Components.CardPrice>{`$ ${
+                      card.price ? card.price : (card.price_large as string)
+                    }`}</Components.CardPrice>
                   </Components.CardText>
                 </Components.Card>
               </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { signUp } from '../../src/authentication.ts'
 import { Form, Input, Button, message } from 'antd'
-import { addData } from '../../src/db.ts'
+// import { addData, getData } from '../../src/db.ts'
 
 const RegistrationForm = () => {
   const [registered, SetRegistered] = useState(false)

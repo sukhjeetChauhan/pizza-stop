@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import Button from '../utils/Button'
 import { useState } from 'react'
 
-const pages = ['pizzas', 'deals', 'sides', 'desserts', 'drinks', 'catering']
+const pages = ['pizzas', 'sides', 'desserts', 'drinks']
 
 interface activeLink {
   pizzas: boolean
