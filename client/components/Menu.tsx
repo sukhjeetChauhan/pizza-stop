@@ -5,7 +5,8 @@ import { Container, ContentWithPaddingXl } from '../utils/Containers'
 import { useEffect, useRef, useState } from 'react'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import Modal from '../components/Modal'
-
+import { useContext } from 'react'
+import { CartContext } from './CartProvider'
 import { MenuItem } from '../../types/menu'
 import CustomizedOrder from './CustomizedOrder'
 
@@ -17,7 +18,7 @@ interface MenuProp {
 
 export default ({ data, title, type }: MenuProp) => {
   const menu: MenuItem[] = data
-
+  const cart = useContext(CartContext)
   const [modalStatus, setModalStatus] = useState(false)
   const [modalData, setModalData] = useState<MenuItem>()
   const modalRef = useRef(null)
@@ -29,13 +30,18 @@ export default ({ data, title, type }: MenuProp) => {
     }
   }, [modalStatus])
 
+  useEffect(() => {
+    sessionStorage.setItem('param', JSON.stringify({ name: type }))
+  }, [])
+
   function handleClick(data: MenuItem) {
     if (type === 'pizzas') {
       setModalStatus(true)
 
       setModalData(data)
+    } else {
+      cart.addToCart(data)
     }
-    console.log(type)
   }
   return (
     <div ref={modalRef}>

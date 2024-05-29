@@ -18,7 +18,7 @@ interface Props {
 export const CartContext = createContext({
   cart: [] as CartItemWithId[],
   addToCart: (_item: any) => {},
-  deleteItem: (_name: string) => {},
+  deleteItem: (_id: number) => {},
   clearCart: () => {},
   addQuantity: (_id: number) => {},
   reduceQuantity: (_id: number) => {},
@@ -40,8 +40,8 @@ export default function CartProvider({ children }: Props) {
     setCartProducts([...cartProducts, cartItem])
   }
 
-  function deleteItem(name: string) {
-    const newCart = cartProducts.filter((obj) => obj.name !== name)
+  function deleteItem(id: number) {
+    const newCart = cartProducts.filter((obj) => obj.id !== id)
     setCartProducts(newCart)
   }
 
@@ -69,7 +69,7 @@ export default function CartProvider({ children }: Props) {
       },
       0
     )
-    return total
+    return total.toFixed(2)
   }
 
   const contextValue = {

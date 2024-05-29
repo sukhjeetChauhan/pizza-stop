@@ -78,12 +78,12 @@ export default function CustomizedOrder({
   }
   return (
     <div className="flex w-[45rem]">
-      <div className="w-1/4 border-r-2 border-slate-300] bg-center">
-        <img
+      <div className="w-1/4 border-r-2 border-slate-300] bg-cover bg-[url('/images/pizzas/Pepperoni-Pizza-Recipe-Sip-Bite-Go.jpg')]">
+        {/* <img
           className="w-screen"
           src="/images/Jalapeno pizza.webp"
           alt="modal pizza"
-        />
+        /> */}
       </div>
       <div className="w-3/4 flex flex-col items-center">
         <div className="w-full p-3 border-b-2 border-slate-300">
@@ -103,15 +103,18 @@ export default function CustomizedOrder({
                 />
                 <label htmlFor="size_choice">{`Large ${data.price_large}`}</label>
               </div>
-              <div>
-                <input
-                  type="radio"
-                  name="size_choice"
-                  value={data.price_small}
-                  onChange={handleCart}
-                />
-                <label htmlFor="size_choice">{`Small ${data.price_small}`}</label>
-              </div>
+
+              {data.price_small && (
+                <div>
+                  <input
+                    type="radio"
+                    name="size_choice"
+                    value={data.price_small}
+                    onChange={handleCart}
+                  />
+                  <label htmlFor="size_choice">{`Small ${data.price_small}`}</label>
+                </div>
+              )}
             </div>
           </Collapse>
           <h2 className="text-xl font-semibold">Choose your extras</h2>

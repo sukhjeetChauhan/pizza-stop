@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Button from '../utils/Button'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const pages = ['pizzas', 'sides', 'desserts', 'drinks']
 
@@ -14,11 +14,28 @@ interface activeLink {
   [key: string]: boolean
 }
 
-const initialState = {} as activeLink
-pages.forEach((page) => (initialState[page] = false))
+const initialState = {
+  pizzas: false,
+  mealdeals: false,
+  sides: false,
+  desserts: false,
+  drinks: false,
+  catering: false,
+} as activeLink
+// pages.forEach((page) => (initialState[page] = false))
 
 export default function Navigation() {
   const [active, setActive] = useState(initialState)
+  let location = useLocation()
+
+  useEffect(() => {
+    if (location.pathname !== '/') {
+      const item = sessionStorage.getItem('param')
+
+      const page = item ? JSON.parse(item) : null
+      setActiveState(page.name)
+    }
+  }, [])
 
   function setActiveState(page: keyof activeLink) {
     const newActive = { ...active }

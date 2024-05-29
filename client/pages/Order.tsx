@@ -6,6 +6,7 @@ import Sidebar from '../components/Sidebar'
 import { productData } from '../../data/products'
 import { useGetData } from '../../data/hooks'
 import { sortBasedOnType } from '../../data/data_manipulation'
+// import { useEffect } from 'react'
 
 // import { MenuItem } from '../../types/menu'
 
@@ -38,10 +39,10 @@ export default function Order() {
           <div className="px-16">
             {hasType ? (
               menuTypeArr.map((item) => (
-                <Menu data={menu[item]} title={item} type={name} />
+                <Menu data={menu[item]} title={item} type={name as string} />
               ))
             ) : (
-              <Menu data={menu} title={'Menu'} type={name} />
+              <Menu data={menu} title={'Menu'} type={name as string} />
             )}
 
             {/* <Menu data={menu} title={'Menu'} /> */}
