@@ -12,11 +12,12 @@ import CustomizedOrder from './CustomizedOrder'
 interface MenuProp {
   data: MenuItem[]
   title: string
+  type: string
 }
 
-export default ({ data, title }: MenuProp) => {
+export default ({ data, title, type }: MenuProp) => {
   const menu: MenuItem[] = data
-  console.log(menu)
+
   const [modalStatus, setModalStatus] = useState(false)
   const [modalData, setModalData] = useState<MenuItem>()
   const modalRef = useRef(null)
@@ -29,9 +30,12 @@ export default ({ data, title }: MenuProp) => {
   }, [modalStatus])
 
   function handleClick(data: MenuItem) {
-    setModalStatus(true)
-    console.log(data)
-    setModalData(data)
+    if (type === 'pizzas') {
+      setModalStatus(true)
+
+      setModalData(data)
+    }
+    console.log(type)
   }
   return (
     <div ref={modalRef}>
