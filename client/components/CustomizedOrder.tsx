@@ -42,7 +42,7 @@ export default function CustomizedOrder({
   function handleSubmit() {
     const upgradeArr = upgradeCart.map((item) => item.name)
     const upgradeCost = upgradeCart.reduce((a, c) => a + Number(c.price), 0)
-
+    console.log(upgradeArr)
     const finalCartItem = {
       ...cartItem,
       upgrades: upgradeArr,
@@ -61,6 +61,7 @@ export default function CustomizedOrder({
       const upgradeItem = {
         name: checkedItem.name,
         price: checkedItem.price,
+        quantity: 1,
       }
 
       if (e.target.checked) {
@@ -116,8 +117,8 @@ export default function CustomizedOrder({
           <h2 className="text-xl font-semibold">Choose your extras</h2>
           <Collapse isOpened={true}>
             <div>
-              {upgrades?.map((item: any) => (
-                <div className="flex justify-between">
+              {upgrades?.map((item: any, i: number) => (
+                <div key={`upgrade ${i}`} className="flex justify-between">
                   <div>
                     <input
                       type="checkbox"

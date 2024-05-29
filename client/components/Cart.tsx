@@ -4,22 +4,27 @@ import { CartContext } from './CartProvider'
 
 export default function Cart() {
   const cart = useContext(CartContext)
-  // const [cartItems, setCartItems] = useState({})
-  // useEffect(() => {
-  //   setCartItems(cartData.cart)
-  // }, [cartData])
+
   return (
-    <ul>
+    <ul className="w-72">
       {cart.cart?.length > 0 &&
-        cart.cart.map((item) => (
-          <li>
-            <div className="flex w-full justify-between p-4">
-              <div className="flex gap-4">
-                <p className="text-xl">{item.name}</p>
-                <div>
-                  <Button onClick={() => cart.addQuantity(item.id)}>+</Button>
+        cart.cart.map((item, i: number) => (
+          <li key={`${item.name}-${i}`}>
+            <div className="flex w-full justify-between">
+              <div className="flex gap-6">
+                <p className="text-sm">{item.name}</p>
+                <div className="flex gap-2">
+                  <Button
+                    className="bg-gray-100 p-1 rounded"
+                    onClick={() => cart.addQuantity(item.id)}
+                  >
+                    +
+                  </Button>
                   <p>{item.quantity}</p>
-                  <Button onClick={() => cart.reduceQuantity(item.id)}>
+                  <Button
+                    className="bg-gray-100 p-1 rounded"
+                    onClick={() => cart.reduceQuantity(item.id)}
+                  >
                     -
                   </Button>
                 </div>

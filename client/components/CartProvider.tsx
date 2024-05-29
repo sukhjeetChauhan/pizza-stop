@@ -1,14 +1,18 @@
-import { createContext, useState } from 'react'
+import { ReactNode, createContext, useState } from 'react'
 
 export interface CartItem {
   name: string
   price: number
   upgrades?: string[]
-  quantity?: number
+  quantity: number
 }
 
 export interface CartItemWithId extends CartItem {
   id: number
+}
+
+interface Props {
+  children: ReactNode
 }
 
 export const CartContext = createContext({
@@ -21,7 +25,7 @@ export const CartContext = createContext({
   calculateTotalCost: () => {},
 })
 
-export default function CartProvider({ children }) {
+export default function CartProvider({ children }: Props) {
   const [cartProducts, setCartProducts] = useState<CartItemWithId[]>([])
 
   function addToCart(item: any) {
