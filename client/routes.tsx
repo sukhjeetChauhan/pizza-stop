@@ -4,6 +4,7 @@ import App from './pages/App.tsx'
 import Landing from './pages/Landing.tsx'
 import Order from './pages/Order.tsx'
 import Login from './components/Login.tsx'
+import Payment from './pages/Payment.tsx'
 
 const routes = createRoutesFromElements(
   <>
@@ -12,6 +13,7 @@ const routes = createRoutesFromElements(
     </Route>
     <Route path="/order/:name" element={<Order />} />
     <Route path="/login" element={<Login />} />
+    <Route path="/payment" element={<Payment />} />
   </>
 )
 
