@@ -3,7 +3,7 @@
   align-items: center;
 }
 
-body {
+.payment > body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
