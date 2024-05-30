@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
 import CheckoutForm from '../components/CheckoutForm'
-// import '../styles/Payment.css'
+import '../styles/Payment.css'
 import { CartContext } from '../components/CartProvider'
 
 // Make sure to call loadStripe outside of a component’s render to avoid
@@ -21,7 +21,7 @@ export default function Payment() {
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     fetch(
-      'http://127.0.0.1:5001/pizza-stop-wellsford/us-central1/api/create-payment-intent',
+      'https://us-central1-pizza-stop-wellsford.cloudfunctions.net/api/create-payment-intent',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

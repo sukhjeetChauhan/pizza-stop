@@ -76,7 +76,7 @@ export default function CheckoutForm() {
   }
 
   const paymentElementOptions = {
-    layout: 'vertical' as Layout, // or 'horizontal'
+    layout: 'tabs' as Layout, // or 'horizontal'
   }
 
   return (
