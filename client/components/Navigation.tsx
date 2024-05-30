@@ -33,7 +33,9 @@ export default function Navigation() {
       const item = sessionStorage.getItem('param')
 
       const page = item ? JSON.parse(item) : null
-      setActiveState(page.name)
+      if (page !== null) {
+        setActiveState(page.name)
+      }
     }
   }, [])
 

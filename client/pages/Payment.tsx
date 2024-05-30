@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
 import CheckoutForm from '../components/CheckoutForm'
-import '../styles/Payment.css'
+// import '../styles/Payment.css'
 import { CartContext } from '../components/CartProvider'
 
 // Make sure to call loadStripe outside of a component’s render to avoid
