@@ -7,11 +7,14 @@ const RegistrationForm = () => {
   const [registered, SetRegistered] = useState(false)
   const [form] = Form.useForm()
 
-  const handleLogin = async (values) => {
+  const handleLogin = async (values: any) => {
     console.log('Received values of form: ', values)
     message.success('Registration successful!')
   }
-  const handleRegister = async (values) => {
+  const handleRegister = async (values: {
+    email: string
+    password: string
+  }) => {
     // console.log('Received values of form: ', values)
     signUp(values.email, values.password)
     message.success('Registration successful!')
