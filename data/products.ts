@@ -22,7 +22,7 @@ export const productData: ProductDataInterface = {
     {
       id: 3,
       name: 'BBQ Chicken',
-      price: 12.99,
+      price: 14.99,
       rating: 4.6,
       imgUrl: '/images/pizzas/bbq-chicken-pizza-feature.jpg',
       description: 'Tangy BBQ sauce with grilled chicken and red onions.',
@@ -83,7 +83,7 @@ export const productData: ProductDataInterface = {
     {
       id: 4,
       name: 'Lunch Special',
-      price: 12.99,
+      price: 14.99,
       rating: 4.6,
       imgUrl: 'https://images.unsplash.com/photo-1601924582979-09f0f2d2d8f0',
       description: 'Personal pizza with a side salad and a drink.',

@@ -15,11 +15,20 @@
     }
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^2.7.1",
+    "@stripe/stripe-js": "^3.4.1",
+    "@tanstack/react-query": "^5.40.0",
+    "antd": "^5.17.3",
     "body-scroll-lock": "^4.0.0-beta.0",
+    "dotenv": "^16.4.5",
     "eslint-config-prettier": "^9.1.0",
     "express": "^4.19.2",
+    "fetch": "^1.1.0",
+    "firebase": "^10.12.1",
+    "formik": "^2.4.6",
     "framer-motion": "^11.2.0",
     "react": "^18.2.0",
+    "react-collapse": "^5.1.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
     "styled-component": "^2.8.0",
@@ -27,9 +36,11 @@
     "stylis": "^4.3.2"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.35.6",
     "@types/body-scroll-lock": "^3.1.2",
     "@types/express": "^4.17.21",
     "@types/react": "^18.2.66",
+    "@types/react-collapse": "^5.0.4",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",

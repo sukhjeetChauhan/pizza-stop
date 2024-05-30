@@ -5,10 +5,11 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import Modal from '../components/Modal'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import * as storage from '../../data/localStorage'
 export default function Landing() {
   const [modalStatus, setModalStatus] = useState(true)
   const [deliverStatus, setDeliverStatus] = useState(true)
+  const [address, setAddress] = useState<string>('')
   const modalRef = useRef(null)
   useEffect(() => {
     if (modalRef.current) {
@@ -18,7 +19,24 @@ export default function Landing() {
     }
   }, [modalStatus])
 
+  useEffect(() => {
+    const storageData = storage.getLocalStorage()
+    if (storageData !== null) {
+      setModalStatus(false)
+    }
+  }, [])
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setAddress(e.target.value)
+  }
+
   function handleOption() {
+    const storageObj = {
+      address: deliverStatus ? address : null,
+      order: deliverStatus ? 'Deliver' : 'Pickup',
+    }
+    storage.setLocalStorage(storageObj)
+
     setModalStatus(false)
   }
 
@@ -84,6 +102,8 @@ export default function Landing() {
                 className={`shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm ${smoothTransition}`}
                 id="address"
                 type="text"
+                onChange={handleChange}
+                value={address}
                 placeholder="Enter your address"
               />
             </div>
@@ -107,6 +127,7 @@ export default function Landing() {
         </Link>
       </div>
       <Features />
+      {/* <RegistrationForm /> */}
     </div>
   )
 }

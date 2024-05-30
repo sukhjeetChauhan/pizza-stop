@@ -36,9 +36,8 @@ const Content: React.FC<ChildrenProps> = ({ children }) => (
   <div className="mt-16">{children}</div>
 )
 
-const Card: React.FC<Card> = ({ children, reversed, key }) => (
+const Card: React.FC<Card> = ({ children, reversed }) => (
   <div
-    key={key}
     className={`mt-24 md:flex justify-center items-center ${
       reversed ? 'flex-row-reverse' : 'flex-row'
     }`}
@@ -117,7 +116,7 @@ const PopularEvents = () => {
         </HeadingInfoContainer>
         <Content>
           {cards.map((card, i) => (
-            <Card key={i.toString()} reversed={i % 2 === 1}>
+            <Card key={`card ${i}`} reversed={i % 2 === 1}>
               <Image imageSrc={card.imageSrc} />
               <Details>
                 {/* <Subtitle>{card.subtitle}</Subtitle> */}
