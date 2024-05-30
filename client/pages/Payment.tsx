@@ -42,6 +42,13 @@ export default function Payment() {
 
   return (
     <div className="payment">
+      <div className="flex items-center justify-center gap-4">
+        <img
+          className="w-20 h-20"
+          src="/images/Logo/android-chrome-192x192.png"
+        />
+        <h1 className="text-5xl text-red-700 font-bold">Secure checkout</h1>
+      </div>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />

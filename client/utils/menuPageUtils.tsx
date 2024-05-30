@@ -78,17 +78,15 @@ export const CardReview: React.FC<Props> = ({ children }) => (
 )
 
 export const CardText: React.FC<Props> = ({ children }) => (
-  <div className="p-4 text-gray-900">{children}</div>
+  <div className="p-4 text-green-500 bg-gray-200 h-32">{children}</div>
 )
 
 export const CardTitle: React.FC<Props> = ({ children }) => (
-  <h5 className="text-lg font-semibold group-hover:text-primary-500">
-    {children}
-  </h5>
+  <h5 className="text-lg font-bold group-hover:text-primary-500">{children}</h5>
 )
 
 export const CardPrice: React.FC<Props> = ({ children }) => (
-  <p className="mt-4 text-xl font-bold">{children}</p>
+  <p className="mt-4 text-xl font-semibold">{children}</p>
 )
 
 export const StarIcon = () => (
