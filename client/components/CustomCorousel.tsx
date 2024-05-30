@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { MenuItem } from '../../types/menu'
 import '../styles/CustomCorousel.css'
 import Button from '../utils/Button'
+import { CartContext } from './CartProvider'
 // import { Data } from '../models/models'
 
 // type ShowModalFunction = (data: Data) => void
@@ -12,6 +13,7 @@ interface CustomCarouselProps {
 }
 
 function CustomCarousel({ data }: CustomCarouselProps) {
+  const cart = useContext(CartContext)
   const [activeIndex, setActiveIndex] = useState(0)
   const [slideDone, setSlideDone] = useState(true)
   const [timeID, setTimeID] = useState<number | null>(null)
@@ -91,8 +93,13 @@ function CustomCarousel({ data }: CustomCarouselProps) {
                   </p>
                   <p className="p-2">{product.price}</p>
                 </div>
-                <div className="self-center">
-                  <Button className="bg-green-500 p-2 text-white">Add</Button>
+                <div className="mt-2 ">
+                  <Button
+                    onClick={() => cart.addToCart(product)}
+                    className="bg-green-500 p-2 text-white"
+                  >
+                    Add
+                  </Button>
                 </div>
               </div>
             </div>

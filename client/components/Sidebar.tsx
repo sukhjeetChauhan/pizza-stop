@@ -2,15 +2,33 @@
 import Button from '../utils/Button'
 import CustomCarousel from './CustomCorousel'
 import { MenuItem } from '../../types/menu'
-// import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Cart from './Cart'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { CartContext } from './CartProvider'
 
 type Props = {
   data: MenuItem[]
 }
 
 export default function Sidebar({ data }: Props) {
+  const cart = useContext(CartContext)
+  const navigate = useNavigate()
+  const [isEmpty, setIsEmpty] = useState(true)
+
+  useEffect(() => {
+    if (cart.cart.length === 0) setIsEmpty(true)
+    if (cart.cart.length > 0) setIsEmpty(false)
+  }, [cart.cart.length])
+
+  function handleCheckout() {
+    if (isEmpty === false) {
+      navigate('/payment')
+    }
+    if (isEmpty === true) {
+      alert('your cart seems to be empty')
+    }
+  }
   return (
     <div className="flex flex-col items-center justify-between h-full">
       <div>
@@ -25,8 +43,11 @@ export default function Sidebar({ data }: Props) {
       </div>
       <div className="flex flex-col items-center max-w-full">
         <CustomCarousel data={data} />
-        <Button className="p-3 w-72 bg-green-500 text-white mb-2">
-          <Link to="/payment">Checkout</Link>
+        <Button
+          onClick={handleCheckout}
+          className="p-3 w-72 bg-green-500 text-white mb-2"
+        >
+          Checkout
         </Button>
       </div>
     </div>

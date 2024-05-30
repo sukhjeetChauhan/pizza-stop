@@ -11,6 +11,7 @@
 
   flex-wrap: nowrap;
   background-color: rgb(240 253 244);
+  margin-bottom: 5px;
 }
 
 .container__slider > button {
@@ -21,7 +22,7 @@
   /* color: #000; */
   font-size: 28px;
   font-weight: bold;
-  padding: 0.8rem 1.3rem;
+  padding: 0.2rem 0.6rem;
 }
 
 .container__slider > button:active {

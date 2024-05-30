@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import Header from '../components/Header'
 import Menu from '../components/Menu'
 import Sidebar from '../components/Sidebar'
-import { productData } from '../../data/products'
+
 import { useGetData } from '../../data/hooks'
 import { sortBasedOnType } from '../../data/data_manipulation'
 // import { useEffect } from 'react'
@@ -17,6 +17,9 @@ import { sortBasedOnType } from '../../data/data_manipulation'
 export default function Order() {
   const { name } = useParams()
   const { data, isLoading, isError } = useGetData(name as string)
+  const { data: sides } = useGetData('sides')
+  const { menu: sidesArr } = sortBasedOnType(sides)
+  console.log(sidesArr)
 
   if (isLoading) {
     return <p>Loading ......</p>
@@ -52,7 +55,7 @@ export default function Order() {
           style={{ width: '23%' }}
           className="fixed top-0 right-0 h-screen shadow-inner"
         >
-          <Sidebar data={productData.sides} />
+          <Sidebar data={sidesArr.Loaded} />
         </aside>
       </div>
     )
