@@ -12,7 +12,7 @@ const routes = createRoutesFromElements(
       <Route index element={<Landing />} />
     </Route>
     <Route path="/order/:name" element={<Order />} />
-    <Route path="/login" element={<Login />} />
+    {/* <Route path="/login" element={<Login />} /> */}
     <Route path="/payment" element={<Payment />} />
   </>
 )

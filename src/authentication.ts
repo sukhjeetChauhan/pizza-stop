@@ -6,7 +6,7 @@ import {
 } from 'firebase/auth'
 import { auth } from './firebase.config'
 
-export function signUp(email, password) {
+export function signUp(email: string, password: string) {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed up
