@@ -3,7 +3,7 @@ import App from './pages/App.tsx'
 
 import Landing from './pages/Landing.tsx'
 import Order from './pages/Order.tsx'
-import Login from './components/Login.tsx'
+// import Login from './components/Login.tsx'
 import Payment from './pages/Payment.tsx'
 
 const routes = createRoutesFromElements(

@@ -20,7 +20,7 @@ export function signUp(email: string, password: string) {
     })
 }
 
-export function SignIn(email, password) {
+export function SignIn(email: string, password: string) {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
