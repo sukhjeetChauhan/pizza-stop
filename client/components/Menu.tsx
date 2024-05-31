@@ -28,7 +28,6 @@ export default ({ data, title, type }: MenuProp) => {
         : enableBodyScroll(modalRef.current)
     }
   }, [modalStatus])
-  console.log(type)
 
   useEffect(() => {
     sessionStorage.setItem('param', JSON.stringify({ name: type }))
