@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { Layout } from '@stripe/stripe-js'
 
+const returnUrl = import.meta.env.VITE_RETURN_URL as string
+
 export default function CheckoutForm() {
   const stripe = useStripe()
   const elements = useElements()
@@ -57,7 +59,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: 'http://localhost:5173/success',
+        return_url: returnUrl,
         receipt_email: email,
       },
     })
