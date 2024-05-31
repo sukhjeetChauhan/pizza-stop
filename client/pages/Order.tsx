@@ -30,10 +30,8 @@ export default function Order() {
   if (data) {
     const { menu, hasType } = sortBasedOnType(data)
     const menuTypeArr = Object.keys(menu)
-    console.log(menu)
-    const { menu: sidesArr } = sortBasedOnType(sides)
 
-    console.log(sidesArr)
+    const { menu: sidesArr } = sortBasedOnType(sides)
 
     return (
       <div
@@ -47,11 +45,9 @@ export default function Order() {
           <div className="px-16 ">
             {hasType ? (
               menuTypeArr.map((item, i) => (
-                <Menu
-                  data={menu[item]}
-                  title={item}
-                  type={name as string}
-                />
+                <div key={i}>
+                  <Menu data={menu[item]} title={item} type={name as string} />
+                </div>
               ))
             ) : (
               <Menu data={menu} title={'Menu'} type={name as string} />

@@ -14,7 +14,7 @@ const ContentWrapper: React.FC<ContentWrapperProps> = ({ children }) => {
     // Simulate a network request or some asynchronous task
     setTimeout(() => {
       setIsLoading(false)
-    }, 1500) // Adjust the timeout as needed
+    }, 1700) // Adjust the timeout as needed
   }, [])
 
   if (isLoading) {

@@ -40,6 +40,9 @@ export default function Landing() {
       storage.setLocalStorage(storageObj)
       setModalStatus(false)
     }
+    if (deliverStatus && address === '') {
+      alert('Please enter an address or choose pickup')
+    }
 
     if (!deliverStatus) {
       storage.setLocalStorage(storageObj)

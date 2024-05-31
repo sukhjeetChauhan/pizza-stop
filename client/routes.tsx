@@ -3,9 +3,10 @@ import App from './pages/App.tsx'
 
 import Landing from './pages/Landing.tsx'
 import Order from './pages/Order.tsx'
-// import Login from './components/Login.tsx'
+// import Login from './components/Login.tsx';
 import Payment from './pages/Payment.tsx'
 import Success from './pages/Success.tsx'
+import ProtectedRoute from './utils/ProtectedRoute.tsx' // Import the ProtectedRoute component
 
 const routes = createRoutesFromElements(
   <>
@@ -14,7 +15,7 @@ const routes = createRoutesFromElements(
     </Route>
     <Route path="/order/:name" element={<Order />} />
     {/* <Route path="/login" element={<Login />} /> */}
-    <Route path="/payment" element={<Payment />} />
+    <Route path="/payment" element={<ProtectedRoute element={<Payment />} />} />
     <Route path="/success" element={<Success />} />
   </>
 )

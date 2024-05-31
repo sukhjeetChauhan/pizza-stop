@@ -16,13 +16,6 @@ const firebaseConfig = {
   messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
   appId: import.meta.env.VITE_APP_ID,
   measurementId: import.meta.env.VITE_MEASUREMENT_ID,
-  // apiKey: 'AIzaSyA_BWDEMsOSlo332BcoOUICO6zS7hRtzxY',
-  // authDomain: 'pizza-stop-wellsford.firebaseapp.com',
-  // projectId: 'pizza-stop-wellsford',
-  // storageBucket: 'pizza-stop-wellsford.appspot.com',
-  // messagingSenderId: '827002287596',
-  // appId: '1:827002287596:web:37c2a41d0314b1392bbcc9',
-  // measurementId: 'G-2Y5TDEFJPJ',
 }
 
 // Initialize Firebase
