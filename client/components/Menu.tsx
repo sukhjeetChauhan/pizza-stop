@@ -15,7 +15,6 @@ interface MenuProp {
   title: string
   type: string
 }
-
 export default ({ data, title, type }: MenuProp) => {
   const menu: MenuItem[] = data
   const cart = useContext(CartContext)
@@ -32,7 +31,7 @@ export default ({ data, title, type }: MenuProp) => {
 
   useEffect(() => {
     sessionStorage.setItem('param', JSON.stringify({ name: type }))
-  }, [])
+  }, [type])
 
   function handleClick(data: MenuItem) {
     if (type === 'pizzas') {
