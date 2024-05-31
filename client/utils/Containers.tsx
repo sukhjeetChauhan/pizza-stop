@@ -5,7 +5,7 @@ interface ChildrenProps {
 }
 
 export const Container: React.FC<ChildrenProps> = ({ children }) => (
-  <div className="relative">{children}</div>
+  <div className="relative ">{children}</div>
 )
 
 export const ContentWithPaddingXl: React.FC<ChildrenProps> = ({ children }) => (
