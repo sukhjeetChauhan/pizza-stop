@@ -20,10 +20,11 @@ export const HeaderRow: React.FC<Props> = ({ children }) => (
 export const Card = styled(motion.a)`
   background-color: #edf2f7; /* Adjusted color to match Tailwind's bg-gray-200 */
   border-radius: 0.375rem;
+  overflow: hidden;
   display: block;
   max-width: 20rem;
   margin: auto;
-
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   @media (min-width: 640px) {
     max-width: none;
     margin-left: 0;
@@ -37,7 +38,8 @@ export const CardImageContainer = styled.div<CardImageContainerProps>`
     height: 16rem; /* Equivalent to xl:h-64 */
   }
   background-position: center;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   position: relative;
   border-top-left-radius: 0.375rem; /* Equivalent to rounded-t */
   border-top-right-radius: 0.375rem; /* Equivalent to rounded-t */
@@ -78,17 +80,15 @@ export const CardReview: React.FC<Props> = ({ children }) => (
 )
 
 export const CardText: React.FC<Props> = ({ children }) => (
-  <div className="p-4 text-gray-900">{children}</div>
+  <div className="p-4 text-green-600 bg-gray-300 h-32">{children}</div>
 )
 
 export const CardTitle: React.FC<Props> = ({ children }) => (
-  <h5 className="text-lg font-semibold group-hover:text-primary-500">
-    {children}
-  </h5>
+  <h5 className="text-lg font-bold group-hover:text-primary-500">{children}</h5>
 )
 
 export const CardPrice: React.FC<Props> = ({ children }) => (
-  <p className="mt-4 text-xl font-bold">{children}</p>
+  <p className="mt-4 text-xl font-semibold">{children}</p>
 )
 
 export const StarIcon = () => (

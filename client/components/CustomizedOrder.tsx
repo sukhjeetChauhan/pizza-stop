@@ -91,10 +91,12 @@ export default function CustomizedOrder({
           <p className="mb-8">{data.description}</p>
         </div>
         <div className="w-full p-6">
-          <h2 className="text-xl font-semibold">First, select your size</h2>
+          <h2 className="text-xl font-semibold mb-2">
+            First, select your size
+          </h2>
           <Collapse isOpened={true}>
             <div className="flex gap-4">
-              <div>
+              <div className="p-2 bg-gray-100 flex gap-2 rounded">
                 <input
                   type="radio"
                   name="size_choice"
@@ -105,7 +107,7 @@ export default function CustomizedOrder({
               </div>
 
               {data.price_small && (
-                <div>
+                <div className="p-2 bg-gray-100 flex gap-2 rounded">
                   <input
                     type="radio"
                     name="size_choice"
@@ -117,12 +119,12 @@ export default function CustomizedOrder({
               )}
             </div>
           </Collapse>
-          <h2 className="text-xl font-semibold">Choose your extras</h2>
+          <h2 className="text-xl font-semibold mb-2">Choose your extras</h2>
           <Collapse isOpened={true}>
-            <div>
+            <div className="flex flex-col gap-2 p-2 rounded bg-gray-100">
               {upgrades?.map((item: any, i: number) => (
                 <div key={`upgrade ${i}`} className="flex justify-between">
-                  <div>
+                  <div className="flex gap-2">
                     <input
                       type="checkbox"
                       name={item.name}
@@ -143,6 +145,12 @@ export default function CustomizedOrder({
         >
           Add to order
         </Button>
+        <button
+          onClick={() => setModalStatus(false)}
+          className="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 absolute top-2 right-2"
+        >
+          X
+        </button>
       </div>
     </div>
   )

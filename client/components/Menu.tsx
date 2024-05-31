@@ -59,7 +59,9 @@ export default ({ data, title, type }: MenuProp) => {
       <Container>
         <ContentWithPaddingXl>
           <Components.HeaderRow>
-            <h1 className="text-3xl font-bold">{title.toUpperCase()}</h1>
+            <h1 className="text-3xl font-bold text-red-600">
+              {title.toUpperCase()}
+            </h1>
           </Components.HeaderRow>
           <div className="opacity-100 scale-100 flex mt-6 flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12">
             {menu.map((card, index) => (
@@ -74,7 +76,7 @@ export default ({ data, title, type }: MenuProp) => {
                   whileHover="hover"
                   animate="rest"
                 >
-                  <Components.CardImageContainer imagesrc="/images/about-us.webp">
+                  <Components.CardImageContainer imagesrc={card.imgUrl}>
                     {/* <Components.CardRatingContainer>
                       <Components.CardRating>
                         <Components.StarIcon />

@@ -9,16 +9,16 @@ interface Nav {
 import { Link } from 'react-router-dom'
 
 const informationNav: Nav[] = [
-  { label: 'About Us', path: '/about-us' },
+  { label: 'About Us', path: '' },
 
-  { label: 'Contact Us', path: '/contact-us' },
-  { label: 'Site Map', path: '/site-map' },
+  { label: 'Contact Us', path: '' },
+  { label: 'Site Map', path: '' },
 ]
 
 const accountNav: Nav[] = [
-  { label: 'Order History', path: '/order-history' },
-  { label: 'Wish List', path: '/wishlist' },
-  { label: 'Special Offers', path: '/special-offers' },
+  { label: 'Order History', path: '' },
+  { label: 'Wish List', path: '' },
+  { label: 'Special Offers', path: '' },
 ]
 
 export default function Footer() {

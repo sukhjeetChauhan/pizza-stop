@@ -5,7 +5,7 @@ import { Layout } from '@stripe/stripe-js'
 export default function CheckoutForm() {
   const stripe = useStripe()
   const elements = useElements()
-
+  const [email, setEmail] = useState('')
   const [message, setMessage] = useState<null | string>(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -57,7 +57,8 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: 'http://localhost:3000',
+        return_url: 'http://localhost:5173/success',
+        receipt_email: email,
       },
     })
 
@@ -76,11 +77,19 @@ export default function CheckoutForm() {
   }
 
   const paymentElementOptions = {
-    layout: 'vertical' as Layout, // or 'horizontal'
+    layout: 'tabs' as Layout, // or 'horizontal'
   }
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
+      <input
+        id="email"
+        type="text"
+        value={email}
+        className="w-full bg-blue-100 p-2 mb-4 rounded"
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Enter email address for Invoice"
+      />
       <PaymentElement id="payment-element" options={paymentElementOptions} />
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">

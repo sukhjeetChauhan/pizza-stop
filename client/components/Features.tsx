@@ -27,9 +27,7 @@ const HeadingInfoContainer: React.FC<ChildrenProps> = ({ children }) => (
 )
 
 const HeadingDescription: React.FC<ChildrenProps> = ({ children }) => (
-  <p className="mt-4 font-medium text-gray-600 text-base text-center max-w-sm">
-    {children}
-  </p>
+  <p className="mt-4 font-medium text-gray-600 text-xl ">{children}</p>
 )
 
 const Content: React.FC<ChildrenProps> = ({ children }) => (
@@ -48,7 +46,7 @@ const Card: React.FC<Card> = ({ children, reversed }) => (
 
 const Image: React.FC<ImageContainer> = ({ imageSrc }) => (
   <div
-    className="rounded md:w-1/2 lg:w-5/12 xl:w-1/3 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4 lg:mx-8"
+    className="rounded md:w-1/2 lg:w-5/12 xl:w-1/3 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4 lg:mx-8 hover:scale-110 cursor-pointer ease-in-out transition-all duration-700"
     style={{ backgroundImage: `url("${imageSrc}")` }}
   />
 )
@@ -63,12 +61,12 @@ const Details: React.FC<ChildrenProps> = ({ children }) => (
 //   <div className="font-bold tracking-wide text-secondary-100">{children}</div>
 // )
 
-// const Title: React.FC<ChildrenProps> = ({ children }) => (
-//   <h4 className="text-3xl font-bold text-gray-900">{children}</h4>
-// )
+const Title: React.FC<ChildrenProps> = ({ children }) => (
+  <h4 className="text-3xl font-bold text-gray-900">{children}</h4>
+)
 
 const Description: React.FC<ChildrenProps> = ({ children }) => (
-  <p className="mt-2 text-sm leading-loose">{children}</p>
+  <p className="mt-2 text-lg leading-loose">{children}</p>
 )
 
 // const Link = ({ href, children }) => (
@@ -84,24 +82,24 @@ const PopularEvents = () => {
   const cards = [
     {
       imageSrc: '/images/about-us.webp',
-      subtitle: 'Paid',
-      title: 'Loachella, NYC',
+      // subtitle: '',
+      title: 'Community Favorite',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        ' As a locally-owned business, we pride ourselves on excellent customer service and a cozy atmosphere, making us a beloved spot for families and friends in Wellsford. Join us and feel like part of the family.',
     },
     {
       imageSrc: '/images/klara-kulikova-QATxlTPJImo-unsplash.jpg',
-      subtitle: 'Free',
-      title: 'Rock In Rio, Upstate',
+      // subtitle: 'Free',
+      title: 'Variety of Options',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        ' Whether you are a fan of classic Margherita or crave unique gourmet toppings, our diverse menu caters to all tastes, including vegan and gluten-free options. You will always find something new to love.',
     },
     {
       imageSrc: '/images/roberto-valdivia-rcUw6b4iYe0-unsplash.jpg',
-      subtitle: 'Exclusive',
-      title: 'Lollapalooza, Manhattan',
+      // subtitle: 'Exclusive',
+      title: 'Fresh Ingredients',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        'At Pizza Stop Wellsford, we use only the freshest ingredients to craft our delicious, hand-tossed pizzas, ensuring every bite is packed with flavor. Our commitment to quality sets us apart from the rest.',
     },
   ]
 
@@ -109,7 +107,7 @@ const PopularEvents = () => {
     <Container>
       <SingleColumn>
         <HeadingInfoContainer>
-          <h2 className="text-4xl font-bold">About Us</h2>
+          <h2 className="text-5xl font-bold text-red-600">About Us</h2>
           <HeadingDescription>
             Here are some reasons why you should choose us.
           </HeadingDescription>
@@ -120,7 +118,7 @@ const PopularEvents = () => {
               <Image imageSrc={card.imageSrc} />
               <Details>
                 {/* <Subtitle>{card.subtitle}</Subtitle> */}
-                {/* <Title>{card.title}</Title> */}
+                <Title>{card.title}</Title>
                 <Description>{card.description}</Description>
               </Details>
             </Card>
