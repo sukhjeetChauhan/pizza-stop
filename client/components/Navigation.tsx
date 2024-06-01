@@ -16,13 +16,11 @@ interface activeLink {
 
 const initialState = {
   pizzas: false,
-  mealdeals: false,
+
   sides: false,
   desserts: false,
   drinks: false,
-  catering: false,
 } as activeLink
-// pages.forEach((page) => (initialState[page] = false))
 
 export default function Navigation() {
   const [active, setActive] = useState(initialState)
@@ -30,12 +28,8 @@ export default function Navigation() {
 
   useEffect(() => {
     if (location.pathname !== '/') {
-      const item = sessionStorage.getItem('param')
-
-      const page = item ? JSON.parse(item) : null
-      if (page !== null) {
-        setActiveState(page.name)
-      }
+      const type = location.pathname.split('/').pop()
+      setActiveState(type as string)
     }
   }, [])
 
@@ -50,6 +44,17 @@ export default function Navigation() {
 
     // set new active state
     setActive(newActive)
+  }
+
+  function handleClick(item: string) {
+    if (location.pathname !== '/') {
+      // const item = sessionStorage.getItem('param')
+
+      // const page = item ? JSON.parse(item) : null
+      // console.log(page.name)
+      // if (page !== null) {
+      setActiveState(item)
+    }
   }
 
   return (
@@ -69,7 +74,7 @@ export default function Navigation() {
                 className={`uppercase  ${
                   active[item] ? 'bg-red-500 text-white' : 'bg-white'
                 }`}
-                onClick={() => setActiveState(item)}
+                onClick={() => handleClick(item)}
               >
                 {item}
               </Button>

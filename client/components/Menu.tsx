@@ -29,10 +29,6 @@ export default ({ data, title, type }: MenuProp) => {
     }
   }, [modalStatus])
 
-  useEffect(() => {
-    sessionStorage.setItem('param', JSON.stringify({ name: type }))
-  }, [type])
-
   function handleClick(data: MenuItem) {
     if (type === 'pizzas') {
       setModalStatus(true)
