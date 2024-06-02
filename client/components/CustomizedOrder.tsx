@@ -26,10 +26,12 @@ export default function CustomizedOrder({
   const [openToppings, setOpenToppings] = useState(false)
   const [openSwirls, setOpenSwirls] = useState(false)
   const [upgradeCart, setUpgradeCart] = useState<CartItem[]>([])
+  const [toppingsChoice, setToppingsChoice] = useState<string[]>([])
+  const [swirlsChoice, setSwirlsChoice] = useState<string[]>([])
+  const [active, setActive] = useState(false)
 
   const cart = useContext(CartContext)
-  let toppingsChoice: string[] = []
-  let swirlsChoice: string[] = []
+
   const filteredUpgrades = upgrades?.filter(
     (item: any) => item.name !== 'Toppings' && item.name !== 'Extra Swirl'
   )
@@ -61,8 +63,11 @@ export default function CustomizedOrder({
     const finalCartItem = {
       ...cartItem,
       upgrades: upgradeArr,
+      toppings: toppingsChoice,
+      swirls: swirlsChoice,
       price: (Number(cartItem.price) + upgradeCost).toFixed(2),
     }
+
     cart.addToCart(finalCartItem)
 
     setModalStatus(false)
@@ -93,20 +98,22 @@ export default function CustomizedOrder({
   }
   function handleOption(item: any, type: string): void {
     if (type === 'toppings') {
-      if (toppingsChoice.includes(item)) {
-        toppingsChoice = toppingsChoice.filter((i) => i !== item)
+      if (toppingsChoice.includes(item as string)) {
+        const choice = toppingsChoice.filter((i) => i !== item)
+        setToppingsChoice(choice)
       } else {
-        toppingsChoice.push(item)
+        const choice = [...toppingsChoice, item]
+        setToppingsChoice(choice)
       }
-      console.log(toppingsChoice)
     }
     if (type === 'swirls') {
       if (swirlsChoice.includes(item)) {
-        swirlsChoice = swirlsChoice.filter((i) => i !== item)
+        const choice = swirlsChoice.filter((i) => i !== item)
+        setSwirlsChoice(choice)
       } else {
-        swirlsChoice.push(item)
+        const choice = [...swirlsChoice, item]
+        setSwirlsChoice(choice)
       }
-      console.log(swirlsChoice)
     }
   }
 
@@ -198,7 +205,11 @@ export default function CustomizedOrder({
               {toppingsArr.map((item: any) => (
                 <button
                   onClick={() => handleOption(item, 'toppings')}
-                  className="p-2 text-limeGreen rounded bg-white border-2 border-limeGreen font-bold"
+                  className={`p-2 border-2 font-bold ${
+                    toppingsChoice.includes(item)
+                      ? `text-white rounded bg-limeGreen  border-limeGreen`
+                      : `text-limeGreen rounded bg-white  border-limeGreen`
+                  } `}
                 >
                   {item}
                 </button>
@@ -221,7 +232,11 @@ export default function CustomizedOrder({
               {swirlsArr.map((item: any) => (
                 <button
                   onClick={() => handleOption(item, 'swirls')}
-                  className="p-2 text-limeGreen rounded bg-white border-2 border-limeGreen font-bold"
+                  className={`p-2 border-2 font-bold ${
+                    swirlsChoice.includes(item)
+                      ? `text-white rounded bg-limeGreen  border-limeGreen`
+                      : `text-limeGreen rounded bg-white  border-limeGreen`
+                  } `}
                 >
                   {item}
                 </button>
