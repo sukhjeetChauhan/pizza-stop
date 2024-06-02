@@ -28,7 +28,6 @@ export default function CustomizedOrder({
   const [upgradeCart, setUpgradeCart] = useState<CartItem[]>([])
   const [toppingsChoice, setToppingsChoice] = useState<string[]>([])
   const [swirlsChoice, setSwirlsChoice] = useState<string[]>([])
-  const [active, setActive] = useState(false)
 
   const cart = useContext(CartContext)
 
@@ -202,8 +201,9 @@ export default function CustomizedOrder({
           </div>
           <Collapse isOpened={openToppings}>
             <div className="flex flex-wrap gap-2">
-              {toppingsArr.map((item: any) => (
+              {toppingsArr.map((item: any, i: number) => (
                 <button
+                  key={i}
                   onClick={() => handleOption(item, 'toppings')}
                   className={`p-2 border-2 font-bold ${
                     toppingsChoice.includes(item)
@@ -229,8 +229,9 @@ export default function CustomizedOrder({
           </div>
           <Collapse isOpened={openSwirls}>
             <div className="flex flex-wrap gap-2">
-              {swirlsArr.map((item: any) => (
+              {swirlsArr.map((item: any, i: number) => (
                 <button
+                  key={i}
                   onClick={() => handleOption(item, 'swirls')}
                   className={`p-2 border-2 font-bold ${
                     swirlsChoice.includes(item)
