@@ -2,7 +2,14 @@
 export default {
   content: ['./index.html', './client/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        limeGreen: '#70a401',
+      },
+      fontFamily: {
+        caveat: ['"Caveat Brush"', 'cursive'],
+      },
+    },
   },
   plugins: [],
 }

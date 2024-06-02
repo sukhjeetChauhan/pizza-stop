@@ -86,8 +86,8 @@ function CustomCarousel({ data }: CustomCarouselProps) {
                   className="w-full h-full"
                 />
               </div>
-              <div className="bg-green-50 w-2/3 flex">
-                <div>
+              <div className="bg-lime-50 w-2/3 flex items-center">
+                <div className="w-2/3">
                   <p className="text-sm font-medium p-2 max-w-full">
                     {product.name}
                   </p>
@@ -96,7 +96,7 @@ function CustomCarousel({ data }: CustomCarouselProps) {
                 <div className="mt-2 ">
                   <Button
                     onClick={() => cart.addToCart(product)}
-                    className="bg-green-500 p-2 text-white"
+                    className="bg-limeGreen p-2 text-white"
                   >
                     Add
                   </Button>
@@ -108,7 +108,7 @@ function CustomCarousel({ data }: CustomCarouselProps) {
       })}
 
       <button
-        className="slider__btn-next text-green-500"
+        className="slider__btn-next text-limeGreen font-bold "
         onClick={(e) => {
           e.preventDefault()
           slideNext()
@@ -117,7 +117,7 @@ function CustomCarousel({ data }: CustomCarouselProps) {
         {'>'}
       </button>
       <button
-        className="slider__btn-prev text-green-500"
+        className="slider__btn-prev text-limeGreen font-bold"
         onClick={(e) => {
           e.preventDefault()
           slidePrev()

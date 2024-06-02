@@ -45,7 +45,7 @@ export default function Sidebar({ data }: Props) {
         <CustomCarousel data={data} />
         <Button
           onClick={handleCheckout}
-          className="p-3 w-72 bg-green-500 text-white mb-2"
+          className="p-3 w-72 bg-limeGreen text-white mb-2"
         >
           Checkout
         </Button>

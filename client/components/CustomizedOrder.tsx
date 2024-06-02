@@ -22,9 +22,24 @@ export default function CustomizedOrder({
     quantity: 1,
   }
   const [cartItem, setCartItem] = useState(initialState)
+  const [openExtra, setOpenExtra] = useState(false)
+  const [openToppings, setOpenToppings] = useState(false)
+  const [openSwirls, setOpenSwirls] = useState(false)
   const [upgradeCart, setUpgradeCart] = useState<CartItem[]>([])
 
   const cart = useContext(CartContext)
+  let toppingsChoice: string[] = []
+  let swirlsChoice: string[] = []
+  const filteredUpgrades = upgrades?.filter(
+    (item: any) => item.name !== 'Toppings' && item.name !== 'Extra Swirl'
+  )
+  const toppingsArr = upgrades?.filter(
+    (item: any) => item.name === 'Toppings'
+  )[0].Toppings
+
+  const swirlsArr = upgrades?.filter(
+    (item: any) => item.name === 'Extra Swirl'
+  )[0].swirls
 
   if (isLoading) {
     return <p>Loading ......</p>
@@ -42,7 +57,7 @@ export default function CustomizedOrder({
   function handleSubmit() {
     const upgradeArr = upgradeCart.map((item) => item.name)
     const upgradeCost = upgradeCart.reduce((a, c) => a + Number(c.price), 0)
-    console.log(upgradeArr)
+
     const finalCartItem = {
       ...cartItem,
       upgrades: upgradeArr,
@@ -76,6 +91,25 @@ export default function CustomizedOrder({
       }
     }
   }
+  function handleOption(item: any, type: string): void {
+    if (type === 'toppings') {
+      if (toppingsChoice.includes(item)) {
+        toppingsChoice = toppingsChoice.filter((i) => i !== item)
+      } else {
+        toppingsChoice.push(item)
+      }
+      console.log(toppingsChoice)
+    }
+    if (type === 'swirls') {
+      if (swirlsChoice.includes(item)) {
+        swirlsChoice = swirlsChoice.filter((i) => i !== item)
+      } else {
+        swirlsChoice.push(item)
+      }
+      console.log(swirlsChoice)
+    }
+  }
+
   return (
     <div className="flex w-[45rem]">
       <div className="w-1/4 border-r-2 border-slate-300] bg-cover bg-[url('/images/pizzas/Pepperoni-Pizza-Recipe-Sip-Bite-Go.jpg')]">
@@ -92,7 +126,7 @@ export default function CustomizedOrder({
         </div>
         <div className="w-full p-6">
           <h2 className="text-xl font-semibold mb-2">
-            First, select your size
+            First, select your Pizza size
           </h2>
           <Collapse isOpened={true}>
             <div className="flex gap-4">
@@ -119,10 +153,20 @@ export default function CustomizedOrder({
               )}
             </div>
           </Collapse>
-          <h2 className="text-xl font-semibold mb-2">Choose your extras</h2>
-          <Collapse isOpened={true}>
+          <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
+            <h2 className="text-xl font-semibold mb-2">Choose your extras</h2>
+            <button
+              onClick={() =>
+                openExtra ? setOpenExtra(false) : setOpenExtra(true)
+              }
+              className="text-limeGreen bg-gray-100 p-1"
+            >
+              {openExtra ? '▲' : '▼'}
+            </button>
+          </div>
+          <Collapse isOpened={openExtra}>
             <div className="flex flex-col gap-2 p-2 rounded bg-gray-100">
-              {upgrades?.map((item: any, i: number) => (
+              {filteredUpgrades?.map((item: any, i: number) => (
                 <div key={`upgrade ${i}`} className="flex justify-between">
                   <div className="flex gap-2">
                     <input
@@ -138,9 +182,55 @@ export default function CustomizedOrder({
               ))}
             </div>
           </Collapse>
+          <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
+            <h2 className="text-xl font-semibold mb-2">Toppings</h2>
+            <button
+              onClick={() =>
+                openToppings ? setOpenToppings(false) : setOpenToppings(true)
+              }
+              className="text-limeGreen bg-gray-100 p-1"
+            >
+              {openToppings ? '▲' : '▼'}
+            </button>
+          </div>
+          <Collapse isOpened={openToppings}>
+            <div className="flex flex-wrap gap-2">
+              {toppingsArr.map((item: any) => (
+                <button
+                  onClick={() => handleOption(item, 'toppings')}
+                  className="p-2 text-limeGreen rounded bg-white border-2 border-limeGreen font-bold"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </Collapse>
+          <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
+            <h2 className="text-xl font-semibold mb-2">Choose your Swirls</h2>
+            <button
+              onClick={() =>
+                openSwirls ? setOpenSwirls(false) : setOpenSwirls(true)
+              }
+              className="text-limeGreen bg-gray-100 p-1"
+            >
+              {openSwirls ? '▲' : '▼'}
+            </button>
+          </div>
+          <Collapse isOpened={openSwirls}>
+            <div className="flex flex-wrap gap-2">
+              {swirlsArr.map((item: any) => (
+                <button
+                  onClick={() => handleOption(item, 'swirls')}
+                  className="p-2 text-limeGreen rounded bg-white border-2 border-limeGreen font-bold"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </Collapse>
         </div>
         <Button
-          className="p-3 w-96 bg-green-500 text-white my-2"
+          className="p-3 w-96 bg-limeGreen text-white my-2"
           onClick={() => handleSubmit()}
         >
           Add to order

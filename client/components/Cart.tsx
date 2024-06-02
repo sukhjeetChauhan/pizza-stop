@@ -11,26 +11,26 @@ export default function Cart() {
         {cart.cart?.length > 0 &&
           cart.cart.map((item, i: number) => (
             <li key={`${item.name}-${i}`}>
-              <div className="flex w-full justify-between">
+              <div className="flex w-full justify-between items-center">
                 <p className="text-sm">{item.name}</p>
-                <div className="flex gap-6">
-                  <div className="flex gap-2">
+                <div className="flex gap-4">
+                  <div className="flex gap-2 items-center">
                     <button
-                      className="bg-green-500 text-white px-2 py-1  rounded-full hover:bg-green-700 focus:outline-none shadow self-center"
+                      className="bg-limeGreen text-white px-2 py-1 text-sm font-bold  rounded-full hover:bg-lime-700 focus:outline-none shadow self-center"
                       onClick={() => cart.addQuantity(item.id)}
                     >
                       +
                     </button>
-                    <p>{item.quantity}</p>
+                    <p className="text-sm">{item.quantity}</p>
                     <button
-                      className="bg-green-500 text-white px-2 py-1 rounded-full hover:bg-green-700 focus:outline-none shadow self-center"
+                      className="bg-limeGreen text-white px-2 py-1 text-sm font-bold rounded-full hover:bg-lime-700 focus:outline-none shadow self-center"
                       onClick={() => cart.reduceQuantity(item.id)}
                     >
                       -
                     </button>
                   </div>
                   <button
-                    className="bg-gray-300 text-white px-2 py-1 rounded-full hover:bg-gray-700 focus:outline-none shadow self-center"
+                    className="bg-gray-300 text-white text-sm px-2 py-1 rounded-full hover:bg-gray-700 focus:outline-none shadow self-center"
                     onClick={() => cart.deleteItem(item.id)}
                   >
                     X

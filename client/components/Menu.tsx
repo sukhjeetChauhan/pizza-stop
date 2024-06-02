@@ -54,7 +54,7 @@ export default ({ data, title, type }: MenuProp) => {
       <Container>
         <ContentWithPaddingXl>
           <Components.HeaderRow>
-            <h1 className="text-3xl font-bold text-red-600">
+            <h1 className="text-5xl font-bold text-red-600 font-caveat">
               {title.toUpperCase()}
             </h1>
           </Components.HeaderRow>
@@ -96,7 +96,7 @@ export default ({ data, title, type }: MenuProp) => {
                     >
                       <Button
                         onClick={() => handleClick(card)}
-                        className="bg-green-500 text-white p-4 text-sm"
+                        className="bg-limeGreen text-white p-4 text-sm"
                       >
                         Add to Cart
                       </Button>
