@@ -1,6 +1,8 @@
 import { useContext } from 'react'
-
+import { Collapse } from 'react-collapse'
 import { CartContext } from './CartProvider'
+import '../styles/Cart.css'
+import CartItemDetails from '../utils/CartItemDetails'
 
 export default function Cart() {
   const cart = useContext(CartContext)
@@ -37,6 +39,14 @@ export default function Cart() {
                   </button>
                 </div>
               </div>
+              <div>
+                <p className="text-sm lato-300 hover:font-bold">
+                  Click to view more Info
+                </p>
+              </div>
+              <Collapse isOpened={false}>
+                <CartItemDetails item={item} />
+              </Collapse>
             </li>
           ))}
       </ul>
