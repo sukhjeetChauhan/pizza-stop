@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Collapse } from 'react-collapse'
 import { CartContext } from './CartProvider'
 import '../styles/Cart.css'
@@ -6,6 +6,15 @@ import CartItemDetails from '../utils/CartItemDetails'
 
 export default function Cart() {
   const cart = useContext(CartContext)
+  const [window, setWindow] = useState('')
+
+  function showDetails(item: string): void {
+    if (window === item) {
+      setWindow('')
+    } else {
+      setWindow(item)
+    }
+  }
 
   return (
     <>
@@ -40,12 +49,17 @@ export default function Cart() {
                 </div>
               </div>
               <div>
-                <p className="text-sm lato-300 hover:font-bold">
+                <p
+                  onClick={() => showDetails(item.name)}
+                  className="text-sm lato-300 hover:font-bold cursor-pointer"
+                >
                   Click to view more Info
                 </p>
               </div>
-              <Collapse isOpened={false}>
-                <CartItemDetails item={item} />
+              <Collapse isOpened={window === item.name ? true : false}>
+                <div className="w-full overflow-hidden">
+                  <CartItemDetails item={item} />
+                </div>
               </Collapse>
             </li>
           ))}
