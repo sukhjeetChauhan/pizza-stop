@@ -62,7 +62,7 @@ const Details: React.FC<ChildrenProps> = ({ children }) => (
 // )
 
 const Title: React.FC<ChildrenProps> = ({ children }) => (
-  <h4 className="text-3xl font-bold text-gray-900">{children}</h4>
+  <h4 className="text-3xl font-bold text-limeGreen">{children}</h4>
 )
 
 const Description: React.FC<ChildrenProps> = ({ children }) => (

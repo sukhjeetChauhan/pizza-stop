@@ -38,7 +38,7 @@ export const CardImageContainer = styled.div<CardImageContainerProps>`
     height: 16rem; /* Equivalent to xl:h-64 */
   }
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   position: relative;
   border-top-left-radius: 0.375rem; /* Equivalent to rounded-t */
@@ -80,7 +80,7 @@ export const CardReview: React.FC<Props> = ({ children }) => (
 )
 
 export const CardText: React.FC<Props> = ({ children }) => (
-  <div className="p-4 text-green-600 bg-gray-300 h-32">{children}</div>
+  <div className="p-4 text-white bg-limeGreen h-32">{children}</div>
 )
 
 export const CardTitle: React.FC<Props> = ({ children }) => (

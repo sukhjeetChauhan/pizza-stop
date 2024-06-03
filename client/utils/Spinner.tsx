@@ -2,7 +2,7 @@
 
 const Spinner = () => {
   return (
-    <div className="flex items-center justify-center h-screen text-2xl text-gray-800">
+    <div className="flex items-center justify-center h-screen text-3xl text-limeGreen font-bold">
       Loading...
     </div>
   )

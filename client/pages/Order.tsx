@@ -7,13 +7,15 @@ import Sidebar from '../components/Sidebar'
 import { useGetData } from '../../data/hooks'
 import { sortBasedOnType } from '../../data/data_manipulation'
 import Spinner from '../utils/Spinner'
-// import { useEffect } from 'react'
 
-// import { MenuItem } from '../../types/menu'
-
-// interface DataType {
-//   [key: string]: MenuItem[] // Adjust the type according to your data structure
-// }
+const order = [
+  'Meat Range',
+  'Chicken Range',
+  'Favourite Range',
+  'Seafood SaRange',
+  'Veg Range',
+  'Value Range',
+]
 
 export default function Order() {
   const { name } = useParams()
@@ -29,7 +31,7 @@ export default function Order() {
   }
   if (data) {
     const { menu, hasType } = sortBasedOnType(data)
-    const menuTypeArr = Object.keys(menu)
+    const menuTypeArr = name === 'pizzas' ? order : Object.keys(menu)
 
     const { menu: sidesArr } = sortBasedOnType(sides)
 

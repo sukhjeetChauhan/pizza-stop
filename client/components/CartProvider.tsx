@@ -3,7 +3,9 @@ import { ReactNode, createContext, useState } from 'react'
 export interface CartItem {
   name: string
   price: number
-  upgrades?: string[]
+  upgrades: string[]
+  toppings: string[]
+  swirls: string[]
   quantity: number
 }
 
@@ -33,7 +35,9 @@ export default function CartProvider({ children }: Props) {
       id: cartProducts.length,
       name: item.name,
       price: item.price ? item.price : item.price_large,
-      upgrades: [],
+      upgrades: item.upgrades ? item.upgrades : [],
+      toppings: item.toppings ? item.toppings : [],
+      swirls: item.swirls ? item.swirls : [],
       quantity: 1,
     }
 

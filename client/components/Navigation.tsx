@@ -20,6 +20,8 @@ const initialState = {
   sides: false,
   desserts: false,
   drinks: false,
+  mealdeals: false,
+  catering: false,
 } as activeLink
 
 export default function Navigation() {
@@ -71,7 +73,7 @@ export default function Navigation() {
           >
             <Link to={`/order/${item}`}>
               <Button
-                className={`uppercase  ${
+                className={`uppercase text-xl ${
                   active[item] ? 'bg-red-500 text-white' : 'bg-white'
                 }`}
                 onClick={() => handleClick(item)}
