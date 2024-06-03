@@ -130,9 +130,9 @@ export default function Landing() {
           </Modal>
         )}
 
-        <div className="min-h-screen bg-[url('/images/landingPizza.jpg')] bg-cover bg-center flex items-center justify-center">
+        <div className="h-screen-minus-header bg-[url('/images/background.jpg')] bg-cover bg-center flex items-center justify-center">
           <Link to="/order/pizzas">
-            <Button className="bg-white text-red-500 text-xl p-4 mt-40 w-80 hover:shadow-2xl">
+            <Button className="bg-white uppercase lato-700 text-red-500 text-xl p-4 mt-40 w-80 hover:shadow-2xl hover:bg-gray-200">
               Order Now
             </Button>
           </Link>

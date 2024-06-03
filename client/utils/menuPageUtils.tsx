@@ -38,7 +38,7 @@ export const CardImageContainer = styled.div<CardImageContainerProps>`
     height: 16rem; /* Equivalent to xl:h-64 */
   }
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   position: relative;
   border-top-left-radius: 0.375rem; /* Equivalent to rounded-t */

@@ -8,7 +8,7 @@ export default function Header() {
   const cart = useContext(CartContext)
   return (
     <>
-      <section className="flex py-5 border-b-1 border-slate-300 items-center">
+      <section className="flex py-3 border-b-1 border-slate-300 items-center">
         <div className="ml-8 w-20 rounded-sm w-auto">
           <Link to="/">
             {/* <img src="/images/Logo/android-chrome-192x192.png" alt="logo" /> */}

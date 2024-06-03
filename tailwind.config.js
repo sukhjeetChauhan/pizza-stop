@@ -9,6 +9,9 @@ export default {
       fontFamily: {
         caveat: ['"Caveat Brush"', 'cursive'],
       },
+      height: {
+        'screen-minus-header': 'calc(100vh - 9rem)', // Adjust '4rem' to your header's height
+      },
     },
   },
   plugins: [],
