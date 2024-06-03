@@ -7,6 +7,12 @@ import { useGetData } from '../../data/hooks'
 import { useContext, useState } from 'react'
 import { CartContext, CartItem } from './CartProvider'
 
+interface Upgrade {
+  name: string
+  price: number
+  quantity: number
+}
+
 export default function CustomizedOrder({
   data,
   setModalStatus,
@@ -20,12 +26,15 @@ export default function CustomizedOrder({
     name: data.name,
     price: data.price_large as number,
     quantity: 1,
+    upgrades: [],
+    toppings: [],
+    swirls: [],
   }
   const [cartItem, setCartItem] = useState(initialState)
   const [openExtra, setOpenExtra] = useState(false)
   const [openToppings, setOpenToppings] = useState(false)
   const [openSwirls, setOpenSwirls] = useState(false)
-  const [upgradeCart, setUpgradeCart] = useState<CartItem[]>([])
+  const [upgradeCart, setUpgradeCart] = useState<Upgrade[]>([])
   const [toppingsChoice, setToppingsChoice] = useState<string[]>([])
   const [swirlsChoice, setSwirlsChoice] = useState<string[]>([])
 
@@ -50,8 +59,8 @@ export default function CustomizedOrder({
     console.log('Error occured')
   }
 
-  function findItem(item: string, data: CartItem[]) {
-    const res = data.find((i) => i.name === item)
+  function findItem(item: string, data: any) {
+    const res = data.find((i: { name: string }) => i.name === item)
     return { data: res, status: res ? true : false }
   }
 
@@ -89,7 +98,7 @@ export default function CustomizedOrder({
         }
       } else {
         const newUpgradeCart = upgradeCart.filter(
-          (i: CartItem) => i.name !== upgradeItem.name
+          (i: Upgrade) => i.name !== upgradeItem.name
         )
         setUpgradeCart(newUpgradeCart)
       }
