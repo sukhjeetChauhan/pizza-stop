@@ -29,7 +29,14 @@ export default function Order() {
   }
   if (data) {
     const { menu, hasType } = sortBasedOnType(data)
-    const menuTypeArr = Object.keys(menu)
+    const menuTypeArr = [
+      'Meat Range',
+      'Chicken Range',
+      'Favourite Range',
+      'Seafood SaRange',
+      'Veg Range',
+      'Value Range',
+    ]
 
     const { menu: sidesArr } = sortBasedOnType(sides)
 
