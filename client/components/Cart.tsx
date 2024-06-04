@@ -5,9 +5,14 @@ import '../styles/Cart.css'
 import CartItemDetails from '../utils/CartItemDetails'
 import { getLocalStorage, setLocalStorage } from '../../data/localStorage'
 
+const fillerObj = {
+  address: '',
+  order: 'Pickup',
+}
+
 export default function Cart() {
   const cart = useContext(CartContext)
-  const order = getLocalStorage()
+  const order = getLocalStorage() || fillerObj
   const [window, setWindow] = useState('')
   const [address, setAddress] = useState<string>('')
   const [isOpen, setIsopen] = useState(false)
