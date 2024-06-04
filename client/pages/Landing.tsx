@@ -33,7 +33,7 @@ export default function Landing() {
 
   function handleOption() {
     const storageObj = {
-      address: deliverStatus ? address : null,
+      address: deliverStatus ? address : '',
       order: deliverStatus ? 'Deliver' : 'Pickup',
     }
     if (deliverStatus && address !== '') {
