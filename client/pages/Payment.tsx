@@ -10,9 +10,7 @@ import { getLocalStorage } from '../../data/localStorage'
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
-const stripePromise = loadStripe(
-  'pk_test_51PLgjzK3nDwi1iFQFXCVEUyURYb88KGNqu0T1CF1ndZPHXuzFQoDlz845Kw7Ui5YUyMHItCWGBlmNEoCjs8r7kY200XEcGW366'
-)
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY)
 
 export default function Payment() {
   const [clientSecret, setClientSecret] = useState('')
