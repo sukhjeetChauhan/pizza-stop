@@ -18,8 +18,6 @@ export default function Cart() {
   const [isOpen, setIsopen] = useState(false)
   const [orderStatus, setOrderStatus] = useState(order.order)
 
-  console.log(order)
-
   const deliveryCharges: number = orderStatus === 'Deliver' ? 5.99 : 0
 
   function showDetails(item: string): void {
