@@ -14,8 +14,10 @@ export async function getData(collectionName: string) {
   const res: any = []
   querySnapshot.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
-    res.push(doc.data())
-    // console.log(querySnapshot)
+    const obj = doc.data()
+    const id = doc.id
+    res.push({ ...obj, id })
+    // console.log({ ...obj, id })
   })
   return res
 }

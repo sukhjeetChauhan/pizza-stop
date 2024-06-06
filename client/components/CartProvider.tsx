@@ -10,7 +10,7 @@ export interface CartItem {
 }
 
 export interface CartItemWithId extends CartItem {
-  id: number
+  id: string
 }
 
 interface Props {
@@ -20,10 +20,10 @@ interface Props {
 export const CartContext = createContext({
   cart: [] as CartItemWithId[],
   addToCart: (_item: any) => {},
-  deleteItem: (_id: number) => {},
+  deleteItem: (_id: string) => {},
   clearCart: () => {},
-  addQuantity: (_id: number) => {},
-  reduceQuantity: (_id: number) => {},
+  addQuantity: (_id: string) => {},
+  reduceQuantity: (_id: string) => {},
   calculateTotalCost: () => {},
 })
 
@@ -32,7 +32,7 @@ export default function CartProvider({ children }: Props) {
 
   function addToCart(item: any) {
     const cartItem: CartItemWithId = {
-      id: cartProducts.length,
+      id: item.id,
       name: item.name,
       price: item.price ? item.price : item.price_large,
       upgrades: item.upgrades ? item.upgrades : [],
@@ -44,7 +44,8 @@ export default function CartProvider({ children }: Props) {
     setCartProducts([...cartProducts, cartItem])
   }
 
-  function deleteItem(id: number) {
+  function deleteItem(id: string) {
+    console.log(id)
     const newCart = cartProducts.filter((obj) => obj.id !== id)
     setCartProducts(newCart)
   }
@@ -53,13 +54,13 @@ export default function CartProvider({ children }: Props) {
     setCartProducts([])
   }
 
-  function addQuantity(id: number) {
+  function addQuantity(id: string) {
     const newcart = cartProducts.map((item) =>
       item.id === id ? { ...item, quantity: item.quantity + 1 } : item
     )
     setCartProducts(newcart)
   }
-  function reduceQuantity(id: number) {
+  function reduceQuantity(id: string) {
     const newCart = cartProducts.map((item) =>
       item.id === id ? { ...item, quantity: item.quantity - 1 } : item
     )

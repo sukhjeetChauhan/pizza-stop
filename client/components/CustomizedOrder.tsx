@@ -5,7 +5,7 @@ import '../styles/CustomizedOrder.css'
 
 import { useGetData } from '../../data/hooks'
 import { useContext, useState } from 'react'
-import { CartContext, CartItem } from './CartProvider'
+import { CartContext, CartItem, CartItemWithId } from './CartProvider'
 
 interface Upgrade {
   name: string
@@ -22,7 +22,8 @@ export default function CustomizedOrder({
 }) {
   const { data: upgrades, isLoading, isError } = useGetData('upgrades')
 
-  const initialState: CartItem = {
+  const initialState: CartItemWithId = {
+    id: data.id,
     name: data.name,
     price: data.price_large as number,
     quantity: 1,

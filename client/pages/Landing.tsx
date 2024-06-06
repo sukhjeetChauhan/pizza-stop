@@ -96,7 +96,7 @@ export default function Landing() {
                   >
                     <div className="flex flex-col items-center">
                       <span className="font-semibold">Pick Up</span>
-                      <span className="text-xs">25 mins</span>
+                      <span className="text-xs">15 mins</span>
                     </div>
                   </button>
                 </div>

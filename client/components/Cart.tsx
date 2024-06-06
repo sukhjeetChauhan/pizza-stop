@@ -144,9 +144,9 @@ export default function Cart() {
             </div>
           </Collapse>
 
-          <p className="text-base mt-4">{`Total Cost: $${
+          <p className="text-base mt-4">{`Total Cost: $${(
             Number(cart.calculateTotalCost()) + Number(deliveryCharges)
-          }`}</p>
+          ).toFixed(2)}`}</p>
         </>
       )}
     </>
