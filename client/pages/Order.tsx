@@ -22,7 +22,7 @@ export default function Order() {
   const { name } = useParams()
   const { data, isLoading, isError } = useGetData(name as string)
   const { data: sides } = useGetData('sides')
-  const [cartView, setcartView] = useState(false)
+  const [cartView, setCartView] = useState(false)
 
   if (isLoading) {
     return <Spinner />
@@ -41,7 +41,7 @@ export default function Order() {
       <div className="bg-[url('/images/marble-back.jpeg')] bg-auto bg-fixed md:w-[77%]">
         <main>
           <div className="sticky top-0 left-0 z-10 bg-white">
-            <Header />
+            <Header cartView={cartView} setCartView={setCartView} />
           </div>
           <div className="px-16 ">
             {hasType ? (
@@ -58,9 +58,9 @@ export default function Order() {
           </div>
         </main>
         <aside
-          className={`fixed z-10 md:right-0 ${
-            cartView ? '' : 'right-full'
-          } bottom-0 h-screen shadow-inner md:w-[23%] sm:w-[60%] w-[80%]`}
+          className={`fixed transition-all transform ease-out-in duration-700 z-10 right-0 ${
+            cartView ? '' : 'translate-x-full'
+          } bottom-0 h-screen shadow-inner md:w-[23%] sm:w-[60%] w-[70%]`}
         >
           <Sidebar data={sides && sidesArr.Loaded} />
         </aside>

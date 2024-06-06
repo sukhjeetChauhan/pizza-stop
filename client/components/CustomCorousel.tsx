@@ -88,15 +88,15 @@ function CustomCarousel({ data }: CustomCarouselProps) {
               </div>
               <div className="bg-lime-50 w-2/3 flex items-center">
                 <div className="w-2/3">
-                  <p className="lg:text-sm text-xs font-medium p-2 min-w-full">
+                  <p className="text-sm font-medium p-2 min-w-full">
                     {product.name}
                   </p>
-                  <p className="p-2 lg:text-sm text-xs">{product.price}</p>
+                  <p className="p-2 text-sm">{product.price}</p>
                 </div>
                 <div className="mt-2 ">
                   <Button
                     onClick={() => cart.addToCart(product)}
-                    className="bg-limeGreen p-2 text-white lg:text-sm text-xs"
+                    className="bg-limeGreen p-2 text-white text-sm"
                   >
                     Add
                   </Button>
