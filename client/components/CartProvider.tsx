@@ -40,8 +40,10 @@ export default function CartProvider({ children }: Props) {
       swirls: item.swirls ? item.swirls : [],
       quantity: 1,
     }
-
-    setCartProducts([...cartProducts, cartItem])
+    const found = cartProducts.find((obj) => obj.id === cartItem.id)
+    if (found === undefined) {
+      setCartProducts([...cartProducts, cartItem])
+    }
   }
 
   function deleteItem(id: string) {
