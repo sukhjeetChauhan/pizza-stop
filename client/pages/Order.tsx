@@ -59,8 +59,8 @@ export default function Order() {
         </main>
         <aside
           className={`fixed transition-all transform ease-out-in duration-500 z-10 right-0 ${
-            cartView ? '' : 'translate-x-full'
-          } bottom-0 h-screen shadow-inner md:w-[23%] sm:w-[60%] w-[70%]`}
+            cartView ? 'translate-x-0' : 'translate-x-full md:translate-x-0'
+          } top-0 h-screen shadow-inner md:w-[23%] sm:w-[60%] w-[70%]`}
         >
           <Sidebar data={sides && sidesArr.Loaded} />
         </aside>

@@ -83,11 +83,11 @@ export default ({ data, title, type }: MenuProp) => {
               {title.toUpperCase()}
             </h1>
           </Components.HeaderRow>
-          <div className="opacity-100 scale-100 flex mt-6 flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12">
+          <div className="opacity-100 scale-100 flex  justify-center mt-6 flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12">
             {menu.map((card, index) => (
               <div
                 key={index}
-                className="mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12"
+                className="mt-10 w-80 sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12"
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
                 onTouchStart={() => handleTouchStart(index)}
