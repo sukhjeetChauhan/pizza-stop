@@ -127,7 +127,7 @@ export default function CustomizedOrder({
   }
 
   return (
-    <div className="flex w-[45rem]">
+    <div className="flex md:w-[45rem] sm:w-[32rem] w-[23rem]">
       <div className="w-1/4 border-r-2 border-slate-300] bg-cover bg-[url('/images/pizzas/Pepperoni-Pizza-Recipe-Sip-Bite-Go.jpg')]">
         {/* <img
           className="w-screen"

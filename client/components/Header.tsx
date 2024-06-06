@@ -33,7 +33,11 @@ export default function Header({
             cartView ? 'right-[70%] sm:right-[60%]' : 'right-12'
           } items-center bg-white p-2`}
         >
-          <div className="block md:hidden">
+          <div
+            className={`${
+              location.pathname === '/' ? 'hidden' : 'block'
+            } md:hidden`}
+          >
             {cartView ? (
               <img
                 className="sm:w-8 w-4 sm:h-8 h-4"

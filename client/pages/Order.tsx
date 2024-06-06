@@ -58,7 +58,7 @@ export default function Order() {
           </div>
         </main>
         <aside
-          className={`fixed transition-all transform ease-out-in duration-700 z-10 right-0 ${
+          className={`fixed transition-all transform ease-out-in duration-500 z-10 right-0 ${
             cartView ? '' : 'translate-x-full'
           } bottom-0 h-screen shadow-inner md:w-[23%] sm:w-[60%] w-[70%]`}
         >
