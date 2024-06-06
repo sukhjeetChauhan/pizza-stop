@@ -12,6 +12,9 @@ export default {
       height: {
         'screen-minus-header': 'calc(100vh - 9rem)', // Adjust '4rem' to your header's height
       },
+      inset: {
+        '-full': '-100%',
+      },
     },
   },
   plugins: [],

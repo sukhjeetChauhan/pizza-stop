@@ -62,30 +62,30 @@ export default function Cart() {
 
   return (
     <>
-      <ul className="w-72">
+      <ul>
         {cart.cart?.length > 0 &&
           cart.cart.map((item, i: number) => (
             <li key={`${item.name}-${i}`}>
               <div className="flex w-full justify-between items-center">
-                <p className="text-sm">{item.name}</p>
+                <p className="lg:text-sm text-xs">{item.name}</p>
                 <div className="flex gap-4">
                   <div className="flex gap-2 items-center">
                     <button
-                      className="bg-limeGreen text-white px-2 py-1 text-sm font-bold  rounded-full hover:bg-lime-700 focus:outline-none shadow self-center"
+                      className="bg-limeGreen text-white px-2 py-1 text-sm font-bold  rounded-full hover:bg-lime-700 focus:outline-none shadow self-center lg:text-sm text-xs"
                       onClick={() => cart.addQuantity(item.id)}
                     >
                       +
                     </button>
-                    <p className="text-sm">{item.quantity}</p>
+                    <p className="lg:text-sm text-xs">{item.quantity}</p>
                     <button
-                      className="bg-limeGreen text-white px-2 py-1 text-sm font-bold rounded-full hover:bg-lime-700 focus:outline-none shadow self-center"
+                      className="bg-limeGreen text-white px-2 py-1 text-sm font-bold rounded-full hover:bg-lime-700 focus:outline-none shadow self-center lg:text-sm text-xs"
                       onClick={() => cart.reduceQuantity(item.id)}
                     >
                       -
                     </button>
                   </div>
                   <button
-                    className="bg-gray-300 text-white text-sm px-2 py-1 rounded-full hover:bg-gray-700 focus:outline-none shadow self-center"
+                    className="bg-gray-300 text-white text-sm px-2 py-1 rounded-full hover:bg-gray-700 focus:outline-none shadow self-center lg:text-sm text-xs"
                     onClick={() => cart.deleteItem(item.id)}
                   >
                     X
@@ -95,7 +95,7 @@ export default function Cart() {
               <div>
                 <p
                   onClick={() => showDetails(item.name)}
-                  className="text-sm lato-300 hover:font-bold cursor-pointer"
+                  className="text-sm lato-300 hover:font-bold cursor-pointer lg:text-sm text-xs"
                 >
                   Click to view more Info
                 </p>
@@ -112,13 +112,13 @@ export default function Cart() {
         <>
           <div className="mt-4 flex justify-between">
             {orderStatus === 'Deliver' ? (
-              <p className="text-sm">Delivery Charges: $5.99</p>
+              <p className="lg:text-sm text-xs">Delivery Charges: $5.99</p>
             ) : (
-              <p className="text-sm">Pick Up</p>
+              <p className="lg:text-sm text-xs">Pick Up</p>
             )}
             <button
               onClick={handleClick}
-              className="text-sm leto-100 text-limeGreen hover:text-lime-800"
+              className="text-sm leto-100 text-limeGreen hover:text-lime-800 lg:text-sm text-xs"
             >
               {`Change to ${
                 order.order === 'Deliver' ? 'Pick Up' : 'Delivery'
@@ -128,7 +128,7 @@ export default function Cart() {
           <Collapse isOpened={isOpen}>
             <div className="mt-2 p-2 bg-gray-100">
               <input
-                className={`shadow appearance-none border rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-sm`}
+                className={`shadow appearance-none border rounded w-full py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs`}
                 id="address"
                 type="text"
                 onChange={handleChange}
@@ -144,7 +144,7 @@ export default function Cart() {
             </div>
           </Collapse>
 
-          <p className="text-base mt-4">{`Total Cost: $${(
+          <p className="text-base mt-4 lg:text-sm text-xs">{`Total Cost: $${(
             Number(cart.calculateTotalCost()) + Number(deliveryCharges)
           ).toFixed(2)}`}</p>
         </>

@@ -71,6 +71,7 @@ export const CardHoverOverlay = styled(motion.div)`
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction:column;
   justify-content: center;
   align-items: center;
 `

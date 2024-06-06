@@ -1,6 +1,5 @@
 import Button from '../utils/Button'
 import * as Components from '../utils/menuPageUtils'
-
 import { Container, ContentWithPaddingXl } from '../utils/Containers'
 import { useEffect, useRef, useState } from 'react'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
@@ -15,12 +14,16 @@ interface MenuProp {
   title: string
   type: string
 }
+
 export default ({ data, title, type }: MenuProp) => {
   const menu: MenuItem[] = data
   const cart = useContext(CartContext)
   const [modalStatus, setModalStatus] = useState(false)
   const [modalData, setModalData] = useState<MenuItem>()
   const modalRef = useRef(null)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [touchActive, setTouchActive] = useState(false)
+
   useEffect(() => {
     if (modalRef.current) {
       modalStatus
@@ -29,15 +32,37 @@ export default ({ data, title, type }: MenuProp) => {
     }
   }, [modalStatus])
 
-  function handleClick(data: MenuItem) {
+  function handleClick(data: MenuItem, index: number) {
+    console.log('hello')
     if (type === 'pizzas') {
       setModalStatus(true)
-
       setModalData(data)
+      if (hoveredIndex === index) {
+        setHoveredIndex(null)
+      }
     } else {
       cart.addToCart(data)
     }
   }
+
+  const handleMouseEnter = (index: number) => {
+    setHoveredIndex(index)
+  }
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null)
+  }
+
+  const handleTouchStart = (index: number) => {
+    setTouchActive(true)
+    setHoveredIndex(index) // Toggle on
+  }
+
+  function handleTouchState() {
+    setHoveredIndex(null)
+    setTouchActive(false)
+  }
+
   return (
     <div ref={modalRef}>
       {modalStatus && (
@@ -63,24 +88,26 @@ export default ({ data, title, type }: MenuProp) => {
               <div
                 key={index}
                 className="mt-10 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12"
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={handleMouseLeave}
+                onTouchStart={() => handleTouchStart(index)}
               >
                 <Components.Card
                   className="group"
-                  // href={card.url}
-                  initial="rest"
-                  whileHover="hover"
-                  animate="rest"
+                  initial="visible"
+                  animate={hoveredIndex === index ? 'hover' : 'rest'}
+                  variants={{
+                    hover: {
+                      opacity: 1,
+                      height: 'auto',
+                    },
+                    rest: {
+                      opacity: 1, // Make sure the card is visible by default
+                      height: 'auto', // Keep height auto to ensure it's not zero
+                    },
+                  }}
                 >
                   <Components.CardImageContainer imagesrc={card.imgUrl}>
-                    {/* <Components.CardRatingContainer>
-                      <Components.CardRating>
-                        <Components.StarIcon />
-                        {card.rating}
-                      </Components.CardRating>
-                      <Components.CardReview>
-                        ({card.rating})
-                      </Components.CardReview>
-                    </Components.CardRatingContainer> */}
                     <Components.CardHoverOverlay
                       variants={{
                         hover: {
@@ -95,17 +122,23 @@ export default ({ data, title, type }: MenuProp) => {
                       transition={{ duration: 0.3 }}
                     >
                       <Button
-                        onClick={() => handleClick(card)}
+                        onClick={() => handleClick(card, index)}
                         className="bg-limeGreen text-white p-4 text-sm"
                       >
                         Add to Cart
                       </Button>
+                      {touchActive && (
+                        <button
+                          className="mt-16 font-bold bg-slate-500 bg-opacity-80 text-white uppercase text-lg px-2 py-2 w-36 rounded  focus:outline-none shadow"
+                          onClick={() => handleTouchState()}
+                        >
+                          Close
+                        </button>
+                      )}
                     </Components.CardHoverOverlay>
                   </Components.CardImageContainer>
-
                   <Components.CardText>
                     <Components.CardTitle>{card.name}</Components.CardTitle>
-                    {/* <CardContent>{card.description}</CardContent> */}
                     <Components.CardPrice>{`$ ${
                       card.price ? card.price : (card.price_large as string)
                     }`}</Components.CardPrice>
@@ -115,8 +148,6 @@ export default ({ data, title, type }: MenuProp) => {
             ))}
           </div>
         </ContentWithPaddingXl>
-        {/* <DecoratorBlob1 /> */}
-        {/* <DecoratorBlob2 /> */}
       </Container>
     </div>
   )

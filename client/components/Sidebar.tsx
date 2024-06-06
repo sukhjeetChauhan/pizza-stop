@@ -30,12 +30,12 @@ export default function Sidebar({ data }: Props) {
     }
   }
   return (
-    <div className="flex flex-col items-center justify-between h-full">
-      <div>
-        <div className="flex items-center justify-center h-20">
-          <span>-------------</span>
+    <div className="flex flex-col items-center justify-between h-full bg-white">
+      <div className="min-w-full p-4">
+        <div className="flex items-center justify-center mt-5 mb-5 lg:text-md text-sm">
+          <span>---------</span>
           <h2 className="uppercase">Your Cart</h2>
-          <span>-------------</span>
+          <span>---------</span>
         </div>
         <div>
           <Cart />
@@ -45,7 +45,7 @@ export default function Sidebar({ data }: Props) {
         <CustomCarousel data={data} />
         <Button
           onClick={handleCheckout}
-          className="p-3 w-72 bg-limeGreen text-white mb-2"
+          className="p-3 w-72 max-w-full bg-limeGreen text-white mb-2"
         >
           Checkout
         </Button>
