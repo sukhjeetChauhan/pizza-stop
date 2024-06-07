@@ -22,7 +22,7 @@ export default function Order() {
   const { name } = useParams()
   const { data, isLoading, isError } = useGetData(name as string)
   const { data: sides } = useGetData('sides')
-  const [cartView, setCartView] = useState(false)
+  const [cartView, setCartView] = useState<boolean>(false)
 
   if (isLoading) {
     return <Spinner />

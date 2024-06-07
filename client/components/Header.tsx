@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom'
 import Navigation from './Navigation'
-import { useContext } from 'react'
+import { Dispatch, SetStateAction, useContext } from 'react'
 import { CartContext } from './CartProvider'
 import cartSVG from '/images/cart.svg'
 
-export default function Header({
-  cartView,
-  setCartView,
-}: {
+interface CartContextType {
   cartView: boolean
-  setCartView: React.Dispatch<React.SetStateAction<boolean>>
-}) {
+  setCartView: Dispatch<SetStateAction<boolean>>
+}
+
+export default function Header({ cartView, setCartView }: CartContextType) {
   const cart = useContext(CartContext)
   return (
     <>
