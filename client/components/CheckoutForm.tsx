@@ -60,7 +60,7 @@ export default function CheckoutForm() {
       confirmParams: {
         // Make sure to change this to your payment completion page
         return_url: returnUrl,
-        receipt_email: email,
+        // receipt_email: email,
       },
     })
 

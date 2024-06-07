@@ -4,7 +4,7 @@
   -webkit-font-smoothing: antialiased;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
   justify-content: center;
   align-content: center;
   height: 100vh;
