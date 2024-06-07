@@ -135,14 +135,14 @@ export default function CustomizedOrder({
 
   return (
     <div className="flex md:w-[45rem] sm:w-[32rem] w-[23rem]">
-      <div className="w-1/4 border-r-2 border-slate-300] bg-cover bg-[url('/images/pizzas/Pepperoni-Pizza-Recipe-Sip-Bite-Go.jpg')]">
+      <div className="w-0 sm:w-1/4 border-r-2 border-slate-300] bg-cover bg-[url('/images/pizzas/Pepperoni-Pizza-Recipe-Sip-Bite-Go.jpg')]">
         {/* <img
           className="w-screen"
           src="/images/Jalapeno pizza.webp"
           alt="modal pizza"
         /> */}
       </div>
-      <div className="w-3/4 flex flex-col items-center">
+      <div className="w-full sm:w-3/4 flex flex-col items-center">
         <div className="w-full p-3 border-b-2 border-slate-300">
           <h1 className="text-3xl font-semibold mb-8">{data.name as string}</h1>
           <p className="mb-8">{data.description}</p>
@@ -273,7 +273,7 @@ export default function CustomizedOrder({
           </div>
         )}
         <Button
-          className="p-3 w-96 bg-limeGreen text-white my-2"
+          className="p-3 w-full md:w-96 bg-limeGreen text-white my-2"
           onClick={() => handleSubmit()}
         >
           Add to order
