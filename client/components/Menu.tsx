@@ -33,8 +33,11 @@ export default ({ data, title, type }: MenuProp) => {
   }, [modalStatus])
 
   function handleClick(data: MenuItem, index: number) {
-    console.log('hello')
-    if (type === 'pizzas') {
+    if (
+      type === 'pizzas' ||
+      data.name === 'Loaded Fries' ||
+      data.name === 'Loaded Wedges'
+    ) {
       setModalStatus(true)
       setModalData(data)
       if (hoveredIndex === index) {

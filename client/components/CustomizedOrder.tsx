@@ -6,6 +6,7 @@ import '../styles/CustomizedOrder.css'
 import { useGetData } from '../../data/hooks'
 import { useContext, useState } from 'react'
 import { CartContext, CartItem, CartItemWithId } from './CartProvider'
+import SidesOPtions from './SidesOptions'
 
 interface Upgrade {
   name: string
@@ -21,11 +22,15 @@ export default function CustomizedOrder({
   setModalStatus: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const { data: upgrades, isLoading, isError } = useGetData('upgrades')
+  console.log(data)
 
   const initialState: CartItemWithId = {
     id: data.id,
     name: data.name,
-    price: data.price_large as number,
+    price:
+      data.type === 'Loaded'
+        ? Number(data.price)
+        : (data.price_large as number),
     quantity: 1,
     upgrades: [],
     toppings: [],
@@ -74,7 +79,10 @@ export default function CustomizedOrder({
       upgrades: upgradeArr,
       toppings: toppingsChoice,
       swirls: swirlsChoice,
-      price: (Number(cartItem.price) + upgradeCost).toFixed(2),
+      price:
+        data.type === 'Loaded'
+          ? Number(cartItem.price)
+          : (Number(cartItem.price) + upgradeCost).toFixed(2),
     }
 
     cart.addToCart(finalCartItem)
@@ -140,121 +148,129 @@ export default function CustomizedOrder({
           <h1 className="text-3xl font-semibold mb-8">{data.name as string}</h1>
           <p className="mb-8">{data.description}</p>
         </div>
-        <div className="w-full p-6">
-          <h2 className="text-xl font-semibold mb-2">
-            First, select your Pizza size
-          </h2>
-          <Collapse isOpened={true}>
-            <div className="flex gap-4">
-              <div className="p-2 bg-gray-100 flex gap-2 rounded">
-                <input
-                  type="radio"
-                  name="size_choice"
-                  value={data.price_large}
-                  onChange={handleCart}
-                />
-                <label htmlFor="size_choice">{`Large ${data.price_large}`}</label>
-              </div>
-
-              {data.price_small && (
+        <SidesOPtions
+          toppingsChoice={toppingsChoice}
+          setToppingsChoice={setToppingsChoice}
+          swirlsChoice={swirlsChoice}
+          setSwirlsChoice={setSwirlsChoice}
+        />
+        {data.type !== 'Loaded' && (
+          <div className="w-full p-6">
+            <h2 className="text-xl font-semibold mb-2">
+              First, select your Pizza size
+            </h2>
+            <Collapse isOpened={true}>
+              <div className="flex gap-4">
                 <div className="p-2 bg-gray-100 flex gap-2 rounded">
                   <input
                     type="radio"
                     name="size_choice"
-                    value={data.price_small}
+                    value={data.price_large}
                     onChange={handleCart}
                   />
-                  <label htmlFor="size_choice">{`Small ${data.price_small}`}</label>
+                  <label htmlFor="size_choice">{`Large ${data.price_large}`}</label>
                 </div>
-              )}
-            </div>
-          </Collapse>
-          <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
-            <h2 className="text-xl font-semibold mb-2">Choose your extras</h2>
-            <button
-              onClick={() =>
-                openExtra ? setOpenExtra(false) : setOpenExtra(true)
-              }
-              className="text-limeGreen bg-gray-100 p-1"
-            >
-              {openExtra ? '▲' : '▼'}
-            </button>
-          </div>
-          <Collapse isOpened={openExtra}>
-            <div className="flex flex-col gap-2 p-2 rounded bg-gray-100">
-              {filteredUpgrades?.map((item: any, i: number) => (
-                <div key={`upgrade ${i}`} className="flex justify-between">
-                  <div className="flex gap-2">
+
+                {data.price_small && (
+                  <div className="p-2 bg-gray-100 flex gap-2 rounded">
                     <input
-                      type="checkbox"
-                      name={item.name}
-                      value={item.name}
-                      onChange={(e) => handleCart(e)}
+                      type="radio"
+                      name="size_choice"
+                      value={data.price_small}
+                      onChange={handleCart}
                     />
-                    <label htmlFor={item.name}>{item.name}</label>
+                    <label htmlFor="size_choice">{`Small ${data.price_small}`}</label>
                   </div>
-                  <p>{`+ $${item.price}`}</p>
-                </div>
-              ))}
+                )}
+              </div>
+            </Collapse>
+            <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
+              <h2 className="text-xl font-semibold mb-2">Choose your extras</h2>
+              <button
+                onClick={() =>
+                  openExtra ? setOpenExtra(false) : setOpenExtra(true)
+                }
+                className="text-limeGreen bg-gray-100 p-1"
+              >
+                {openExtra ? '▲' : '▼'}
+              </button>
             </div>
-          </Collapse>
-          <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
-            <h2 className="text-xl font-semibold mb-2">Toppings</h2>
-            <button
-              onClick={() =>
-                openToppings ? setOpenToppings(false) : setOpenToppings(true)
-              }
-              className="text-limeGreen bg-gray-100 p-1"
-            >
-              {openToppings ? '▲' : '▼'}
-            </button>
+            <Collapse isOpened={openExtra}>
+              <div className="flex flex-col gap-2 p-2 rounded bg-gray-100">
+                {filteredUpgrades?.map((item: any, i: number) => (
+                  <div key={`upgrade ${i}`} className="flex justify-between">
+                    <div className="flex gap-2">
+                      <input
+                        type="checkbox"
+                        name={item.name}
+                        value={item.name}
+                        onChange={(e) => handleCart(e)}
+                      />
+                      <label htmlFor={item.name}>{item.name}</label>
+                    </div>
+                    <p>{`+ $${item.price}`}</p>
+                  </div>
+                ))}
+              </div>
+            </Collapse>
+            <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
+              <h2 className="text-xl font-semibold mb-2">Toppings</h2>
+              <button
+                onClick={() =>
+                  openToppings ? setOpenToppings(false) : setOpenToppings(true)
+                }
+                className="text-limeGreen bg-gray-100 p-1"
+              >
+                {openToppings ? '▲' : '▼'}
+              </button>
+            </div>
+            <Collapse isOpened={openToppings}>
+              <div className="flex flex-wrap gap-2">
+                {toppingsArr.map((item: any, i: number) => (
+                  <button
+                    key={i}
+                    onClick={() => handleOption(item, 'toppings')}
+                    className={`p-2 border-2 font-bold ${
+                      toppingsChoice.includes(item)
+                        ? `text-white rounded bg-limeGreen  border-limeGreen`
+                        : `text-limeGreen rounded bg-white  border-limeGreen`
+                    } `}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </Collapse>
+            <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
+              <h2 className="text-xl font-semibold mb-2">Choose your Swirls</h2>
+              <button
+                onClick={() =>
+                  openSwirls ? setOpenSwirls(false) : setOpenSwirls(true)
+                }
+                className="text-limeGreen bg-gray-100 p-1"
+              >
+                {openSwirls ? '▲' : '▼'}
+              </button>
+            </div>
+            <Collapse isOpened={openSwirls}>
+              <div className="flex flex-wrap gap-2">
+                {swirlsArr.map((item: any, i: number) => (
+                  <button
+                    key={i}
+                    onClick={() => handleOption(item, 'swirls')}
+                    className={`p-2 border-2 font-bold ${
+                      swirlsChoice.includes(item)
+                        ? `text-white rounded bg-limeGreen  border-limeGreen`
+                        : `text-limeGreen rounded bg-white  border-limeGreen`
+                    } `}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </Collapse>
           </div>
-          <Collapse isOpened={openToppings}>
-            <div className="flex flex-wrap gap-2">
-              {toppingsArr.map((item: any, i: number) => (
-                <button
-                  key={i}
-                  onClick={() => handleOption(item, 'toppings')}
-                  className={`p-2 border-2 font-bold ${
-                    toppingsChoice.includes(item)
-                      ? `text-white rounded bg-limeGreen  border-limeGreen`
-                      : `text-limeGreen rounded bg-white  border-limeGreen`
-                  } `}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          </Collapse>
-          <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
-            <h2 className="text-xl font-semibold mb-2">Choose your Swirls</h2>
-            <button
-              onClick={() =>
-                openSwirls ? setOpenSwirls(false) : setOpenSwirls(true)
-              }
-              className="text-limeGreen bg-gray-100 p-1"
-            >
-              {openSwirls ? '▲' : '▼'}
-            </button>
-          </div>
-          <Collapse isOpened={openSwirls}>
-            <div className="flex flex-wrap gap-2">
-              {swirlsArr.map((item: any, i: number) => (
-                <button
-                  key={i}
-                  onClick={() => handleOption(item, 'swirls')}
-                  className={`p-2 border-2 font-bold ${
-                    swirlsChoice.includes(item)
-                      ? `text-white rounded bg-limeGreen  border-limeGreen`
-                      : `text-limeGreen rounded bg-white  border-limeGreen`
-                  } `}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          </Collapse>
-        </div>
+        )}
         <Button
           className="p-3 w-96 bg-limeGreen text-white my-2"
           onClick={() => handleSubmit()}

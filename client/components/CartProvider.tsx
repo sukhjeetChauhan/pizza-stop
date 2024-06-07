@@ -31,8 +31,9 @@ export default function CartProvider({ children }: Props) {
   const [cartProducts, setCartProducts] = useState<CartItemWithId[]>([])
 
   function addToCart(item: any) {
+    const cartIncludes = cartProducts.find((obj) => obj.id === item.id)
     const cartItem: CartItemWithId = {
-      id: item.id,
+      id: cartIncludes ? item.id + '_a' : item.id,
       name: item.name,
       price: item.price ? item.price : item.price_large,
       upgrades: item.upgrades ? item.upgrades : [],
@@ -40,9 +41,17 @@ export default function CartProvider({ children }: Props) {
       swirls: item.swirls ? item.swirls : [],
       quantity: 1,
     }
-    const found = cartProducts.find((obj) => obj.id === cartItem.id)
+    const found = cartProducts.find(
+      (obj) =>
+        obj.id === cartItem.id ||
+        (obj.id === cartItem.id.split('_')[0] &&
+          JSON.stringify(obj.toppings) === JSON.stringify(cartItem.toppings))
+    )
+    console.log(found)
     if (found === undefined) {
       setCartProducts([...cartProducts, cartItem])
+    } else {
+      alert('You are adding the same item again')
     }
   }
 
