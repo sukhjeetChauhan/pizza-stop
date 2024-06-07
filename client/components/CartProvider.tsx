@@ -47,7 +47,7 @@ export default function CartProvider({ children }: Props) {
         (obj.id === cartItem.id.split('_')[0] &&
           JSON.stringify(obj.toppings) === JSON.stringify(cartItem.toppings))
     )
-    console.log(found)
+    
     if (found === undefined) {
       setCartProducts([...cartProducts, cartItem])
     } else {

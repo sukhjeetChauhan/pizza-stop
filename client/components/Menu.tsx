@@ -86,7 +86,7 @@ export default ({ data, title, type }: MenuProp) => {
               {title.toUpperCase()}
             </h1>
           </Components.HeaderRow>
-          <div className="opacity-100 scale-100 flex  justify-center mt-6 flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12">
+          <div className="opacity-100 scale-100 flex  justify-center md:justify-start mt-6 flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12">
             {menu.map((card, index) => (
               <div
                 key={index}

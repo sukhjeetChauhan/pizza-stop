@@ -22,7 +22,6 @@ export default function CustomizedOrder({
   setModalStatus: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const { data: upgrades, isLoading, isError } = useGetData('upgrades')
-  console.log(data)
 
   const initialState: CartItemWithId = {
     id: data.id,
@@ -148,12 +147,14 @@ export default function CustomizedOrder({
           <h1 className="text-3xl font-semibold mb-8">{data.name as string}</h1>
           <p className="mb-8">{data.description}</p>
         </div>
-        <SidesOPtions
-          toppingsChoice={toppingsChoice}
-          setToppingsChoice={setToppingsChoice}
-          swirlsChoice={swirlsChoice}
-          setSwirlsChoice={setSwirlsChoice}
-        />
+        {data.type === 'Loaded' && (
+          <SidesOPtions
+            toppingsChoice={toppingsChoice}
+            setToppingsChoice={setToppingsChoice}
+            swirlsChoice={swirlsChoice}
+            setSwirlsChoice={setSwirlsChoice}
+          />
+        )}
         {data.type !== 'Loaded' && (
           <div className="w-full p-6">
             <h2 className="text-xl font-semibold mb-2">
