@@ -9,7 +9,7 @@ export default function App() {
     <>
       <Header
         cartView={false}
-        setCartView={function (value: SetStateAction<boolean>): void {
+        setCartView={function (_value: SetStateAction<boolean>): void {
           throw new Error('Function not implemented.')
         }}
       />
