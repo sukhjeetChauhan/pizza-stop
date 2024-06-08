@@ -7,7 +7,7 @@ const returnUrl = import.meta.env.VITE_RETURN_URL as string
 export default function CheckoutForm() {
   const stripe = useStripe()
   const elements = useElements()
-  const [email, setEmail] = useState('')
+  // const [email, setEmail] = useState('')
   const [message, setMessage] = useState<null | string>(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -84,14 +84,14 @@ export default function CheckoutForm() {
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      <input
+      {/* <input
         id="email"
         type="text"
         value={email}
         className="w-full bg-blue-100 p-2 mb-4 rounded"
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter email address for Invoice"
-      />
+      /> */}
       <PaymentElement id="payment-element" options={paymentElementOptions} />
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
