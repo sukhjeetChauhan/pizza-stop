@@ -72,7 +72,10 @@ export default function CustomizedOrder({
   function handleSubmit() {
     const upgradeArr = upgradeCart.map((item) => item.name)
     const upgradeCost = upgradeCart.reduce((a, c) => a + Number(c.price), 0)
+    const toppingCost = toppingsChoice.length > 0 ? 1.99 : 0
+    const swirlsCost = swirlsChoice.length > 0 ? 0.5 : 0
 
+    const otherCost = toppingCost + swirlsCost
     const finalCartItem = {
       ...cartItem,
       upgrades: upgradeArr,
@@ -80,8 +83,8 @@ export default function CustomizedOrder({
       swirls: swirlsChoice,
       price:
         data.type === 'Loaded'
-          ? Number(cartItem.price)
-          : (Number(cartItem.price) + upgradeCost).toFixed(2),
+          ? Number(cartItem.price) + otherCost
+          : (Number(cartItem.price) + upgradeCost + otherCost).toFixed(2),
     }
 
     cart.addToCart(finalCartItem)

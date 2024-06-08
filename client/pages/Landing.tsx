@@ -12,6 +12,7 @@ export default function Landing() {
   const [deliverStatus, setDeliverStatus] = useState(true)
   const [address, setAddress] = useState<string>('')
   const [name, setName] = useState('')
+  const [number, setNumber] = useState('')
   const modalRef = useRef(null)
   useEffect(() => {
     if (modalRef.current) {
@@ -36,6 +37,7 @@ export default function Landing() {
     console.log(name)
     const storageObj = {
       name: name,
+      number: number,
       address: deliverStatus ? address : '',
       order: deliverStatus ? 'Deliver' : 'Pickup',
     }
@@ -92,6 +94,22 @@ export default function Landing() {
                   value={name}
                   className="w-4/5 bg-lime-100 p-2 mb-4 rounded text-xl"
                   onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className="flex flex-col w-full items-center">
+                <label
+                  className="text-xl text-limeGreen font-bold"
+                  htmlFor="name"
+                >
+                  Please enter your number
+                </label>
+
+                <input
+                  id="name"
+                  type="text"
+                  value={number}
+                  className="w-4/5 bg-lime-100 p-2 mb-4 rounded text-xl"
+                  onChange={(e) => setNumber(e.target.value)}
                 />
               </div>
               <div className="p-7 w-full flex flex-col items-center gap-4">

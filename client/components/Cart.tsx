@@ -47,14 +47,14 @@ export default function Cart() {
   }
 
   function handleAddress(): void {
-    const obj = {
-      address: address,
-      order: 'Deliver',
-    }
+    // const obj = {
+    //   address: address,
+    //   order: 'Deliver',
+    // }
     if (address === '') {
       alert('please enter an address')
     } else {
-      setLocalStorage(obj)
+      setLocalStorage({ ...order, address: address, order: 'Deliver' })
       setOrderStatus('Deliver')
       setIsopen(false)
     }
