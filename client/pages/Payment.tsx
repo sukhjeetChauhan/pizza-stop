@@ -18,8 +18,8 @@ export default function Payment() {
   const [clientSecret, setClientSecret] = useState('')
   const cart = useContext(CartContext)
   const deliverStatus = getLocalStorage()
-  const [name, setName] = useState('')
   console.log(deliverStatus)
+
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     fetch(
@@ -31,7 +31,7 @@ export default function Payment() {
           items: cart.cart,
           order: deliverStatus.order,
           address: deliverStatus.address,
-          name: name,
+          name: deliverStatus.name,
         }),
       }
     )
@@ -55,18 +55,6 @@ export default function Payment() {
           src="/images/Logo/android-chrome-192x192.png"
         />
         <h1 className="text-5xl text-red-700 font-bold">Secure checkout</h1>
-        <div className="flex flex-col w-[30vw]">
-          <label className="text-xl text-sky-500 font-bold" htmlFor="name">
-            Please enter your name
-          </label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            className="w-full bg-sky-100 p-2 mb-4 rounded text-xl"
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
       </div>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { Layout } from '@stripe/stripe-js'
 
-const returnUrl = import.meta.env.VITE_RETURN_URL as string
+// const returnUrl = import.meta.env.VITE_RETURN_URL as string
 
 export default function CheckoutForm() {
   const stripe = useStripe()
@@ -59,7 +59,7 @@ export default function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: returnUrl,
+        return_url: 'https://pizzastop.myvo.one/success',
         // receipt_email: email,
       },
     })
