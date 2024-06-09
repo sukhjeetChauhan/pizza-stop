@@ -24,7 +24,7 @@ export const Card = styled(motion.a)`
   display: block;
   max-width: 20rem;
   margin: auto;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   @media (min-width: 640px) {
     max-width: none;
     margin-left: 0;
@@ -71,7 +71,7 @@ export const CardHoverOverlay = styled(motion.div)`
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `

@@ -1,29 +1,20 @@
 import { useState } from 'react'
-import { signUp } from '../../src/authentication.ts'
-import { Form, Input, Button, message } from 'antd'
-// import { addData, getData } from '../../src/db.ts'
+import { Form, Input, Button, message, Checkbox } from 'antd'
+import 'tailwindcss/tailwind.css' // Ensure Tailwind CSS is imported
 
 const RegistrationForm = () => {
-  const [registered, SetRegistered] = useState(false)
   const [form] = Form.useForm()
+  const [isHovered, setIsHovered] = useState(false)
 
-  const handleLogin = async (values: any) => {
+  const handleLogin = async (values) => {
     console.log('Received values of form: ', values)
-    message.success('Registration successful!')
-  }
-  const handleRegister = async (values: {
-    email: string
-    password: string
-  }) => {
-    // console.log('Received values of form: ', values)
-    signUp(values.email, values.password)
     message.success('Registration successful!')
   }
 
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
-      sm: { span: 6 },
+      sm: { span: 7 },
     },
     wrapperCol: {
       xs: { span: 24 },
@@ -43,25 +34,26 @@ const RegistrationForm = () => {
     },
   }
 
-  function setLogin() {
-    SetRegistered(false)
+  const handleMouseEnter = () => {
+    setIsHovered(true)
   }
 
-  function setRegister() {
-    SetRegistered(true)
+  const handleMouseLeave = () => {
+    setIsHovered(false)
   }
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center gap-24">
       <div className="flex items-center justify-center gap-4">
-        <Button onClick={setLogin}>Login</Button>
-        <p>-----OR------</p>
-        <Button onClick={setRegister}>Register</Button>
+        <Button onClick={() => {}}>Register</Button>
       </div>
 
-      {!registered && (
+      <div className="p-16 bg-gray-100 w-[30rem] rounded shadow-lg">
         <Form
           {...formItemLayout}
+          initialValues={{
+            remember: true,
+          }}
           form={form}
           name="register"
           onFinish={handleLogin}
@@ -69,7 +61,17 @@ const RegistrationForm = () => {
         >
           <Form.Item
             name="email"
-            label="E-mail"
+            label={
+              <label
+                style={{
+                  color: '#F44336',
+                  fontWeight: 'bold',
+                  fontSize: '1.25rem',
+                }}
+              >
+                Email
+              </label>
+            }
             rules={[
               {
                 type: 'email',
@@ -86,7 +88,17 @@ const RegistrationForm = () => {
 
           <Form.Item
             name="password"
-            label="Password"
+            label={
+              <label
+                style={{
+                  color: '#F44336',
+                  fontWeight: 'bold',
+                  fontSize: '1.25rem',
+                }}
+              >
+                Password
+              </label>
+            }
             rules={[
               {
                 required: true,
@@ -98,72 +110,30 @@ const RegistrationForm = () => {
             <Input.Password />
           </Form.Item>
 
+          <Form.Item
+            {...tailFormItemLayout}
+            name="remember"
+            valuePropName="checked"
+          >
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
+
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button
+              className="bg-limeGreen text-xl w-64 h-auto"
+              type="primary"
+              htmlType="submit"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                backgroundColor: isHovered ? '#84cc16' : '#70a401', // Change colors as per your need
+              }}
+            >
               Login
             </Button>
           </Form.Item>
         </Form>
-      )}
-      {registered && (
-        <Form
-          {...formItemLayout}
-          form={form}
-          name="register"
-          onFinish={handleRegister}
-          scrollToFirstError
-        >
-          <Form.Item
-            name="email"
-            label="E-mail"
-            rules={[
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            name="password"
-            label="Password"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your password!',
-              },
-            ]}
-            hasFeedback
-          >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            name="address"
-            label="Address"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your address!',
-              },
-            ]}
-          >
-            <Input.TextArea />
-          </Form.Item>
-
-          <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
-              Register
-            </Button>
-          </Form.Item>
-        </Form>
-      )}
+      </div>
     </div>
   )
 }
