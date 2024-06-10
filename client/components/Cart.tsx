@@ -5,18 +5,13 @@ import '../styles/Cart.css'
 import CartItemDetails from '../utils/CartItemDetails'
 import { getLocalStorage, setLocalStorage } from '../../data/localStorage'
 
-const fillerObj = {
-  address: '',
-  order: 'Pickup',
-}
-
 export default function Cart() {
   const cart = useContext(CartContext)
-  const order = getLocalStorage() || fillerObj
+  let order = getLocalStorage()
   const [window, setWindow] = useState('')
   const [address, setAddress] = useState<string>('')
   const [isOpen, setIsopen] = useState(false)
-  const [orderStatus, setOrderStatus] = useState(order.order)
+  const [orderStatus, setOrderStatus] = useState(order?.order)
 
   const deliveryCharges: number = orderStatus === 'Deliver' ? 5.99 : 0
 
@@ -31,26 +26,23 @@ export default function Cart() {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setAddress(e.target.value)
   }
+  console.log(order)
 
   function handleClick(): void {
-    const obj = {
-      address: '',
-      order: 'Pickup',
+    if (order === null) {
+      setLocalStorage({ name: '', number: '', address: '', order: 'Pickup' })
+      order = getLocalStorage()
     }
-    if (order.order === 'Deliver') {
-      setLocalStorage(obj)
+    if (order?.order === 'Deliver') {
+      setLocalStorage({ ...order, address: '', order: 'Pickup' })
       setOrderStatus('Pickup')
     }
-    if (order.order === 'Pickup') {
+    if (order?.order === 'Pickup') {
       setIsopen(true)
     }
   }
 
   function handleAddress(): void {
-    // const obj = {
-    //   address: address,
-    //   order: 'Deliver',
-    // }
     if (address === '') {
       alert('please enter an address')
     } else {
@@ -121,7 +113,7 @@ export default function Cart() {
               className="text-sm leto-100 text-limeGreen hover:text-lime-800 lg:text-sm text-xs"
             >
               {`Change to ${
-                order.order === 'Deliver' ? 'Pick Up' : 'Delivery'
+                order?.order === 'Deliver' ? 'Pick Up' : 'Delivery'
               }`}
             </button>
           </div>

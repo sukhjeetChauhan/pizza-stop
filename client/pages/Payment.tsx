@@ -29,10 +29,10 @@ export default function Payment() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: cart.cart,
-          order: deliverStatus.order,
-          address: deliverStatus.address,
-          name: deliverStatus.name,
-          number: deliverStatus.number,
+          order: deliverStatus?.order ? deliverStatus.order : '',
+          address: deliverStatus?.address ? deliverStatus.address : '',
+          name: deliverStatus?.name ? deliverStatus.name : '',
+          number: deliverStatus?.number ? deliverStatus.number : '',
         }),
       }
     )

@@ -72,8 +72,9 @@ export default function CustomizedOrder({
   function handleSubmit() {
     const upgradeArr = upgradeCart.map((item) => item.name)
     const upgradeCost = upgradeCart.reduce((a, c) => a + Number(c.price), 0)
-    const toppingCost = toppingsChoice.length > 0 ? 1.99 : 0
-    const swirlsCost = swirlsChoice.length > 0 ? 0.5 : 0
+    const toppingCost =
+      toppingsChoice.length > 0 ? toppingsChoice.length * 1.99 : 0
+    const swirlsCost = swirlsChoice.length > 0 ? swirlsChoice.length * 0.5 : 0
 
     const otherCost = toppingCost + swirlsCost
     const finalCartItem = {
@@ -218,7 +219,10 @@ export default function CustomizedOrder({
               </div>
             </Collapse>
             <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
-              <h2 className="text-xl font-semibold mb-2">Toppings</h2>
+              <div className="flex justify-between w-full">
+                <h2 className="text-xl font-semibold mb-2">Toppings</h2>
+                <p className="text-lg mb-2">+ $1.99 per Topping</p>
+              </div>
               <button
                 onClick={() =>
                   openToppings ? setOpenToppings(false) : setOpenToppings(true)
@@ -246,7 +250,12 @@ export default function CustomizedOrder({
               </div>
             </Collapse>
             <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
-              <h2 className="text-xl font-semibold mb-2">Choose your Swirls</h2>
+              <div className="flex justify-between w-full">
+                <h2 className="text-xl font-semibold mb-2">
+                  Choose your Swirls
+                </h2>
+                <p className="text-lg mb-2">+ $0.50 per Swirl</p>
+              </div>
               <button
                 onClick={() =>
                   openSwirls ? setOpenSwirls(false) : setOpenSwirls(true)

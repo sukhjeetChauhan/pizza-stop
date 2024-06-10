@@ -1,5 +1,5 @@
 // import { useState } from 'react'
-import { signUp } from '../../src/authentication.ts'
+// import { signUp } from '../../src/authentication.ts'
 import { Form, Input, Button, message } from 'antd'
 // import { addData, getData } from '../../src/db.ts'
 
