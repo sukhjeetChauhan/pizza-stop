@@ -32,6 +32,7 @@ export default function Payment() {
           order: deliverStatus.order,
           address: deliverStatus.address,
           name: deliverStatus.name,
+          number: deliverStatus.number,
         }),
       }
     )

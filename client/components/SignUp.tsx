@@ -10,8 +10,8 @@ const RegistrationForm = () => {
     email: string
     password: string
   }) => {
-    // console.log('Received values of form: ', values)
-    signUp(values.email, values.password)
+    console.log('Received values of form: ', values)
+    // signUp(values.email, values.password)
     message.success('Registration successful!')
   }
 
@@ -43,68 +43,69 @@ const RegistrationForm = () => {
   }
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center gap-24 bg-[url('/images/marble-back.jpeg')] bg-repeat min-h-screen">
       <div className="flex items-center justify-center gap-4">
         <Button onClick={setLogin}>Login</Button>
       </div>
-
-      <Form
-        {...formItemLayout}
-        form={form}
-        name="register"
-        onFinish={handleRegister}
-        scrollToFirstError
-      >
-        <Form.Item
-          name="email"
-          label="E-mail"
-          rules={[
-            {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
-            },
-            {
-              required: true,
-              message: 'Please input your E-mail!',
-            },
-          ]}
+      <div>
+        <Form
+          {...formItemLayout}
+          form={form}
+          name="register"
+          onFinish={handleRegister}
+          scrollToFirstError
         >
-          <Input />
-        </Form.Item>
+          <Form.Item
+            name="email"
+            label="E-mail"
+            rules={[
+              {
+                type: 'email',
+                message: 'The input is not valid E-mail!',
+              },
+              {
+                required: true,
+                message: 'Please input your E-mail!',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-        <Form.Item
-          name="password"
-          label="Password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
-          hasFeedback
-        >
-          <Input.Password />
-        </Form.Item>
+          <Form.Item
+            name="password"
+            label="Password"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your password!',
+              },
+            ]}
+            hasFeedback
+          >
+            <Input.Password />
+          </Form.Item>
 
-        <Form.Item
-          name="address"
-          label="Address"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your address!',
-            },
-          ]}
-        >
-          <Input.TextArea />
-        </Form.Item>
+          <Form.Item
+            name="address"
+            label="Address"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your address!',
+              },
+            ]}
+          >
+            <Input.TextArea />
+          </Form.Item>
 
-        <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Register
-          </Button>
-        </Form.Item>
-      </Form>
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit">
+              Register
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   )
 }

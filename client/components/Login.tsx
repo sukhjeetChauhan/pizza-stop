@@ -6,7 +6,11 @@ const RegistrationForm = () => {
   const [form] = Form.useForm()
   const [isHovered, setIsHovered] = useState(false)
 
-  const handleLogin = async (values) => {
+  const handleLogin = async (values: {
+    email: string
+    password: string
+    remember: boolean
+  }) => {
     console.log('Received values of form: ', values)
     message.success('Registration successful!')
   }
@@ -14,7 +18,7 @@ const RegistrationForm = () => {
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
-      sm: { span: 7 },
+      sm: { span: 8 },
     },
     wrapperCol: {
       xs: { span: 24 },
@@ -43,12 +47,8 @@ const RegistrationForm = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center gap-24">
-      <div className="flex items-center justify-center gap-4">
-        <Button onClick={() => {}}>Register</Button>
-      </div>
-
-      <div className="p-16 bg-gray-100 w-[30rem] rounded shadow-lg">
+    <div className="flex flex-col items-center justify-center gap-24 bg-[url('/images/marble-back.jpeg')] bg-repeat min-h-screen">
+      <div className="p-16 bg-gray-100 w-[30rem] rounded shadow-lg mt-20">
         <Form
           {...formItemLayout}
           initialValues={{
@@ -133,6 +133,13 @@ const RegistrationForm = () => {
             </Button>
           </Form.Item>
         </Form>
+      </div>
+
+      <div className="flex items-center justify-center gap-4">
+        <p>Dont have a login? Click here to Register</p>
+        <Button className="bg-limeGreen text-white" onClick={() => {}}>
+          Register
+        </Button>
       </div>
     </div>
   )
