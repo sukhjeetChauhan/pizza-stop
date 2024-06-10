@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Navigation from './Navigation'
-import { Dispatch, SetStateAction, useContext } from 'react'
+import { Dispatch, SetStateAction, useContext, useState } from 'react'
 import { CartContext } from './CartProvider'
 import cartSVG from '/images/cart.svg'
+import { auth } from '../../src/firebase.config'
+import { onAuthStateChanged } from 'firebase/auth'
+import { sign_Out } from '../../src/authentication'
 
 interface CartContextType {
   cartView: boolean
@@ -11,6 +14,21 @@ interface CartContextType {
 
 export default function Header({ cartView, setCartView }: CartContextType) {
   const cart = useContext(CartContext)
+  const [isSignedIn, setIsSignedIn] = useState(false)
+  const navigate = useNavigate()
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in,
+      console.log('signed In')
+      setIsSignedIn(true)
+    } else {
+      // User is signed out
+      console.log('signed out')
+      setIsSignedIn(false)
+    }
+  })
+
+  console.log(isSignedIn)
   return (
     <>
       <section className="flex py-8 border-b-1 border-slate-300 items-center">
@@ -28,10 +46,27 @@ export default function Header({ cartView, setCartView }: CartContextType) {
           </Link>
         </div>
         <div
-          className={`flex transition-all ease-in-out duration-500 absolute top-0 ${
+          className={`flex gap-2 transition-all ease-in-out duration-500 absolute top-0 ${
             cartView ? 'right-[70%] sm:right-[60%]' : 'right-12'
           } items-center bg-white p-2`}
         >
+          {isSignedIn ? (
+            <button
+              className="text-red-500 text-lg bg-white font-bold hover:text-xl transition-all ease-in-out duration-500"
+              onClick={() => {
+                sign_Out()
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              className="text-red-500 text-lg bg-white font-bold hover:text-xl transition-all ease-in-out duration-500"
+              onClick={() => navigate('/login')}
+            >
+              Login/Sign-Up
+            </button>
+          )}
           <div
             className={`${
               location.pathname === '/' ? 'hidden' : 'block'

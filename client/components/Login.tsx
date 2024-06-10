@@ -1,18 +1,29 @@
 import { useState } from 'react'
 import { Form, Input, Button, message, Checkbox } from 'antd'
+import { SignIn } from '../../src/authentication'
+import { useNavigate } from 'react-router-dom'
 import 'tailwindcss/tailwind.css' // Ensure Tailwind CSS is imported
 
 const RegistrationForm = () => {
   const [form] = Form.useForm()
   const [isHovered, setIsHovered] = useState(false)
+  const navigate = useNavigate()
 
   const handleLogin = async (values: {
     email: string
     password: string
     remember: boolean
   }) => {
-    console.log('Received values of form: ', values)
-    message.success('Registration successful!')
+    const output = (await SignIn(
+      values.email,
+      values.password
+    )) as unknown as string
+    if (output === 'success') {
+      message.success('Logged In!')
+      navigate('/')
+    } else {
+      message.error(output)
+    }
   }
 
   const formItemLayout = {
@@ -137,7 +148,10 @@ const RegistrationForm = () => {
 
       <div className="flex items-center justify-center gap-4">
         <p>Dont have a login? Click here to Register</p>
-        <Button className="bg-limeGreen text-white" onClick={() => {}}>
+        <Button
+          className="bg-limeGreen text-white"
+          onClick={() => navigate('/signUp')}
+        >
           Register
         </Button>
       </div>
