@@ -6,6 +6,8 @@ import cartSVG from '/images/cart.svg'
 import { auth } from '../../src/firebase.config'
 import { onAuthStateChanged } from 'firebase/auth'
 import { sign_Out } from '../../src/authentication'
+import { Modal, message } from 'antd'
+import { ExclamationCircleFilled } from '@ant-design/icons'
 
 interface CartContextType {
   cartView: boolean
@@ -16,19 +18,32 @@ export default function Header({ cartView, setCartView }: CartContextType) {
   const cart = useContext(CartContext)
   const [isSignedIn, setIsSignedIn] = useState(false)
   const navigate = useNavigate()
+
+  const { confirm } = Modal
+  const showConfirm = () => {
+    confirm({
+      title: 'Are you sure you want to Logout?',
+      icon: <ExclamationCircleFilled />,
+
+      onOk() {
+        message.success('Logged out successfully')
+        sign_Out()
+      },
+      onCancel() {},
+    })
+  }
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in,
-      console.log('signed In')
+
       setIsSignedIn(true)
     } else {
       // User is signed out
-      console.log('signed out')
+
       setIsSignedIn(false)
     }
   })
 
-  console.log(isSignedIn)
   return (
     <>
       <section className="flex py-8 border-b-1 border-slate-300 items-center">
@@ -54,7 +69,7 @@ export default function Header({ cartView, setCartView }: CartContextType) {
             <button
               className="text-red-500 text-lg bg-white font-bold hover:text-xl transition-all ease-in-out duration-500"
               onClick={() => {
-                sign_Out()
+                showConfirm()
               }}
             >
               Logout

@@ -10,13 +10,9 @@ import { FirebaseError } from 'firebase/app'
 
 export async function signUp(email: string, password: string) {
   try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    )
-    const user = userCredential.user
-    console.log(user)
+    await createUserWithEmailAndPassword(auth, email, password)
+    // const user = userCredential.user
+    // console.log(user)
     return 'success'
   } catch (error) {
     if (error instanceof FirebaseError) {
@@ -33,21 +29,25 @@ export async function signUp(email: string, password: string) {
 }
 
 export async function SignIn(email: string, password: string) {
-  let output
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user
-      output = 'success'
-      return user
-    })
-    .catch((error) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password)
+
+    // Signed in
+    // const user = userCredential.user
+    // console.log(user)
+    return 'success'
+  } catch (error) {
+    if (error instanceof FirebaseError) {
       const errorCode = error.code
       const errorMessage = error.message
       console.log(`${errorCode} ${errorMessage}`)
-      output = errorMessage
-    })
-  return output
+      return errorMessage
+    } else {
+      // Handle any other types of errors
+      console.error('An unexpected error occurred:', error)
+      return 'An unexpected error occurred.'
+    }
+  }
 }
 
 export function sign_Out() {
