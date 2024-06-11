@@ -1,5 +1,5 @@
 import { db } from './firebase.config'
-import { collection, addDoc, getDocs } from 'firebase/firestore'
+import { collection, addDoc, getDocs, getDoc, doc } from 'firebase/firestore'
 
 export function addDatafromArray(collectionName: string, data: any) {
   data.forEach(async (item: any) => {
@@ -26,4 +26,16 @@ export async function getData(collectionName: string) {
     // console.log({ ...obj, id })
   })
   return res
+}
+
+export async function getDataById(collectionName: string, id: string) {
+  const docRef = doc(db, collectionName, id)
+  const docSnap = await getDoc(docRef)
+
+  if (docSnap.exists()) {
+    return docSnap.data()
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log('No such document!')
+  }
 }

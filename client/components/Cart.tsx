@@ -26,7 +26,6 @@ export default function Cart() {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setAddress(e.target.value)
   }
-  console.log(order)
 
   function handleClick(): void {
     if (order === null) {

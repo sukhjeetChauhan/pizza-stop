@@ -6,6 +6,8 @@ import CheckoutForm from '../components/CheckoutForm'
 import '../styles/Payment.css'
 import { CartContext } from '../components/CartProvider'
 import { getLocalStorage } from '../../data/localStorage'
+import { auth } from '../../src/firebase.config'
+import { useGetDataById } from '../../data/hooks'
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
@@ -16,9 +18,15 @@ const stripePromise = loadStripe(
 
 export default function Payment() {
   const [clientSecret, setClientSecret] = useState('')
+  const [name, setName] = useState('')
+  const [number, setNumber] = useState('')
   const cart = useContext(CartContext)
   const deliverStatus = getLocalStorage()
+  const user = auth.currentUser
+  const userId = user?.uid
+  const { data: userData } = useGetDataById('Users', userId as string)
   console.log(deliverStatus)
+  console.log(userData)
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -57,11 +65,44 @@ export default function Payment() {
         />
         <h1 className="text-5xl text-red-700 font-bold">Secure checkout</h1>
       </div>
-      {clientSecret && (
-        <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
-        </Elements>
-      )}
+      <div className="flex item-center justify-center gap-20">
+        {/* <div className="flex flex-col">
+          <div className="flex w-full items-center">
+            <label className="text-xl text-limeGreen font-bold" htmlFor="name">
+              Please enter your name
+            </label>
+
+            <input
+              id="name"
+              type="text"
+              value={name}
+              className="w-4/5 bg-lime-100 p-2 mb-4 rounded text-xl"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="flex w-full items-center">
+            <label className="text-xl text-limeGreen font-bold" htmlFor="name">
+              Please enter your number
+            </label>
+
+            <input
+              id="name"
+              type="text"
+              value={number}
+              className="w-4/5 bg-lime-100 p-2 mb-4 rounded text-xl"
+              onChange={(e) => setNumber(e.target.value)}
+            />
+          </div>
+        </div> */}
+
+        <div>
+          {clientSecret && (
+            <Elements options={options} stripe={stripePromise}>
+              <CheckoutForm />
+            </Elements>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

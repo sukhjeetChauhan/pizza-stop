@@ -1,6 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom'
 import Navigation from './Navigation'
-import { Dispatch, SetStateAction, useContext, useState } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { CartContext } from './CartProvider'
 import cartSVG from '/images/cart.svg'
 import { auth } from '../../src/firebase.config'
@@ -32,17 +38,21 @@ export default function Header({ cartView, setCartView }: CartContextType) {
       onCancel() {},
     })
   }
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in,
+  useEffect(() => {
+    // Set up the auth state listener when the component mounts
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, update state
+        setIsSignedIn(true)
+      } else {
+        // User is signed out, update state
+        setIsSignedIn(false)
+      }
+    })
 
-      setIsSignedIn(true)
-    } else {
-      // User is signed out
-
-      setIsSignedIn(false)
-    }
-  })
+    // Clean up the listener when the component unmounts
+    return () => unsubscribe()
+  }, []) // Empty dependency array ensures this runs only once when the component mounts
 
   return (
     <>
