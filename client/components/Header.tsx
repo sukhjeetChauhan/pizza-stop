@@ -57,27 +57,23 @@ export default function Header({ cartView, setCartView }: CartContextType) {
   return (
     <>
       <section className="flex py-8 border-b-1 border-slate-300 items-center">
-        <div className="ml-8 w-20 rounded-sm w-auto">
+        <div className="ml-8 md:w-20 rounded-sm">
           <Link to="/">
             {/* <img src="/images/Logo/android-chrome-192x192.png" alt="logo" /> */}
             <p>
-              <span className="text-white  rounded-l-sm font-caveat text-xl p-2 bg-limeGreen uppercase pl-3">
+              <span className="text-white  rounded-l-sm font-caveat md:text-xl p-2 bg-limeGreen uppercase pl-3">
                 Pizza
               </span>
-              <span className="text-white rounded-r-sm font-caveat text-xl p-2 bg-red-500 uppercase pr-3">
+              <span className="text-white rounded-r-sm font-caveat md:text-xl p-2 bg-red-500 uppercase pr-3">
                 Stop
               </span>
             </p>
           </Link>
         </div>
-        <div
-          className={`flex gap-2 transition-all ease-in-out duration-500 absolute top-0 ${
-            cartView ? 'right-[70%] sm:right-[60%]' : 'right-12'
-          } items-center bg-white p-2`}
-        >
+        <div className="ml-auto mr-[9.5rem]">
           {isSignedIn ? (
             <button
-              className="text-red-500 text-lg bg-white font-bold hover:text-xl transition-all ease-in-out duration-500"
+              className="text-red-500 text-xs md:text-lg bg-white font-bold hover:text-xl transition-all ease-in-out duration-500"
               onClick={() => {
                 showConfirm()
               }}
@@ -86,12 +82,18 @@ export default function Header({ cartView, setCartView }: CartContextType) {
             </button>
           ) : (
             <button
-              className="text-red-500 text-lg bg-white font-bold hover:text-xl transition-all ease-in-out duration-500"
+              className="text-red-500 text-xs md:text-lg bg-white font-bold hover:text-xl transition-all ease-in-out duration-500"
               onClick={() => navigate('/login')}
             >
               Login/Sign-Up
             </button>
           )}
+        </div>
+        <div
+          className={`flex gap-2 transition-all ease-in-out duration-500 absolute top-0 ${
+            cartView ? 'right-[70%] sm:right-[60%]' : 'right-12'
+          } items-center bg-white p-2`}
+        >
           <div
             className={`${
               location.pathname === '/' ? 'hidden' : 'block'

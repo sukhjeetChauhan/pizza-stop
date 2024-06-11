@@ -88,7 +88,7 @@ const RegistrationForm = () => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-20 bg-[url('/images/marble-back.jpeg')] bg-repeat min-h-screen">
-      <div className="p-16 bg-gray-100 w-[35rem] rounded shadow-lg mt-20">
+      <div className="p-6 md:p-12 bg-gray-100  w-[20rem] md:w-[35rem] rounded shadow-lg mt-20">
         <Form
           {...formItemLayout}
           form={form}
@@ -117,7 +117,7 @@ const RegistrationForm = () => {
             ]}
             hasFeedback
           >
-            <Input />
+            <Input style={{ width: '90%' }} />
           </Form.Item>
           <Form.Item
             name="email"
@@ -143,7 +143,7 @@ const RegistrationForm = () => {
               },
             ]}
           >
-            <Input />
+            <Input style={{ width: '90%' }} />
           </Form.Item>
 
           <Form.Item
@@ -171,7 +171,7 @@ const RegistrationForm = () => {
             ]}
             hasFeedback
           >
-            <Input.Password />
+            <Input.Password style={{ width: '90%' }} />
           </Form.Item>
 
           <Form.Item
@@ -194,7 +194,7 @@ const RegistrationForm = () => {
               },
             ]}
           >
-            <Input.TextArea />
+            <Input.TextArea style={{ width: '90%' }} />
           </Form.Item>
           <Form.Item
             name="number"
@@ -217,7 +217,7 @@ const RegistrationForm = () => {
             ]}
             hasFeedback
           >
-            <Input style={{ width: '10rem' }} />
+            <Input style={{ width: '90%' }} />
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>

@@ -47,7 +47,7 @@ export default function CartProvider({ children }: Props) {
         (obj.id === cartItem.id.split('_')[0] &&
           JSON.stringify(obj.toppings) === JSON.stringify(cartItem.toppings))
     )
-    
+
     if (found === undefined) {
       setCartProducts([...cartProducts, cartItem])
     } else {
@@ -56,7 +56,7 @@ export default function CartProvider({ children }: Props) {
   }
 
   function deleteItem(id: string) {
-    console.log(id)
+    // console.log(id)
     const newCart = cartProducts.filter((obj) => obj.id !== id)
     setCartProducts(newCart)
   }

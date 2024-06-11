@@ -59,7 +59,7 @@ const RegistrationForm = () => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-24 bg-[url('/images/marble-back.jpeg')] bg-repeat min-h-screen">
-      <div className="p-16 bg-gray-100 w-[30rem] rounded shadow-lg mt-20">
+      <div className="p-6 md:p-16 bg-gray-100 w-[20rem] md:w-[30rem] rounded shadow-lg mt-20">
         <Form
           {...formItemLayout}
           initialValues={{
@@ -94,7 +94,7 @@ const RegistrationForm = () => {
               },
             ]}
           >
-            <Input />
+            <Input style={{ width: '90%' }} />
           </Form.Item>
 
           <Form.Item
@@ -118,7 +118,7 @@ const RegistrationForm = () => {
             ]}
             hasFeedback
           >
-            <Input.Password />
+            <Input.Password style={{ width: '90%' }} />
           </Form.Item>
 
           <Form.Item
@@ -131,7 +131,7 @@ const RegistrationForm = () => {
 
           <Form.Item {...tailFormItemLayout}>
             <Button
-              className="bg-limeGreen text-xl w-64 h-auto"
+              className="bg-limeGreen text-xl md:w-56 h-auto"
               type="primary"
               htmlType="submit"
               onMouseEnter={handleMouseEnter}
@@ -146,7 +146,7 @@ const RegistrationForm = () => {
         </Form>
       </div>
 
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center justify-center gap-4 p-8">
         <p>Dont have a login? Click here to Register</p>
         <Button
           className="bg-limeGreen text-white"

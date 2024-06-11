@@ -29,7 +29,7 @@ export default function Cart() {
 
   function handleClick(): void {
     if (order === null) {
-      setLocalStorage({ name: '', number: '', address: '', order: 'Pickup' })
+      setLocalStorage({ address: '', order: 'Pickup' })
       order = getLocalStorage()
     }
     if (order?.order === 'Deliver') {

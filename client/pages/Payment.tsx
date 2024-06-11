@@ -16,17 +16,21 @@ const stripePromise = loadStripe(
   'pk_live_51MR5xTIP5GR2cuzx36SURQMsXwpnz346yJGBKErRXv7dEGWPCBW6tN1T5B5vt0zQ1SimGnUgHA5WoRlvt00x3mRz00S3Ciuge1'
 )
 
+interface UserInfo {
+  name: string
+  number: string
+}
+
 export default function Payment() {
   const [clientSecret, setClientSecret] = useState('')
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')
+  const [userInfo, setUserInfo] = useState<UserInfo>()
   const cart = useContext(CartContext)
   const deliverStatus = getLocalStorage()
   const user = auth.currentUser
   const userId = user?.uid
   const { data: userData } = useGetDataById('Users', userId as string)
-  console.log(deliverStatus)
-  console.log(userData)
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -38,9 +42,21 @@ export default function Payment() {
         body: JSON.stringify({
           items: cart.cart,
           order: deliverStatus?.order ? deliverStatus.order : '',
-          address: deliverStatus?.address ? deliverStatus.address : '',
-          name: deliverStatus?.name ? deliverStatus.name : '',
-          number: deliverStatus?.number ? deliverStatus.number : '',
+          address: deliverStatus?.address
+            ? deliverStatus.address
+            : userData?.address
+            ? userData?.address
+            : '',
+          name: userData?.name
+            ? userData?.name
+            : userInfo?.name
+            ? userInfo?.name
+            : '',
+          number: userData?.phone
+            ? userData?.phone
+            : userInfo?.number
+            ? userInfo?.number
+            : '',
         }),
       }
     )
@@ -56,6 +72,12 @@ export default function Payment() {
     appearance,
   }
 
+  function handleSubmit() {
+    setUserInfo({ name: name, number: number })
+    setName('')
+    setNumber('')
+  }
+
   return (
     <div className="payment">
       <div className="flex flex-col items-center justify-center gap-4">
@@ -65,36 +87,57 @@ export default function Payment() {
         />
         <h1 className="text-5xl text-red-700 font-bold">Secure checkout</h1>
       </div>
-      <div className="flex item-center justify-center gap-20">
-        {/* <div className="flex flex-col">
-          <div className="flex w-full items-center">
-            <label className="text-xl text-limeGreen font-bold" htmlFor="name">
-              Please enter your name
-            </label>
+      <div className="flex flex-col md:flex-row item-center justify-center md:gap-20">
+        {userData === undefined && (
+          <div className="flex flex-col bg-sky-100 p-4 m-4 md:p-8 rounder shadow-lg gap-4 md:gap-8">
+            <h2 className="text-lg font-bold">
+              We need little more detail to process your order
+            </h2>
+            <div className="flex w-full items-center justify-between">
+              <label
+                className="md:text-xl text-red-500 font-bold"
+                htmlFor="name"
+              >
+                Name:
+              </label>
 
-            <input
-              id="name"
-              type="text"
-              value={name}
-              className="w-4/5 bg-lime-100 p-2 mb-4 rounded text-xl"
-              onChange={(e) => setName(e.target.value)}
-            />
+              <input
+                id="name"
+                type="text"
+                value={name}
+                className="w-auto p-1 rounded text-xl border-2"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="flex w-full items-center justify-between">
+              <label
+                className="md:text-xl text-red-500 font-bold"
+                htmlFor="number"
+              >
+                Phone:
+              </label>
+
+              <input
+                id="number"
+                type="text"
+                value={number}
+                className="w-auto p-1 rounded text-xl border-2"
+                onChange={(e) => setNumber(e.target.value)}
+              />
+            </div>
+            <button onClick={handleSubmit}>Submit</button>
+            {userInfo && (
+              <div>
+                <p className="text-xl font-bold text-sky-500">
+                  Thank you for the information.
+                </p>
+                <p className="text-xl font-bold text-sky-500">
+                  Please proceed to Payment.
+                </p>
+              </div>
+            )}
           </div>
-          <div className="flex w-full items-center">
-            <label className="text-xl text-limeGreen font-bold" htmlFor="name">
-              Please enter your number
-            </label>
-
-            <input
-              id="name"
-              type="text"
-              value={number}
-              className="w-4/5 bg-lime-100 p-2 mb-4 rounded text-xl"
-              onChange={(e) => setNumber(e.target.value)}
-            />
-          </div>
-        </div> */}
-
+        )}
         <div>
           {clientSecret && (
             <Elements options={options} stripe={stripePromise}>

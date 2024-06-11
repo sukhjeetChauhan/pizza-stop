@@ -55,9 +55,12 @@ export default function SidesOPtions({
   return (
     <div>
       <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
-        <h2 className="text-xl font-semibold mb-2">
-          Choose any 2 Meat toppings
-        </h2>
+        <div className="flex justify-between w-full">
+          <h2 className="text-xl font-semibold mb-2">
+            Choose any 2 Meat toppings
+          </h2>
+          <p className="text-lg mb-2">+ $1.99 per Topping</p>
+        </div>
         <button
           onClick={() =>
             openToppings ? setOpenToppings(false) : setOpenToppings(true)
@@ -85,7 +88,10 @@ export default function SidesOPtions({
         </div>
       </Collapse>
       <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
-        <h2 className="text-xl font-semibold mb-2">Choose any 2 Swirls</h2>
+        <div className="flex justify-between w-full">
+          <h2 className="text-xl font-semibold mb-2">Choose any 2 Swirls</h2>
+          <p className="text-lg mb-2">+ $0.50 per Swirl</p>
+        </div>
         <button
           onClick={() =>
             openSwirls ? setOpenSwirls(false) : setOpenSwirls(true)
