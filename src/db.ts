@@ -1,5 +1,15 @@
 import { db } from './firebase.config'
-import { collection, addDoc, getDocs, getDoc, doc } from 'firebase/firestore'
+import {
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  doc,
+  where,
+  query,
+  onSnapshot,
+  DocumentData,
+} from 'firebase/firestore'
 
 export function addDatafromArray(collectionName: string, data: any) {
   data.forEach(async (item: any) => {
@@ -38,4 +48,19 @@ export async function getDataById(collectionName: string, id: string) {
     // docSnap.data() will be undefined in this case
     console.log('No such document!')
   }
+}
+
+export function getUpdatedOrder(
+  onupdate: (arg0: DocumentData[]) => void,
+  status: string
+) {
+  const q = query(collection(db, 'orders'), where('status', '==', status))
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const orders: DocumentData[] = []
+    querySnapshot.forEach((doc) => {
+      orders.push({ ...doc.data(), id: doc.id })
+    })
+    onupdate(orders)
+  })
+  return unsubscribe
 }
