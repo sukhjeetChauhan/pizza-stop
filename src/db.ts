@@ -9,6 +9,7 @@ import {
   query,
   onSnapshot,
   DocumentData,
+  updateDoc,
 } from 'firebase/firestore'
 
 export function addDatafromArray(collectionName: string, data: any) {
@@ -63,4 +64,11 @@ export function getUpdatedOrder(
     onupdate(orders)
   })
   return unsubscribe
+}
+
+export async function updateData(collection: string, id: string, data: any) {
+  const dataRef = doc(db, collection, id)
+
+  // Set the "capital" field of the city 'DC'
+  await updateDoc(dataRef, data)
 }

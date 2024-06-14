@@ -34,6 +34,7 @@ export default function Payment() {
   const user = auth.currentUser
   const userId = user?.uid
   const { data: userData } = useGetDataById('Users', userId as string)
+  console.log(userData)
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -93,7 +94,7 @@ export default function Payment() {
         <h1 className="text-5xl text-red-700 font-bold">Secure checkout</h1>
       </div>
       <div className="flex flex-col md:flex-row item-center justify-center md:gap-20">
-        {userData === undefined && (
+        {userData?.name === undefined && (
           <div className="flex flex-col bg-sky-100 p-4 m-4 md:p-8 rounder shadow-lg gap-4 md:gap-8">
             <h2 className="text-lg font-bold">
               We need little more detail to process your order

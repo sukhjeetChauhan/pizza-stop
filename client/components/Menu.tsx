@@ -87,7 +87,7 @@ export default ({ data, title, type }: MenuProp) => {
             </h1>
           </Components.HeaderRow>
           <div className="opacity-100 scale-100 flex  justify-center md:justify-start mt-6 flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12">
-            {menu.map((card, index) => (
+            {menu?.map((card, index) => (
               <div
                 key={index}
                 className="mt-10 w-80 sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12"
