@@ -53,7 +53,7 @@ export default function Header({ cartView, setCartView }: CartContextType) {
     // Clean up the listener when the component unmounts
     return () => unsubscribe()
   }, []) // Empty dependency array ensures this runs only once when the component mounts
-
+  console.log(location.pathname)
   return (
     <>
       <section className="flex py-8 border-b-1 border-slate-300 items-center">
@@ -73,7 +73,7 @@ export default function Header({ cartView, setCartView }: CartContextType) {
         <div className="ml-auto mr-[9.5rem]">
           {isSignedIn ? (
             <button
-              className="text-red-500 text-xs md:text-lg bg-white font-bold hover:text-xl transition-all ease-in-out duration-500"
+              className="text-red-500 text-xs md:text-xl bg-white font-bold hover:text-xl transition-all ease-in-out duration-500"
               onClick={() => {
                 showConfirm()
               }}
@@ -82,7 +82,7 @@ export default function Header({ cartView, setCartView }: CartContextType) {
             </button>
           ) : (
             <button
-              className="text-red-500 text-xs md:text-lg bg-white font-bold hover:text-xl transition-all ease-in-out duration-500"
+              className="text-red-500 text-xs md:text-xl bg-white font-bold hover:text-xl transition-all ease-in-out duration-500"
               onClick={() => navigate('/login')}
             >
               Login/Sign-Up
@@ -115,17 +115,19 @@ export default function Header({ cartView, setCartView }: CartContextType) {
               ></img>
             )}
           </div>
-          <div className="max-w-12 ml-3">
-            <Link to="/order/pizzas">
-              <span className="text-red-500 text-xl font-bold relative top-2">
-                {cart.cart.length}
-              </span>
-              <img src={cartSVG} alt="cart Image" />
-            </Link>
-          </div>
+          {!location.pathname.startsWith('/admin') && (
+            <div className="max-w-12 ml-3">
+              <Link to="/order/pizzas">
+                <span className="text-red-500 text-xl font-bold relative top-2">
+                  {cart.cart.length}
+                </span>
+                <img src={cartSVG} alt="cart Image" />
+              </Link>
+            </div>
+          )}
         </div>
       </section>
-      <Navigation />
+      {!location.pathname.startsWith('/admin') && <Navigation />}
     </>
   )
 }

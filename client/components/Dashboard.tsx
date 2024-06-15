@@ -3,16 +3,21 @@ import { Collapse } from 'react-collapse'
 // import Spinner from '../utils/Spinner'
 import { getUpdatedOrder } from '../../src/db'
 import { DocumentData } from 'firebase/firestore'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import DashboardItems from '../utils/DashboardItems'
 
 export function Dashboard() {
   const [audio] = useState(new Audio('/sound/level-up-191997.mp3'))
+  const [mute, setMute] = useState(true)
   const [newOrders, setNewOrders] = useState<DocumentData[]>([])
   const [pendingOrders, setPendingOrders] = useState<DocumentData[]>([])
   const [completedOrders, setCompletedOrders] = useState<DocumentData[]>([])
+  const checkerRef = useRef<DocumentData[]>([])
+
+  audio.muted = mute // assign value of mute variable
 
   const playAudio = () => {
+    setMute(false)
     if (audio.readyState >= 2) {
       audio.currentTime = 0
       audio.play()
@@ -27,19 +32,38 @@ export function Dashboard() {
       setTimeout(() => {
         clearInterval(interval)
         audio.pause()
-      }, 8000) // 5000 milliseconds = 5 seconds
+      }, 5000) // 5000 milliseconds = 5 seconds
     } else {
       console.error('Audio not loaded properly.')
     }
   }
+  ////////////////////////////////////////////////////////////
+  function sortArray(data: DocumentData[]) {
+    data.sort(function (x, y) {
+      return y.timestamp.seconds - x.timestamp.seconds
+    })
+    return data
+  }
 
+  ///////////////////////////////////
+
+  checkerRef.current = newOrders
+
+  /////////////////////////////////////////////////
   useEffect(() => {
     // Define the callback to handle updates
     const handleOrderUpdate = (updatedOrders: DocumentData[]) => {
-      setNewOrders(updatedOrders)
-
-      // Play the audio
-      playAudio()
+      setNewOrders(sortArray(updatedOrders))
+      // console.log(checkerRef.current)
+      // console.log(updatedOrders)
+      if (
+        // JSON.stringify(checkerRef.current) !== JSON.stringify(newOrders)
+        updatedOrders.length > checkerRef.current.length
+      ) {
+        // Play the audio
+        playAudio()
+        // console.log(audio.muted)
+      }
     }
 
     // Get the initial orders and set up continuous updates
@@ -54,8 +78,8 @@ export function Dashboard() {
   useEffect(() => {
     // Define the callback to handle updates
     const handleOrderUpdate = (updatedOrders: DocumentData[]) => {
-      setPendingOrders(updatedOrders)
-      playAudio()
+      setPendingOrders(sortArray(updatedOrders))
+      // playAudio()
     }
 
     // Get the initial orders and set up continuous updates
@@ -69,11 +93,12 @@ export function Dashboard() {
   useEffect(() => {
     // Define the callback to handle updates
     const handleOrderUpdate = (updatedOrders: DocumentData[]) => {
+      const sortedOrders = sortArray(updatedOrders)
       const arr = []
-      for (let i = 0; i < 11; i++) {
-        updatedOrders[i] && arr.push(updatedOrders[i])
+      for (let i = 0; i < 10; i++) {
+        sortedOrders[i] && arr.push(sortedOrders[i])
       }
-      console.log(arr)
+      // console.log(arr)
       setCompletedOrders(arr)
     }
 
@@ -85,6 +110,16 @@ export function Dashboard() {
       unsubscribe()
     }
   }, [])
+
+  function muteAudio(): void {
+    setMute(true)
+  }
+
+  function playSound(): void {
+    setMute(false)
+    audio.currentTime = 0
+    audio.play()
+  }
 
   return (
     <div className="bg-slate-100 w-full h-full flex flex-col items-center justify-center">
@@ -108,7 +143,22 @@ export function Dashboard() {
         <Collapse isOpened={true}>
           <DashboardItems data={completedOrders} />
         </Collapse>
-        <button onClick={playAudio}>play audio</button>
+        {mute && (
+          <button
+            className="absolute top-3 right-6 border-2 border-slate-300 p-4 w-[4.5rem]"
+            onClick={playSound}
+          >
+            <img src="/volume.png" />
+          </button>
+        )}
+        {!mute && (
+          <button
+            className="absolute top-3 right-6 border-2 border-slate-300 p-4 w-[4.5rem]"
+            onClick={muteAudio}
+          >
+            <img src="/mute.png" />
+          </button>
+        )}
       </div>
     </div>
   )

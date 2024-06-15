@@ -11,6 +11,7 @@ export default {
       },
       height: {
         'screen-minus-header': 'calc(100vh - 9rem)', // Adjust '4rem' to your header's height
+        'screen-minus-dashboard-header': 'calc(100vh - 5.5rem)', // Adjust '4rem' to your header's height
       },
       inset: {
         '-full': '-100%',

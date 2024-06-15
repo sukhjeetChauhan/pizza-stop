@@ -60,16 +60,16 @@ export default function DashboardItems({ data }: DataProp) {
       setId(orderId)
     }
   }
-  function sortArray(data: DocumentData[]) {
-    data.sort(function (x, y) {
-      return y.timestamp.seconds - x.timestamp.seconds
-    })
-    return data
-  }
+  // function sortArray(data: DocumentData[]) {
+  //   data.sort(function (x, y) {
+  //     return y.timestamp.seconds - x.timestamp.seconds
+  //   })
+  //   return data
+  // }
 
   return (
     <div>
-      {sortArray(data).map((order, i) => (
+      {data.map((order, i) => (
         <div className="my-1" key={`${order.name}${i}`}>
           <div
             onClick={() => handleDetailWindow(order.id)}
@@ -98,8 +98,11 @@ export default function DashboardItems({ data }: DataProp) {
           </div>
           <Collapse isOpened={id === order.id ? true : false}>
             <div className="py-2 px-2 w-full ">
-              {JSON.parse(order.cart).map((item: CartItemWithId) => (
-                <div className="flex border-b-2 border-slate-300 border-dotted py-2 w-full">
+              {JSON.parse(order.cart).map((item: CartItemWithId, i: number) => (
+                <div
+                  key={i}
+                  className="flex border-b-2 border-slate-300 border-dotted py-2 w-full"
+                >
                   <div className="w-1/4">
                     <p className="font-bold text-lime-700">{`${item.name}  x  ${item.quantity}`}</p>
                     <p className="text-sm text-gray-600">{item.upgrades}</p>

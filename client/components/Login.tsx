@@ -3,10 +3,12 @@ import { Form, Input, Button, message, Checkbox } from 'antd'
 import { SignIn } from '../../src/authentication'
 import { useNavigate } from 'react-router-dom'
 import 'tailwindcss/tailwind.css' // Ensure Tailwind CSS is imported
+import Spinner from '../utils/Spinner'
 
 const RegistrationForm = () => {
   const [form] = Form.useForm()
   const [isHovered, setIsHovered] = useState(false)
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleLogin = async (values: {
@@ -14,15 +16,17 @@ const RegistrationForm = () => {
     password: string
     remember: boolean
   }) => {
+    setLoading(true) // Show the spinner
     const output = (await SignIn(
       values.email,
       values.password
     )) as unknown as string
+    setLoading(false) // Hide the spinner
     if (output === 'success') {
       message.success('Logged In!')
       navigate('/')
     } else {
-      message.error(output)
+      message.error('Login error, try again')
     }
   }
 
@@ -59,6 +63,7 @@ const RegistrationForm = () => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-24 bg-[url('/images/marble-back.jpeg')] bg-repeat min-h-screen">
+      {loading && <Spinner />}
       <div className="p-6 md:p-16 bg-gray-100 w-[20rem] md:w-[30rem] rounded shadow-lg mt-20">
         <Form
           {...formItemLayout}
