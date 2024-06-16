@@ -14,12 +14,12 @@ export default function Admin() {
       <div className="flex h-screen-minus-dashboard-header">
         <div className="w-1/5 h-full border-r-2 border-t-2 border-slate-300 flex flex-col items-center">
           <Link to="/admin/dashboard">
-            <button className=" rounded py-4 w-72 mt-4 text-black bg-white text-2xl font-bold hover:bg-red-100 hover:text-red-500">
+            <button className=" rounded py-4 w-48 lg:w-72 mt-4 text-black bg-white text-2xl font-bold hover:bg-red-100 hover:text-red-500">
               My Orders
             </button>
           </Link>
           <Link to="/admin/manageProducts">
-            <button className=" rounded py-4 w-72 text-black bg-white text-2xl font-bold hover:bg-red-100 hover:text-red-500">
+            <button className=" rounded py-4  w-48 lg:w-72 text-black bg-white text-2xl font-bold hover:bg-red-100 hover:text-red-500">
               My Products
             </button>
           </Link>
