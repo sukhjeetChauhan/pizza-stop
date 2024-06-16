@@ -53,7 +53,7 @@ export default function Header({ cartView, setCartView }: CartContextType) {
     // Clean up the listener when the component unmounts
     return () => unsubscribe()
   }, []) // Empty dependency array ensures this runs only once when the component mounts
-  console.log(location.pathname)
+
   return (
     <>
       <section className="flex py-8 border-b-1 border-slate-300 items-center">

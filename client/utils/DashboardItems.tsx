@@ -36,20 +36,34 @@ export default function DashboardItems({ data }: DataProp) {
     return res
   }
 
-  async function acceptOrder(id: string): Promise<void> {
-    const email = 'chauhansukhjeet@gmail.com'
-    const content = 'Your order has been accepted and is being prepared'
+  async function acceptOrder(
+    id: string,
+    customerEmail: string,
+    name: string
+  ): Promise<void> {
+    const email = customerEmail
+    const content = `Dear ${name},\nThank you for your order! We're excited to let you know that it's being prepared. We appreciate your business and look forward to serving you soon.`
     const sub = 'Order accepted'
     setId('')
-    await sendmail(email, sub, content)
+
+    if (email !== '' && email !== undefined) {
+      await sendmail(email, sub, content)
+    }
     await updateData('orders', id, { status: 'preparing' })
   }
-  async function completeOrder(id: string): Promise<void> {
-    const email = 'chauhansukhjeet@gmail.com'
-    const content = 'Your order is ready'
+  async function completeOrder(
+    id: string,
+    customerEmail: string,
+    name: string
+  ): Promise<void> {
+    const email = customerEmail
+    const content = `Dear ${name},\nYour order is ready! We appreciate your business and look forward to serving you soon.`
     const sub = 'Order ready'
     setId('')
-    await sendmail(email, sub, content)
+
+    if (email !== '' && email !== undefined) {
+      await sendmail(email, sub, content)
+    }
     await updateData('orders', id, { status: 'completed' })
   }
 
@@ -73,7 +87,7 @@ export default function DashboardItems({ data }: DataProp) {
         <div className="my-1" key={`${order.name}${i}`}>
           <div
             onClick={() => handleDetailWindow(order.id)}
-            className={`flex justify-around p-3 ${bgColor(
+            className={`flex justify-around p-5 ${bgColor(
               order
             )} items-center font-bold rounded w-full`}
           >
@@ -144,6 +158,10 @@ export default function DashboardItems({ data }: DataProp) {
                     {` ${order.address}`}
                   </p>
                   <p>
+                    <span className="font-bold">Email:</span>
+                    {` ${order.email ? order.email : ''}`}
+                  </p>
+                  <p>
                     <span className="font-bold">Total Cost:</span>
                     {` $${
                       Number(calculateOrderAmount(JSON.parse(order.cart))) +
@@ -158,7 +176,9 @@ export default function DashboardItems({ data }: DataProp) {
                         Reject
                       </button>
                       <button
-                        onClick={() => acceptOrder(order.id)}
+                        onClick={() =>
+                          acceptOrder(order.id, order.email, order.name)
+                        }
                         className="bg-limeGreen rounded py-4 px-6 text-white font-bold text-lg"
                       >
                         Accept
@@ -167,7 +187,9 @@ export default function DashboardItems({ data }: DataProp) {
                   )}
                   {order.status === 'preparing' && (
                     <button
-                      onClick={() => completeOrder(order.id)}
+                      onClick={() =>
+                        completeOrder(order.id, order.email, order.name)
+                      }
                       className="bg-limeGreen rounded py-4 px-6 text-white font-bold text-lg"
                     >
                       Complete

@@ -34,7 +34,7 @@ export default function Payment() {
   const user = auth.currentUser
   const userId = user?.uid
   const { data: userData } = useGetDataById('Users', userId as string)
-  console.log(userData)
+  // console.log(userData?.email)
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -63,6 +63,7 @@ export default function Payment() {
             : userInfo?.number
             ? userInfo?.number
             : '',
+          email: userData?.email ? userData?.email : '',
         }),
       }
     )

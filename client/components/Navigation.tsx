@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import Button from '../utils/Button'
 import { useEffect, useState } from 'react'
+import { auth } from '../../src/firebase.config'
 
 const pages = ['pizzas', 'sides', 'desserts', 'drinks']
 
@@ -11,12 +12,13 @@ interface activeLink {
   desserts: boolean
   drinks: boolean
   catering: boolean
+  dashboard: boolean
   [key: string]: boolean
 }
 
 const initialState = {
   pizzas: false,
-
+  dashboard: false,
   sides: false,
   desserts: false,
   drinks: false,
@@ -26,6 +28,9 @@ const initialState = {
 
 export default function Navigation() {
   const [active, setActive] = useState(initialState)
+  const user = auth.currentUser
+  const userId = user?.uid
+
   let location = useLocation()
 
   useEffect(() => {
@@ -83,6 +88,26 @@ export default function Navigation() {
             </Link>
           </li>
         ))}
+        {userId === 'sq5tfS5JPyVIRinIc9XsBN1PlmY2' && (
+          <li
+            className={`p-3 border border-slate-300  ${
+              active.dashboard
+                ? 'bg-red-500 text-white'
+                : 'bg-white hover:text-red-500'
+            }`}
+          >
+            <Link to={`/admin/dashboard`}>
+              <Button
+                className={`uppercase text-xl ${
+                  active.dashboard ? 'bg-red-500 text-white' : 'bg-white'
+                }`}
+                onClick={() => handleClick('dashboard')}
+              >
+                dashboard
+              </Button>
+            </Link>
+          </li>
+        )}
       </ul>
     </div>
   )

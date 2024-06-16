@@ -4,6 +4,7 @@ import { Form, Input, Button, message } from 'antd'
 // import { addData, getData } from '../../src/db.ts'
 import { addUser } from '../../src/authentication.ts'
 import { useNavigate } from 'react-router-dom'
+import Spinner from '../utils/Spinner.tsx'
 
 interface RegisterData {
   name: string
@@ -16,6 +17,7 @@ interface RegisterData {
 const RegistrationForm = () => {
   const [form] = Form.useForm()
   const [isHovered, setIsHovered] = useState(false)
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleRegister = async (values: RegisterData) => {
@@ -27,7 +29,7 @@ const RegistrationForm = () => {
         address: values.address,
         phone: values.number,
       }
-
+      setLoading(true) // Show the spinne
       // Sign up the user
       const output = (await signUp(
         values.email,
@@ -40,7 +42,7 @@ const RegistrationForm = () => {
 
         // Add user data
         await addUser(data)
-
+        setLoading(false) // Hide the spinner
         message.success('Registration successful!')
         navigate('/')
       } else {
@@ -88,6 +90,7 @@ const RegistrationForm = () => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-20 bg-[url('/images/marble-back.jpeg')] bg-repeat min-h-screen">
+      {loading && <Spinner />}
       <div className="p-6 md:p-12 bg-gray-100  w-[20rem] md:w-[35rem] rounded shadow-lg mt-20">
         <Form
           {...formItemLayout}
