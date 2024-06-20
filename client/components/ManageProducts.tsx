@@ -8,6 +8,7 @@ import Spinner from '../utils/Spinner'
 export default function ManageProducts() {
   const [data, setData] = useState()
   const [types, setTypes] = useState<string[]>()
+  const [product, setProduct] = useState('')
   const {
     data: pizzas,
     isLoading: pizzasLoading,
@@ -40,6 +41,7 @@ export default function ManageProducts() {
   }
 
   function showData(item: string) {
+    setProduct(item)
     if (item === 'pizzas') {
       setData(sortedPizzas?.menu)
       setTypes(Object.keys(sortedPizzas?.menu))
@@ -72,7 +74,7 @@ export default function ManageProducts() {
         {types?.map((item, i) => (
           <div className="mb-6" key={i}>
             <h1 className="font-bold text-3xl text-limeGreen mb-4">{item}</h1>
-            {data && <AdminProducts data={data[item]} />}
+            {data && <AdminProducts data={data[item]} type={product} />}
           </div>
         ))}
       </div>

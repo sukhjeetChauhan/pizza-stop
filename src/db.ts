@@ -69,6 +69,5 @@ export function getUpdatedOrder(
 export async function updateData(collection: string, id: string, data: any) {
   const dataRef = doc(db, collection, id)
 
-  // Set the "capital" field of the city 'DC'
   await updateDoc(dataRef, data)
 }
