@@ -4,6 +4,8 @@ import { CartContext } from './CartProvider'
 import '../styles/Cart.css'
 import CartItemDetails from '../utils/CartItemDetails'
 import { getLocalStorage, setLocalStorage } from '../../data/localStorage'
+import { getCoords } from '../../src/appApi'
+import calculateAddressDistance from '../../src/geoLib'
 
 export default function Cart() {
   const cart = useContext(CartContext)
@@ -13,7 +15,8 @@ export default function Cart() {
   const [isOpen, setIsopen] = useState(false)
   const [orderStatus, setOrderStatus] = useState(order?.order)
 
-  const deliveryCharges: number = orderStatus === 'Deliver' ? 5.99 : 0
+  const deliveryCharges: number =
+    orderStatus === 'Deliver' ? order.deliveryFee : 0
 
   function showDetails(item: string): void {
     if (window === item) {
@@ -33,7 +36,12 @@ export default function Cart() {
       order = getLocalStorage()
     }
     if (order?.order === 'Deliver') {
-      setLocalStorage({ ...order, address: '', order: 'Pickup' })
+      setLocalStorage({
+        ...order,
+        address: '',
+        order: 'Pickup',
+        deliveryFee: 0,
+      })
       setOrderStatus('Pickup')
     }
     if (order?.order === 'Pickup') {
@@ -41,13 +49,35 @@ export default function Cart() {
     }
   }
 
-  function handleAddress(): void {
+  async function handleAddress(): Promise<void> {
     if (address === '') {
       alert('please enter an address')
     } else {
-      setLocalStorage({ ...order, address: address, order: 'Deliver' })
-      setOrderStatus('Deliver')
-      setIsopen(false)
+      const coords = await getCoords(address)
+      const distance = calculateAddressDistance(coords)
+      if (distance > 20) {
+        alert(`We are not able to deliver that far`)
+      } else if (distance > 5) {
+        const delivery = Number((5.99 + (distance - 5)).toFixed(2))
+        alert(`Please beware your delivery cost will be ${delivery.toFixed(2)}`)
+        setLocalStorage({
+          ...order,
+          address: address,
+          order: 'Deliver',
+          deliveryFee: delivery,
+        })
+        setOrderStatus('Deliver')
+        setIsopen(false)
+      } else {
+        setLocalStorage({
+          ...order,
+          address: address,
+          order: 'Deliver',
+          deliveryFee: 5.99,
+        })
+        setOrderStatus('Deliver')
+        setIsopen(false)
+      }
     }
   }
 
@@ -103,7 +133,7 @@ export default function Cart() {
         <>
           <div className="mt-4 flex justify-between">
             {orderStatus === 'Deliver' ? (
-              <p className="lg:text-sm text-xs">Delivery Charges: $5.99</p>
+              <p className="lg:text-sm text-xs">{`Delivery Charges: $${order.deliveryFee}`}</p>
             ) : (
               <p className="lg:text-sm text-xs">Pick Up</p>
             )}

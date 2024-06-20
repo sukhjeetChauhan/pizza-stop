@@ -7,6 +7,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as storage from '../../data/localStorage'
 import ContentWrapper from '../utils/ContentWrapper'
+import { getCoords } from '../../src/appApi'
+import calculateAddressDistance from '../../src/geoLib'
 export default function Landing() {
   const [modalStatus, setModalStatus] = useState(true)
   const [deliverStatus, setDeliverStatus] = useState(true)
@@ -32,14 +34,31 @@ export default function Landing() {
     setAddress(e.target.value)
   }
 
-  function handleOption() {
+  async function handleOption() {
     const storageObj = {
       address: deliverStatus ? address : '',
       order: deliverStatus ? 'Deliver' : 'Pickup',
+      deliveryFee: deliverStatus ? 5.99 : 0,
     }
     if (deliverStatus && address !== '') {
-      storage.setLocalStorage(storageObj)
-      setModalStatus(false)
+      const coords = await getCoords(address)
+      const distance = calculateAddressDistance(coords)
+      if (distance > 20) {
+        alert(`We are not able to deliver that far`)
+      } else if (distance > 5) {
+        storageObj.deliveryFee = Number((5.99 + (distance - 5)).toFixed(2))
+        alert(
+          `Please beware your delivery cost will be ${storageObj.deliveryFee.toFixed(
+            2
+          )}`
+        )
+        storage.setLocalStorage(storageObj)
+        setModalStatus(false)
+      } else {
+        console.log(storageObj)
+        storage.setLocalStorage(storageObj)
+        setModalStatus(false)
+      }
     }
     if (deliverStatus && address === '') {
       alert('Please enter an address or choose pickup')

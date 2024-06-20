@@ -73,7 +73,12 @@ export default function CartProvider({ children }: Props) {
   }
   function reduceQuantity(id: string) {
     const newCart = cartProducts.map((item) =>
-      item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+      item.id === id
+        ? {
+            ...item,
+            quantity: item.quantity > 1 ? item.quantity - 1 : item.quantity,
+          }
+        : item
     )
     setCartProducts(newCart)
   }

@@ -27,3 +27,29 @@ export async function sendmail(email: string, sub: string, content: string) {
     }
   }
 }
+
+export async function getCoords(address: string) {
+  let headersList = {
+    Accept: '*/*',
+    'User-Agent': 'Thunder ',
+  }
+
+  let response = await fetch(
+    // `https://nominatim.openstreetmap.org/search?q=${address}&format=json`,
+    `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${
+      import.meta.env.VITE_MAP_API_KEY
+    }`,
+    {
+      method: 'GET',
+      headers: headersList,
+    }
+  )
+
+  let { results } = await response.json()
+  const { geometry } = results[0]
+  const obj = {
+    latitude: geometry.location.lat,
+    longitude: geometry.location.lng,
+  }
+  return obj
+}

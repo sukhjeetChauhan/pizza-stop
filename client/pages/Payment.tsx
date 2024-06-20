@@ -11,13 +11,13 @@ import { useGetDataById } from '../../data/hooks'
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
-const stripePromise = loadStripe(
-  'pk_live_51MR5xTIP5GR2cuzx36SURQMsXwpnz346yJGBKErRXv7dEGWPCBW6tN1T5B5vt0zQ1SimGnUgHA5WoRlvt00x3mRz00S3Ciuge1'
-)
-// This is your test publishable API key.
 // const stripePromise = loadStripe(
-//   'pk_test_51PLgjzK3nDwi1iFQFXCVEUyURYb88KGNqu0T1CF1ndZPHXuzFQoDlz845Kw7Ui5YUyMHItCWGBlmNEoCjs8r7kY200XEcGW366'
+//   'pk_live_51MR5xTIP5GR2cuzx36SURQMsXwpnz346yJGBKErRXv7dEGWPCBW6tN1T5B5vt0zQ1SimGnUgHA5WoRlvt00x3mRz00S3Ciuge1'
 // )
+// This is your test publishable API key.
+const stripePromise = loadStripe(
+  'pk_test_51PLgjzK3nDwi1iFQFXCVEUyURYb88KGNqu0T1CF1ndZPHXuzFQoDlz845Kw7Ui5YUyMHItCWGBlmNEoCjs8r7kY200XEcGW366'
+)
 
 interface UserInfo {
   name: string
@@ -34,13 +34,12 @@ export default function Payment() {
   const user = auth.currentUser
   const userId = user?.uid
   const { data: userData } = useGetDataById('Users', userId as string)
-  // console.log(userData?.email)
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     fetch(
-      'https://us-central1-pizza-stop-wellsford.cloudfunctions.net/api/create-payment-intent',
-      // 'http://localhost:3000/create-payment-intent',
+      // 'https://us-central1-pizza-stop-wellsford.cloudfunctions.net/api/create-payment-intent',
+      'http://localhost:3000/create-payment-intent',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -64,6 +63,9 @@ export default function Payment() {
             ? userInfo?.number
             : '',
           email: userData?.email ? userData?.email : '',
+          deliveryFee: deliverStatus?.deliveryFee
+            ? deliverStatus?.deliveryFee
+            : 0,
         }),
       }
     )
