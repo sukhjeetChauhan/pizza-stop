@@ -8,7 +8,13 @@ interface Edit {
   [x: string]: string | number
 }
 
-export default function AdminProducts({ data, type }: any) {
+export default function AdminProducts({
+  data,
+  type,
+  trigger,
+  setTrigger,
+  refetchObj,
+}: any) {
   const [modalStatus, setModalStatus] = useState(false)
   const [product, setProduct] = useState<MenuItem>()
   const [editmode, setEditMode] = useState(false)
@@ -17,7 +23,7 @@ export default function AdminProducts({ data, type }: any) {
   const [input, setInput] = useState('')
   const modalRef = useRef(null)
 
-  // console.log(product)
+  const refetchData = refetchObj[type]
 
   useEffect(() => {
     if (modalRef.current) {
@@ -37,12 +43,15 @@ export default function AdminProducts({ data, type }: any) {
     const collection = type
     const update: Edit = {}
     update[editField] = input
-    console.log(collection, id, update)
+
     await updateData(collection, id, update)
-    // setProduct({ ...product, [editField]: input})
+    await refetchData()
     setEditMode(false)
     setInput('')
     setEditfield('')
+    setModalStatus(false)
+
+    setTrigger(!trigger) // Toggle trigger to refetch data
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -57,124 +66,126 @@ export default function AdminProducts({ data, type }: any) {
   return (
     <div ref={modalRef}>
       {modalStatus && (
-        <div className="fixed top-0 left-0 z-10 h-screen w-screen bg-gray-800 opacity-50"></div>
-      )}
-      {modalStatus && (
-        <Modal>
-          <div className="w-auto p-6 pt-14 flex flex-col items-center">
-            {!editmode && (
-              <div>
-                <div className="flex w-[35rem] justify-between bg-gray-200 mb-2 p-2">
-                  <p className="font-bold text-lg">Name:</p>
-                  <div className="flex gap-4">
-                    <p className="text-limeGreen text-lg">{product?.name}</p>
-                    <button onClick={() => openEdit('name')} className="w-5">
-                      <img src="/editing.png" alt="edit icon" />
-                    </button>
+        <>
+          <div className="fixed top-0 left-0 z-10 h-screen w-screen bg-gray-800 opacity-50"></div>
+          <Modal>
+            <div className="w-auto p-6 pt-14 flex flex-col items-center">
+              {!editmode && (
+                <div>
+                  <div className="flex w-[35rem] justify-between bg-gray-200 mb-2 p-2">
+                    <p className="font-bold text-lg">Name:</p>
+                    <div className="flex gap-4">
+                      <p className="text-limeGreen text-lg">{product?.name}</p>
+                      <button onClick={() => openEdit('name')} className="w-5">
+                        <img src="/editing.png" alt="edit icon" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex w-[35rem] justify-between bg-gray-200 mb-2 p-2">
+                    <p className="font-bold text-lg">Category:</p>
+                    <div className="flex gap-4">
+                      <p className="text-limeGreen text-lg">{product?.type}</p>
+                      <button onClick={() => openEdit('type')} className="w-5">
+                        <img src="/editing.png" alt="edit icon" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex w-[35rem] justify-between bg-gray-200 mb-2 p-2">
+                    <p className="font-bold text-lg">Description:</p>
+                    <div className="flex gap-4">
+                      <p className="w-64 text-limeGreen text-lg">
+                        {product?.description}
+                      </p>
+                      <button
+                        onClick={() => openEdit('description')}
+                        className="w-5"
+                      >
+                        <img src="/editing.png" alt="edit icon" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex w-[35rem] justify-between p-2 bg-gray-200 mb-2">
+                    <p className="font-bold text-lg">Price:</p>
+                    <div className="flex gap-4">
+                      {product?.price_large && (
+                        <div>
+                          <p className="text-limeGreen text-lg">
+                            {product?.price_large}
+                          </p>
+                          <p>price large</p>
+                          <button
+                            onClick={() => openEdit('price_large')}
+                            className="w-5"
+                          >
+                            <img src="/editing.png" alt="edit icon" />
+                          </button>
+                        </div>
+                      )}
+                      {product?.price_small && (
+                        <div>
+                          <p className="text-limeGreen text-lg">
+                            {product?.price_small}
+                          </p>
+                          <p>price small</p>
+                          <button
+                            onClick={() => openEdit('price_small')}
+                            className="w-5"
+                          >
+                            <img src="/editing.png" alt="edit icon" />
+                          </button>
+                        </div>
+                      )}
+                      {product?.price && (
+                        <div>
+                          <p className="text-limeGreen text-lg">
+                            {product?.price}
+                          </p>
+                          <button
+                            onClick={() => openEdit('price')}
+                            className="w-5"
+                          >
+                            <img src="/editing.png" alt="edit icon" />
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-                <div className="flex w-[35rem] justify-between bg-gray-200 mb-2 p-2">
-                  <p className="font-bold text-lg">Category:</p>
-                  <div className="flex gap-4">
-                    <p className="text-limeGreen text-lg">{product?.type}</p>
-                    <button onClick={() => openEdit('type')} className="w-5">
-                      <img src="/editing.png" alt="edit icon" />
-                    </button>
-                  </div>
-                </div>
-                <div className="flex w-[35rem] justify-between bg-gray-200 mb-2 p-2">
-                  <p className="font-bold text-lg">Description:</p>
-                  <div className="flex gap-4">
-                    <p className="w-64 text-limeGreen text-lg">
-                      {product?.description}
-                    </p>
+              )}
+              {editmode && (
+                <div className="flex w-[35rem] flex-col bg-gray-300 items-center justify-center p-8">
+                  <div className="w-72 bg-white p-4">
+                    <p className="font-bold text-xl">{`Enter the ${editField} to update`}</p>
+                    <p>{`Current value: ${
+                      product ? product[editField] : ''
+                    }`}</p>
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      value={input}
+                      className="rounded border-2 w-full p-2 mt-3"
+                    />
                     <button
-                      onClick={() => openEdit('description')}
-                      className="w-5"
+                      className="px-3 py-2 bg-limeGreen text-white text-lg font-bold rounded mt-2"
+                      onClick={() => updateProduct()}
                     >
-                      <img src="/editing.png" alt="edit icon" />
+                      Submit
                     </button>
                   </div>
                 </div>
-                <div className="flex w-[35rem] justify-between p-2 bg-gray-200 mb-2">
-                  <p className="font-bold text-lg">Price:</p>
-                  <div className="flex gap-4">
-                    {product?.price_large && (
-                      <div>
-                        <p className="text-limeGreen text-lg">
-                          {product?.price_large}
-                        </p>
-                        <p>price large</p>
-                        <button
-                          onClick={() => openEdit('price_large')}
-                          className="w-5"
-                        >
-                          <img src="/editing.png" alt="edit icon" />
-                        </button>
-                      </div>
-                    )}
-                    {product?.price_small && (
-                      <div>
-                        <p className="text-limeGreen text-lg">
-                          {product?.price_small}
-                        </p>
-                        <p>price small</p>
-                        <button
-                          onClick={() => openEdit('price_small')}
-                          className="w-5"
-                        >
-                          <img src="/editing.png" alt="edit icon" />
-                        </button>
-                      </div>
-                    )}
-                    {product?.price && (
-                      <div>
-                        <p className="text-limeGreen text-lg">
-                          {product?.price}
-                        </p>
-                        <button
-                          onClick={() => openEdit('price')}
-                          className="w-5"
-                        >
-                          <img src="/editing.png" alt="edit icon" />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
-            {editmode && (
-              <div className="flex w-[35rem] flex-col bg-gray-300 items-center justify-center p-8">
-                <div className="w-72 bg-white p-4">
-                  <p className="font-bold text-xl">{`Enter the ${editField} to update`}</p>
-                  <p>{`Current value: ${product ? product[editField] : ''}`}</p>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    value={input}
-                    className="rounded border-2 w-full p-2 mt-3"
-                  />
-                  <button
-                    className="px-3 py-2 bg-limeGreen text-white text-lg font-bold rounded mt-2"
-                    onClick={() => updateProduct()}
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            )}
-            <button
-              onClick={() => {
-                setModalStatus(false)
-                setEditMode(false)
-              }}
-              className="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 absolute top-2 right-2"
-            >
-              X
-            </button>
-          </div>
-        </Modal>
+              )}
+              <button
+                onClick={() => {
+                  setModalStatus(false)
+                  setEditMode(false)
+                }}
+                className="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 absolute top-2 right-2"
+              >
+                X
+              </button>
+            </div>
+          </Modal>
+        </>
       )}
       <div className="flex gap-4 flex-wrap bg-white">
         {data.map((item: any) => (
