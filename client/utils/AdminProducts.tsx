@@ -49,9 +49,7 @@ export default function AdminProducts({
     setEditMode(false)
     setInput('')
     setEditfield('')
-    setModalStatus(false)
-
-    setTrigger(!trigger) // Toggle trigger to refetch data
+    // setModalStatus(false)
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -93,7 +91,7 @@ export default function AdminProducts({
                   <div className="flex w-[35rem] justify-between bg-gray-200 mb-2 p-2">
                     <p className="font-bold text-lg">Description:</p>
                     <div className="flex gap-4">
-                      <p className="w-64 text-limeGreen text-lg">
+                      <p className="w-64 text-limeGreen text-lg text-right">
                         {product?.description}
                       </p>
                       <button
@@ -178,6 +176,7 @@ export default function AdminProducts({
                 onClick={() => {
                   setModalStatus(false)
                   setEditMode(false)
+                  setTrigger(!trigger) // Toggle trigger to refetch data
                 }}
                 className="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 absolute top-2 right-2"
               >

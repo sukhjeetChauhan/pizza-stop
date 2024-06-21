@@ -109,20 +109,21 @@ export default function ManageProducts() {
       </div>
       <div className="bg-white w-[95%] h-[34.5rem] p-4 shadow-md overflow-y-scroll">
         {loading && <Spinner />}
-        {types?.map((item, i) => (
-          <div className="mb-6" key={i}>
-            <h1 className="font-bold text-3xl text-limeGreen mb-4">{item}</h1>
-            {data && (
-              <AdminProducts
-                data={data[item]}
-                type={product}
-                refetchObj={refetchObj}
-                trigger={trigger}
-                setTrigger={setTrigger}
-              />
-            )}
-          </div>
-        ))}
+        {!loading &&
+          types?.map((item, i) => (
+            <div className="mb-6" key={i}>
+              <h1 className="font-bold text-3xl text-limeGreen mb-4">{item}</h1>
+              {data && (
+                <AdminProducts
+                  data={data[item]}
+                  type={product}
+                  refetchObj={refetchObj}
+                  trigger={trigger}
+                  setTrigger={setTrigger}
+                />
+              )}
+            </div>
+          ))}
       </div>
     </div>
   )

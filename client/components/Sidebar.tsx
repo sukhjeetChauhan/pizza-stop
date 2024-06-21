@@ -22,11 +22,28 @@ export default function Sidebar({ data }: Props) {
   }, [cart.cart.length])
 
   function handleCheckout() {
-    if (isEmpty === false) {
-      navigate('/payment')
-    }
-    if (isEmpty === true) {
-      alert('your cart seems to be empty')
+    // Create a new Date object
+    const now = new Date()
+    // Get the current hour
+    const currentHour = now.getHours()
+    const currentMins = now.getMinutes()
+    const currentTimeInMinutes = currentHour * 60 + currentMins
+
+    const openingTime = 11 * 60 + 30
+    const closingTime = 20 * 60 + 45
+
+    if (
+      openingTime < currentTimeInMinutes &&
+      currentTimeInMinutes < closingTime
+    ) {
+      if (isEmpty === false) {
+        navigate('/payment')
+      }
+      if (isEmpty === true) {
+        alert('your cart seems to be empty')
+      }
+    } else {
+      alert('Sorry, We only accept orders between 11:30am and 8:45pm')
     }
   }
   return (
