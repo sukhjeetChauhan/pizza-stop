@@ -3,6 +3,7 @@ import Modal from '../components/Modal'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import { MenuItem } from '../../types/menu'
 import { updateData } from '../../src/db'
+import editLogo from '/editing.png'
 
 interface Edit {
   [x: string]: string | number
@@ -75,7 +76,7 @@ export default function AdminProducts({
                     <div className="flex gap-4">
                       <p className="text-limeGreen text-lg">{product?.name}</p>
                       <button onClick={() => openEdit('name')} className="w-5">
-                        <img src="/editing.png" alt="edit icon" />
+                        <img src={editLogo} alt="edit icon" />
                       </button>
                     </div>
                   </div>
@@ -84,7 +85,7 @@ export default function AdminProducts({
                     <div className="flex gap-4">
                       <p className="text-limeGreen text-lg">{product?.type}</p>
                       <button onClick={() => openEdit('type')} className="w-5">
-                        <img src="/editing.png" alt="edit icon" />
+                        <img src={editLogo} alt="edit icon" />
                       </button>
                     </div>
                   </div>
@@ -98,7 +99,7 @@ export default function AdminProducts({
                         onClick={() => openEdit('description')}
                         className="w-5"
                       >
-                        <img src="/editing.png" alt="edit icon" />
+                        <img src={editLogo} alt="edit icon" />
                       </button>
                     </div>
                   </div>
@@ -115,7 +116,7 @@ export default function AdminProducts({
                             onClick={() => openEdit('price_large')}
                             className="w-5"
                           >
-                            <img src="/editing.png" alt="edit icon" />
+                            <img src={editLogo} alt="edit icon" />
                           </button>
                         </div>
                       )}
@@ -129,7 +130,7 @@ export default function AdminProducts({
                             onClick={() => openEdit('price_small')}
                             className="w-5"
                           >
-                            <img src="/editing.png" alt="edit icon" />
+                            <img src={editLogo} alt="edit icon" />
                           </button>
                         </div>
                       )}
@@ -142,7 +143,7 @@ export default function AdminProducts({
                             onClick={() => openEdit('price')}
                             className="w-5"
                           >
-                            <img src="/editing.png" alt="edit icon" />
+                            <img src={editLogo} alt="edit icon" />
                           </button>
                         </div>
                       )}
