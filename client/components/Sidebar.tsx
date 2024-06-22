@@ -31,16 +31,14 @@ export default function Sidebar({ data }: Props) {
 
     const openingTime = 11 * 60 + 30
     const closingTime = 20 * 60 + 45
-
-    if (
+    if (isEmpty === true) {
+      alert('your cart seems to be empty')
+    } else if (
       openingTime < currentTimeInMinutes &&
       currentTimeInMinutes < closingTime
     ) {
       if (isEmpty === false) {
         navigate('/payment')
-      }
-      if (isEmpty === true) {
-        alert('your cart seems to be empty')
       }
     } else {
       alert('Sorry, We only accept orders between 11:30am and 8:45pm')

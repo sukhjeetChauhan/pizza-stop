@@ -32,6 +32,11 @@ export default ({ data, title, type }: MenuProp) => {
     }
   }, [modalStatus])
 
+  const cardWidth =
+    title === 'deals'
+      ? 'sm:w-80 md:w-1/2 lg:w-1/2'
+      : 'sm:w-1/2 md:w-1/3 lg:w-1/4' // set card width based on type of menu
+
   function handleClick(data: MenuItem, index: number) {
     if (
       type === 'pizzas' ||
@@ -90,7 +95,7 @@ export default ({ data, title, type }: MenuProp) => {
             {menu?.map((card, index) => (
               <div
                 key={index}
-                className="mt-10 w-80 sm:w-1/2 md:w-1/3 lg:w-1/4 sm:pr-10 md:pr-6 lg:pr-12"
+                className={`mt-10 w-80 ${cardWidth} sm:pr-10 md:pr-6 lg:pr-12`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
                 onTouchStart={() => handleTouchStart(index)}
@@ -142,6 +147,7 @@ export default ({ data, title, type }: MenuProp) => {
                   </Components.CardImageContainer>
                   <Components.CardText>
                     <Components.CardTitle>{card.name}</Components.CardTitle>
+                    {card.type === 'deals' && <p>{card.description}</p>}
                     <Components.CardPrice>{`$ ${
                       card.price ? card.price : (card.price_large as string)
                     }`}</Components.CardPrice>

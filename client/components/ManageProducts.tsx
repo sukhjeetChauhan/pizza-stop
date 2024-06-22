@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react'
 import { sortBasedOnType } from '../../data/data_manipulation'
 import { useGetData } from '../../data/hooks'
-// import { CartItemWithId } from './CartProvider'
+
 import AdminProducts from '../utils/AdminProducts'
 import Spinner from '../utils/Spinner'
 
 export default function ManageProducts() {
-  const [data, setData] = useState()
+  const [data, setData] = useState(null)
   const [types, setTypes] = useState<string[]>()
   const [product, setProduct] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [trigger, setTrigger] = useState(false)
 
   const {
     data: pizzas,
@@ -58,20 +56,12 @@ export default function ManageProducts() {
   const sortedDrinks = drinks ? sortBasedOnType(drinks) : undefined
 
   useEffect(() => {
-    if (product === '') {
-      showData('pizzas')
+    if (data === null) {
+      if (product === '') {
+        showData('pizzas')
+      }
     }
-  }, [])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true)
-
-      setTimeout(() => setLoading(false), 1000)
-    }
-
-    fetchData()
-  }, [trigger])
+  }, [data])
 
   if (pizzasLoading) {
     return <Spinner />
@@ -79,18 +69,26 @@ export default function ManageProducts() {
 
   function showData(item: string) {
     setProduct(item)
-    if (item === 'pizzas') {
-      setData(sortedPizzas?.menu)
-      setTypes(Object.keys(sortedPizzas?.menu))
-    } else if (item === 'sides') {
-      setData(sortedSides?.menu)
-      setTypes(Object.keys(sortedSides?.menu))
-    } else if (item === 'desserts') {
-      setData(sortedDesserts?.menu)
-      setTypes(Object.keys(sortedDesserts?.menu))
-    } else if (item === 'drinks') {
-      setData(sortedDrinks?.menu)
-      setTypes(Object.keys(sortedDrinks?.menu))
+    let selectedData
+    let selectedTypes
+
+    if (item === 'pizzas' && sortedPizzas) {
+      selectedData = sortedPizzas.menu
+      selectedTypes = Object.keys(sortedPizzas.menu || {})
+    } else if (item === 'sides' && sortedSides) {
+      selectedData = sortedSides.menu
+      selectedTypes = Object.keys(sortedSides.menu || {})
+    } else if (item === 'desserts' && sortedDesserts) {
+      selectedData = sortedDesserts.menu
+      selectedTypes = Object.keys(sortedDesserts.menu || {})
+    } else if (item === 'drinks' && sortedDrinks) {
+      selectedData = sortedDrinks.menu
+      selectedTypes = Object.keys(sortedDrinks.menu || {})
+    }
+
+    if (selectedData && selectedTypes) {
+      setData(selectedData)
+      setTypes(selectedTypes)
     }
   }
 
@@ -108,22 +106,19 @@ export default function ManageProducts() {
         ))}
       </div>
       <div className="bg-white w-[95%] h-[34.5rem] p-4 shadow-md overflow-y-scroll">
-        {loading && <Spinner />}
-        {!loading &&
-          types?.map((item, i) => (
-            <div className="mb-6" key={i}>
-              <h1 className="font-bold text-3xl text-limeGreen mb-4">{item}</h1>
-              {data && (
-                <AdminProducts
-                  data={data[item]}
-                  type={product}
-                  refetchObj={refetchObj}
-                  trigger={trigger}
-                  setTrigger={setTrigger}
-                />
-              )}
-            </div>
-          ))}
+        {types?.map((item, i) => (
+          <div className="mb-6" key={i}>
+            <h1 className="font-bold text-3xl text-limeGreen mb-4">{item}</h1>
+            {data && (
+              <AdminProducts
+                data={data[item]}
+                type={product}
+                refetchObj={refetchObj}
+                showData={showData}
+              />
+            )}
+          </div>
+        ))}
       </div>
     </div>
   )

@@ -3,15 +3,15 @@ import Button from '../utils/Button'
 import { useEffect, useState } from 'react'
 import { auth } from '../../src/firebase.config'
 
-const pages = ['pizzas', 'sides', 'desserts', 'drinks']
+const pages = ['pizzas', 'sides', 'desserts', 'drinks', 'deals']
 
 interface activeLink {
   pizzas: boolean
-  mealdeals: boolean
+  deals: boolean
   sides: boolean
   desserts: boolean
   drinks: boolean
-  catering: boolean
+  // catering: boolean
   dashboard: boolean
   [key: string]: boolean
 }
@@ -22,8 +22,8 @@ const initialState = {
   sides: false,
   desserts: false,
   drinks: false,
-  mealdeals: false,
-  catering: false,
+  deals: false,
+  // catering: false,
 } as activeLink
 
 export default function Navigation() {
@@ -83,7 +83,7 @@ export default function Navigation() {
                 }`}
                 onClick={() => handleClick(item)}
               >
-                {item}
+                {item === 'deals' ? 'Meal Deals' : item}
               </Button>
             </Link>
           </li>

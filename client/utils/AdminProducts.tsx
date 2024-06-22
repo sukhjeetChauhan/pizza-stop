@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import Modal from '../components/Modal'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import { MenuItem } from '../../types/menu'
-import { updateData } from '../../src/db'
+// import { updateData } from '../../src/db'
 import editLogo from '/editing.png'
+import useUpdateData from '../../data/hooks'
 
 interface Edit {
   [x: string]: string | number
@@ -12,19 +13,25 @@ interface Edit {
 export default function AdminProducts({
   data,
   type,
-  trigger,
-  setTrigger,
-  refetchObj,
-}: any) {
+  showData,
+}: // trigger,
+// setTrigger,
+// refetchObj,
+any) {
   const [modalStatus, setModalStatus] = useState(false)
   const [product, setProduct] = useState<MenuItem>()
   const [editmode, setEditMode] = useState(false)
   const [editField, setEditfield] = useState('')
 
   const [input, setInput] = useState('')
+
+  const id = product?.id as string
+  const collection = type
+
+  const mutation = useUpdateData(type, collection, id)
   const modalRef = useRef(null)
 
-  const refetchData = refetchObj[type]
+  // const refetchData = refetchObj[type]
 
   useEffect(() => {
     if (modalRef.current) {
@@ -35,21 +42,21 @@ export default function AdminProducts({
   }, [modalStatus])
 
   function handleClick(item: any) {
+    console.log(item.name)
     setModalStatus(true)
     setProduct(item)
   }
 
-  async function updateProduct() {
-    const id = product?.id as string
-    const collection = type
+  function updateProduct() {
     const update: Edit = {}
     update[editField] = input
 
-    await updateData(collection, id, update)
-    await refetchData()
+    mutation.mutate(update)
+    // await refetchData()
     setEditMode(false)
     setInput('')
     setEditfield('')
+
     // setModalStatus(false)
   }
 
@@ -177,7 +184,7 @@ export default function AdminProducts({
                 onClick={() => {
                   setModalStatus(false)
                   setEditMode(false)
-                  setTrigger(!trigger) // Toggle trigger to refetch data
+                  showData(type)
                 }}
                 className="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 absolute top-2 right-2"
               >
