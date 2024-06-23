@@ -66,6 +66,21 @@ export function getUpdatedOrder(
   return unsubscribe
 }
 
+export async function getDataByType(product: string, type: string) {
+  const q =
+    type === 'any'
+      ? query(collection(db, product))
+      : query(collection(db, product), where('type', '==', type))
+  const result: DocumentData[] = []
+  const querySnapshot = await getDocs(q)
+
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snacopshots
+    result.push({ ...doc.data(), id: doc.id })
+  })
+  return result
+}
+
 export async function updateData(collection: string, id: string, data: any) {
   const dataRef = doc(db, collection, id)
 

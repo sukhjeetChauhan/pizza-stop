@@ -5,8 +5,14 @@ import '../styles/CustomizedOrder.css'
 
 import { useGetData } from '../../data/hooks'
 import { useContext, useState } from 'react'
-import { CartContext, CartItem, CartItemWithId } from './CartProvider'
+import {
+  CartContext,
+  CartItem,
+  CartItemWithId,
+  ChoiceItem,
+} from './CartProvider'
 import SidesOPtions from './SidesOptions'
+import ChoiceSelection from '../utils/ChoiceSelection'
 
 interface Upgrade {
   name: string
@@ -34,6 +40,12 @@ export default function CustomizedOrder({
     upgrades: [],
     toppings: [],
     swirls: [],
+    choice: {
+      pizzas: [],
+      sides: [],
+      drinks: [],
+      desserts: [],
+    },
   }
   const [cartItem, setCartItem] = useState(initialState)
   const [openExtra, setOpenExtra] = useState(false)
@@ -42,7 +54,7 @@ export default function CustomizedOrder({
   const [upgradeCart, setUpgradeCart] = useState<Upgrade[]>([])
   const [toppingsChoice, setToppingsChoice] = useState<string[]>([])
   const [swirlsChoice, setSwirlsChoice] = useState<string[]>([])
-
+  const [dealChoices, setDealChoices] = useState<ChoiceItem>()
   const cart = useContext(CartContext)
 
   const filteredUpgrades = upgrades?.filter(
@@ -82,6 +94,7 @@ export default function CustomizedOrder({
       upgrades: upgradeArr,
       toppings: toppingsChoice,
       swirls: swirlsChoice,
+      choice: dealChoices,
       price:
         data.type === 'Loaded'
           ? Number(cartItem.price) + otherCost
@@ -151,6 +164,9 @@ export default function CustomizedOrder({
           <h1 className="text-3xl font-semibold mb-8">{data.name as string}</h1>
           <p className="mb-8">{data.description}</p>
         </div>
+        {data.type === 'deals' && (
+          <ChoiceSelection data={data} setDealChoices={setDealChoices} />
+        )}
         {data.type === 'Loaded' && (
           <SidesOPtions
             toppingsChoice={toppingsChoice}

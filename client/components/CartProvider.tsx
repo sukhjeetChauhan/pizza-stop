@@ -1,11 +1,19 @@
 import { ReactNode, createContext, useState } from 'react'
 
+export interface ChoiceItem {
+  pizzas: string[]
+  sides: string[]
+  desserts: string[]
+  drinks: string[]
+}
+
 export interface CartItem {
   name: string
   price: number
   upgrades: string[]
   toppings: string[]
   swirls: string[]
+  choice: ChoiceItem
   quantity: number
 }
 
@@ -39,6 +47,12 @@ export default function CartProvider({ children }: Props) {
       upgrades: item.upgrades ? item.upgrades : [],
       toppings: item.toppings ? item.toppings : [],
       swirls: item.swirls ? item.swirls : [],
+      choice: {
+        pizzas: item.choice.pizzas,
+        sides: item.choice.sides,
+        drinks: item.choice.drinks,
+        desserts: item.choice.desserts,
+      },
       quantity: 1,
     }
     const found = cartProducts.find(

@@ -40,6 +40,7 @@ export default ({ data, title, type }: MenuProp) => {
   function handleClick(data: MenuItem, index: number) {
     if (
       type === 'pizzas' ||
+      type === 'deals' ||
       data.name === 'Loaded Fries' ||
       data.name === 'Loaded Wedges'
     ) {
