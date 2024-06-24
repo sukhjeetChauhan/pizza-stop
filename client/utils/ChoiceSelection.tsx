@@ -17,7 +17,10 @@ export default function ChoiceSelection({ setDealChoices, data }: Props) {
   const [drinksChoice, setDrinksChoice] = useState<string[]>([])
   const [dessertChoice, setDessertChoice] = useState<string[]>([])
   const [deal, setDeal] = useState<Combo>()
-  const [openChoice, setOpenChoice] = useState(false)
+  const [openPizza, setOpenPizza] = useState(false)
+  const [openSide, setOpenSide] = useState(false)
+  const [openDrinks, setOpenDrinks] = useState(false)
+  const [openDessert, setOpenDessert] = useState(false)
   const [sortedData, setSortedData] = useState({})
 
   const choicesObj: Combos = {
@@ -96,7 +99,7 @@ export default function ChoiceSelection({ setDealChoices, data }: Props) {
     setData()
   }, [deal])
 
-  console.log(pizzasChoice, sidesChoice, drinksChoice, dessertChoice)
+  // console.log(pizzasChoice, sidesChoice, drinksChoice, dessertChoice)
 
   const choices = deal?.choices
     ? (Object.keys(deal.choices) as (keyof Choices)[])
@@ -119,10 +122,48 @@ export default function ChoiceSelection({ setDealChoices, data }: Props) {
     return obj
   }
 
-  async function handleClick() {
-    openChoice ? setOpenChoice(false) : setOpenChoice(true)
+  function setOpenWindow(item: string) {
+    const res =
+      item === 'pizzas'
+        ? { state: openPizza, setState: setOpenPizza }
+        : item === 'sides'
+        ? { state: openSide, setState: setOpenSide }
+        : item === 'drinks'
+        ? { state: openDrinks, setState: setOpenDrinks }
+        : { state: openDessert, setState: setOpenDessert }
+    return res
   }
-  console.log(sortedData)
+
+  function setChoice(item: string) {
+    const res =
+      item === 'pizzas'
+        ? { state: pizzasChoice, setState: setPizzasChoice }
+        : item === 'sides'
+        ? { state: sidesChoice, setState: setSidesChoice }
+        : item === 'drinks'
+        ? { state: drinksChoice, setState: setDrinksChoice }
+        : { state: dessertChoice, setState: setDessertChoice }
+    return res
+  }
+
+  function handleClick(item: string) {
+    const window = setOpenWindow(item)
+    window.state ? window.setState(false) : window.setState(true)
+  }
+
+  function handleChoice(type: string, name: string) {
+    const choice = setChoice(type)
+    const state = choice.state
+    const setState = choice.setState
+
+    if (state.includes(name)) {
+      const newState = state.filter((item) => item !== name)
+      setState(newState)
+    } else {
+      setState([...state, name])
+    }
+  }
+  console.log(pizzasChoice, sidesChoice)
 
   return (
     <div className="w-full p-6">
@@ -133,13 +174,13 @@ export default function ChoiceSelection({ setDealChoices, data }: Props) {
               (choiceObj && choiceObj[item]?.number) ?? 1
             } ${item}`}</h1>
             <button
-              onClick={() => handleClick()}
+              onClick={() => handleClick(item)}
               className="text-limeGreen bg-gray-100 p-1"
             >
-              {openChoice ? '▲' : '▼'}
+              {setOpenWindow(item).state ? '▲' : '▼'}
             </button>
           </div>
-          <Collapse isOpened={openChoice}>
+          <Collapse isOpened={setOpenWindow(item).state}>
             <div>
               {Object.keys(sortedData).length > 0 &&
                 Object.keys(sortedData[item]).map((type) => (
@@ -147,7 +188,11 @@ export default function ChoiceSelection({ setDealChoices, data }: Props) {
                     <h1>{type}</h1>
                     <div>
                       {sortedData[item][type].map((product) => (
-                        <button>{product.name}</button>
+                        <button
+                          onClick={() => handleChoice(item, product.name)}
+                        >
+                          {product.name}
+                        </button>
                       ))}
                     </div>
                   </div>
