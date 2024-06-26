@@ -1,3 +1,5 @@
+import { MenuItem } from './menu'
+
 export interface Choices {
   pizzas?: { type: string; number: number }
   sides?: { type: string; number: number }
@@ -24,4 +26,8 @@ export interface Combos {
   'Triple combo': Combo
   'Stuffed crust combo': Combo
   [key: string]: Combo // Add a string index signature
+}
+
+export interface Sorted {
+  [key: string]: { [key: string]: MenuItem[] }
 }

@@ -33,7 +33,7 @@ export default function CustomizedOrder({
     id: data.id,
     name: data.name,
     price:
-      data.type === 'Loaded'
+      data.type === 'Loaded' || data.type === 'deals'
         ? Number(data.price)
         : (data.price_large as number),
     quantity: 1,
@@ -175,7 +175,7 @@ export default function CustomizedOrder({
             setSwirlsChoice={setSwirlsChoice}
           />
         )}
-        {data.type !== 'Loaded' && (
+        {data.type !== 'Loaded' && data.type !== 'deals' && (
           <div className="w-full p-6">
             <h2 className="text-xl font-semibold mb-2">
               First, select your Pizza size
