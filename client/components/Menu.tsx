@@ -34,8 +34,8 @@ export default ({ data, title, type }: MenuProp) => {
 
   const cardWidth =
     title === 'deals'
-      ? 'sm:w-80 md:w-1/2 lg:w-1/2'
-      : 'sm:w-1/2 md:w-1/3 lg:w-1/4' // set card width based on type of menu
+      ? 'sm:w-1/2 md:w-1/2 lg:w-1/2'
+      : 'w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/4' // set card width based on type of menu
 
   function handleClick(data: MenuItem, index: number) {
     if (
@@ -92,11 +92,11 @@ export default ({ data, title, type }: MenuProp) => {
               {title.toUpperCase()}
             </h1>
           </Components.HeaderRow>
-          <div className="opacity-100 scale-100 flex  justify-center md:justify-start mt-6 flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12">
+          <div className="opacity-100 scale-100 flex  justify-start md:justify-start mt-6 flex-wrap sm:-mr-10 md:-mr-6 lg:-mr-12">
             {menu?.map((card, index) => (
               <div
                 key={index}
-                className={`mt-10 w-80 ${cardWidth} sm:pr-10 md:pr-6 lg:pr-12`}
+                className={`mt-10 ${cardWidth} pr-6 sm:pr-10 md:pr-6 lg:pr-12`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
                 onTouchStart={() => handleTouchStart(index)}
@@ -138,7 +138,7 @@ export default ({ data, title, type }: MenuProp) => {
                       </Button>
                       {touchActive && (
                         <button
-                          className="mt-16 font-bold bg-slate-500 bg-opacity-80 text-white uppercase text-lg px-2 py-2 w-36 rounded  focus:outline-none shadow"
+                          className="mt-8 font-bold bg-slate-500 bg-opacity-80 text-white uppercase text-lg px-2 py-2 w-36 rounded  focus:outline-none shadow"
                           onClick={() => handleTouchState()}
                         >
                           Close

@@ -44,7 +44,7 @@ export default function Order() {
           <div className="sticky top-0 left-0 z-10 bg-white">
             <Header cartView={cartView} setCartView={setCartView} />
           </div>
-          <div className="px-16 ">
+          <div className="pl-8 pr-2 sm:px-16 ">
             {hasType ? (
               menuTypeArr.map((item, i) => (
                 <div key={i}>

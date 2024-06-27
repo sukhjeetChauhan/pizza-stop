@@ -80,7 +80,7 @@ export default function Cart() {
       }
     }
   }
-  console.log(cart.cart)
+  
 
   return (
     <>
