@@ -5,6 +5,7 @@ export interface ChoiceItem {
   sides: string[]
   desserts: string[]
   drinks: string[]
+  [key: string]: string[]
 }
 
 export interface CartItem {

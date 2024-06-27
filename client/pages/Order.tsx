@@ -39,7 +39,7 @@ export default function Order() {
     const { menu: sidesArr } = sortBasedOnType(sides)
 
     return (
-      <div className="bg-[url('/images/marble-back.jpeg')] bg-auto bg-fixed md:w-[77%] bg-repeat-y">
+      <div className="bg-[url('/images/marble-back.jpeg')] bg-auto bg-fixed md:w-[77%] bg-repeat-y min-h-screen">
         <main>
           <div className="sticky top-0 left-0 z-10 bg-white">
             <Header cartView={cartView} setCartView={setCartView} />

@@ -183,6 +183,10 @@ export default function ChoiceSelection({ setDealChoices, data }: Props) {
       desserts: dessertChoice,
     }
     setDealChoices(obj)
+    setOpenPizza(false)
+    setOpenSide(false)
+    setOpenDrinks(false)
+    setOpenDessert(false)
     setActive(false)
   }
 
@@ -244,7 +248,9 @@ export default function ChoiceSelection({ setDealChoices, data }: Props) {
           Change Choices
         </Button>
       </div>
-      <p></p>
+      {!active && (
+        <p className="text-xl text-limeGreen font-bold">Choices confirmed !</p>
+      )}
     </div>
   )
 }

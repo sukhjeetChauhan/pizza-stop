@@ -74,12 +74,13 @@ export default function DashboardItems({ data }: DataProp) {
       setId(orderId)
     }
   }
-  // function sortArray(data: DocumentData[]) {
-  //   data.sort(function (x, y) {
-  //     return y.timestamp.seconds - x.timestamp.seconds
-  //   })
-  //   return data
-  // }
+  function choicesAvailable(item: CartItemWithId) {
+    if (item.choice) {
+      const choiceKeys = Object.keys(item.choice)
+      const lengthArr = choiceKeys.map((key) => item.choice[key].length)
+      return lengthArr.some((item) => item !== 0)
+    }
+  }
 
   return (
     <div>
@@ -121,26 +122,74 @@ export default function DashboardItems({ data }: DataProp) {
                     <p className="font-bold text-lime-700">{`${item.name}  x  ${item.quantity}`}</p>
                     <p className="text-sm text-gray-600">{item.upgrades}</p>
                   </div>
-                  <div className="w-1/4">
-                    {item.toppings.length !== 0 && (
+                  {choicesAvailable(item) && (
+                    <div className="w-2/4 ml-6">
+                      <p className="font-bold text-lime-700">Choices</p>
+                      <div className="text-sm text-gray-600">
+                        {item.choice.pizzas.length > 0 && (
+                          <div className="flex gap-2">
+                            <span className="text-sm lg:text-sm text-xs">
+                              Pizzas :
+                            </span>
+                            <span className="text-sm lg:text-sm text-xs">{`${item.choice.pizzas.join(
+                              ', '
+                            )}`}</span>
+                          </div>
+                        )}
+
+                        {item.choice.sides.length > 0 && (
+                          <div className="flex gap-2">
+                            <span className="text-sm lg:text-sm text-xs">
+                              Sides :
+                            </span>
+                            <span className="text-sm lg:text-sm text-xs">{`${item.choice.sides.join(
+                              ', '
+                            )}`}</span>
+                          </div>
+                        )}
+                        {item.choice.drinks.length > 0 && (
+                          <div className="flex gap-2">
+                            <span className="text-sm lg:text-sm text-xs">
+                              Drinks :
+                            </span>
+                            <span className="text-sm lg:text-sm text-xs">{`${item.choice.drinks.join(
+                              ', '
+                            )}`}</span>
+                          </div>
+                        )}
+                        {item.choice.desserts.length > 0 && (
+                          <div className="flex gap-2">
+                            <span className="text-sm lg:text-sm text-xs">
+                              Dessert :
+                            </span>
+                            <span className="text-sm lg:text-sm text-xs">{`${item.choice.desserts.join(
+                              ', '
+                            )}`}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  {item.toppings.length !== 0 && (
+                    <div className="w-1/4">
                       <div>
                         <p className="font-bold text-lime-700">Toppings</p>
                         <p className="text-sm text-gray-600">
                           {item.toppings.join(', ')}
                         </p>
                       </div>
-                    )}
-                  </div>
-                  <div className="w-1/4">
-                    {item.swirls.length !== 0 && (
+                    </div>
+                  )}
+                  {item.swirls.length !== 0 && (
+                    <div className="w-1/4">
                       <div>
                         <p className="font-bold text-lime-700">Swirls</p>
                         <p className="text-sm text-gray-600">
                           {item.swirls.join(', ')}
                         </p>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                   <div className="w-1/4">
                     <p className="font-bold text-lime-700">Price</p>
                     <p className="text-sm text-gray-600">{`$${item.price}`}</p>
