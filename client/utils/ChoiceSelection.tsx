@@ -197,7 +197,7 @@ export default function ChoiceSelection({ setDealChoices, data }: Props) {
           {!active && (
             <div className="absolute top-0 left-0 z-10 h-full w-full bg-gray-800 opacity-50"></div>
           )}
-          <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">
+          <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between font-bold text-lg">
             <h1>{`Select any ${getChoiceNumber(item)} ${item}`}</h1>
             <button
               onClick={() => handleClick(item)}

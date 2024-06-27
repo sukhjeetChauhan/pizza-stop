@@ -49,10 +49,10 @@ export default function CartProvider({ children }: Props) {
       toppings: item.toppings ? item.toppings : [],
       swirls: item.swirls ? item.swirls : [],
       choice: {
-        pizzas: item.choice.pizzas,
-        sides: item.choice.sides,
-        drinks: item.choice.drinks,
-        desserts: item.choice.desserts,
+        pizzas: item.choice?.pizzas ? item.choice.pizzas : [],
+        sides: item.choice?.sides ? item.choice.sides : [],
+        drinks: item.choice?.drinks ? item.choice.drinks : [],
+        desserts: item.choice?.desserts ? item.choice.desserts : [],
       },
       quantity: 1,
     }
