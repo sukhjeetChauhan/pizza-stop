@@ -170,27 +170,27 @@ export default function DashboardItems({ data }: DataProp) {
                       </div>
                     </div>
                   )}
-                  {item.toppings.length !== 0 && (
-                    <div className="w-1/4">
+                  <div className="w-1/5">
+                    {item.toppings.length !== 0 && (
                       <div>
                         <p className="font-bold text-lime-700">Toppings</p>
                         <p className="text-sm text-gray-600">
                           {item.toppings.join(', ')}
                         </p>
                       </div>
-                    </div>
-                  )}
-                  {item.swirls.length !== 0 && (
-                    <div className="w-1/4">
+                    )}
+                  </div>
+                  <div className="w-1/5">
+                    {item.swirls.length !== 0 && (
                       <div>
                         <p className="font-bold text-lime-700">Swirls</p>
                         <p className="text-sm text-gray-600">
                           {item.swirls.join(', ')}
                         </p>
                       </div>
-                    </div>
-                  )}
-                  <div className="w-1/4">
+                    )}
+                  </div>
+                  <div className="w-1/5">
                     <p className="font-bold text-lime-700">Price</p>
                     <p className="text-sm text-gray-600">{`$${item.price}`}</p>
                   </div>
