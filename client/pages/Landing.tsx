@@ -9,6 +9,7 @@ import * as storage from '../../data/localStorage'
 import ContentWrapper from '../utils/ContentWrapper'
 import { getCoords } from '../../src/appApi'
 import calculateAddressDistance from '../../src/geoLib'
+import CtaReview from '../components/CtaReview'
 export default function Landing() {
   const [modalStatus, setModalStatus] = useState(true)
   const [deliverStatus, setDeliverStatus] = useState(true)
@@ -159,7 +160,7 @@ export default function Landing() {
           </Link>
         </div>
         <Features />
-        {/* <RegistrationForm /> */}
+        <CtaReview />
       </div>
     </ContentWrapper>
   )

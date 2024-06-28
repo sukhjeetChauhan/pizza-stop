@@ -30,6 +30,11 @@ export default ({ data, title, type }: MenuProp) => {
         ? disableBodyScroll(modalRef.current)
         : enableBodyScroll(modalRef.current)
     }
+    return () => {
+      if (modalRef.current) {
+        enableBodyScroll(modalRef.current)
+      }
+    }
   }, [modalStatus])
 
   const cardWidth =
