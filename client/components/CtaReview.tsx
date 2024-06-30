@@ -1,24 +1,65 @@
+import { useState } from 'react'
+
 export default function CtaReview() {
+  const [nameText, setNameText] = useState('')
+  const [reviewText, setReviewText] = useState('')
+
+  function handleChange(
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) {
+    if (e.target.name === 'name') {
+      setNameText(e.target.value)
+    }
+    if (e.target.name === 'review') {
+      setReviewText(e.target.value)
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log({ name: nameText, review: reviewText })
+  }
+
   return (
     <div className="flex h-[35rem] max-w-screen-xl mx-auto my-20 lg:my-24 rounded overflow-hidden">
       <div className="w-1/2 h-full bg-[url('/images/roberto-valdivia-rcUw6b4iYe0-unsplash.jpg')] bg-cover bg-center"></div>
-      <div className="w-1/2 h-full bg-limeGreen">
-        <h3>Please help your local business by giving us feedback.</h3>
-        <form className="w-full flex flex-col items-center">
+      <div className="w-1/2 h-full bg-gradient-to-tl from-limeGreen to-lime-500">
+        <h3 className="text-white text-3xl font-bold mt-8">
+          Please help your local business by giving us feedback.
+        </h3>
+        <form
+          className="w-full flex flex-col items-center gap-4 mt-8"
+          onSubmit={handleSubmit}
+        >
           <div className="flex">
-            <label htmlFor="name">Name :</label>
+            <label className="text-white text-2xl w-[6rem]" htmlFor="name">
+              Name :
+            </label>
             <input
-              className="w-[20rem]"
+              className="w-[20rem] border-2 ml-2 rounded p-2"
               type="text"
               placeholder="Please type your name or type anonymous"
               name="name"
+              value={nameText}
+              onChange={handleChange}
             />
           </div>
           <div className="flex">
-            <label htmlFor="review">Review :</label>
-            <textarea className="w-[20rem]" name="review" />
+            <label className="text-white text-2xl w-[6rem]" htmlFor="review">
+              Review :
+            </label>
+            <textarea
+              className="w-[20rem] border-2 ml-2 rounded p-2 min-h-56"
+              name="review"
+              value={reviewText}
+              onChange={handleChange}
+            />
           </div>
-          <button>Submit</button>
+          <button className="bg-white rounded text-limeGreen font-bold text-xl px-4 py-2 w-52 border-2 border-limeGreen hover:bg-gray-200">
+            Submit
+          </button>
         </form>
       </div>
     </div>
