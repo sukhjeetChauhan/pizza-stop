@@ -19,7 +19,7 @@ export default function CtaReview() {
     }
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     await addData('Reviews', { name: nameText, review: reviewText })
     setNameText('')

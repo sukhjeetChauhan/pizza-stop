@@ -54,7 +54,12 @@ export default function CustomizedOrder({
   const [upgradeCart, setUpgradeCart] = useState<Upgrade[]>([])
   const [toppingsChoice, setToppingsChoice] = useState<string[]>([])
   const [swirlsChoice, setSwirlsChoice] = useState<string[]>([])
-  const [dealChoices, setDealChoices] = useState<ChoiceItem>()
+  const [dealChoices, setDealChoices] = useState<ChoiceItem>({
+    pizzas: [''],
+    sides: [''],
+    drinks: [''],
+    desserts: [''],
+  })
   const cart = useContext(CartContext)
 
   const filteredUpgrades = upgrades?.filter(
@@ -101,9 +106,17 @@ export default function CustomizedOrder({
           : (Number(cartItem.price) + upgradeCost + otherCost).toFixed(2),
     }
 
-    cart.addToCart(finalCartItem)
+    const arr = Object.values(dealChoices)
+    const allEmpty = arr.every(
+      (item) => JSON.stringify(item) == JSON.stringify([''])
+    )
 
-    setModalStatus(false)
+    if (data.type === 'deals' && allEmpty) {
+      alert('Please make sure to choose an item')
+    } else {
+      cart.addToCart(finalCartItem)
+      setModalStatus(false)
+    }
   }
   function handleCart(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.type === 'radio') {

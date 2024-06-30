@@ -10,7 +10,7 @@ import Button from './Button'
 
 interface Props {
   data: MenuItem
-  setDealChoices: Dispatch<SetStateAction<ChoiceItem | undefined>>
+  setDealChoices: Dispatch<SetStateAction<ChoiceItem>>
 }
 export default function ChoiceSelection({ setDealChoices, data }: Props) {
   const [pizzasChoice, setPizzasChoice] = useState<string[]>([])
