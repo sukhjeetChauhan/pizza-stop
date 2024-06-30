@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { addData } from '../../src/db'
 
 export default function CtaReview() {
   const [nameText, setNameText] = useState('')
   const [reviewText, setReviewText] = useState('')
+  const [status, setStatus] = useState(false)
 
   function handleChange(
     e:
@@ -17,9 +19,12 @@ export default function CtaReview() {
     }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    console.log({ name: nameText, review: reviewText })
+    await addData('Reviews', { name: nameText, review: reviewText })
+    setNameText('')
+    setReviewText('')
+    setStatus(true)
   }
 
   return (
@@ -61,6 +66,11 @@ export default function CtaReview() {
             Submit
           </button>
         </form>
+        {status && (
+          <p className="text-xl text-white font-bold mt-2">
+            Thank you for your review !
+          </p>
+        )}
       </div>
     </div>
   )

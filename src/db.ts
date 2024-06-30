@@ -23,7 +23,8 @@ export function addDatafromArray(collectionName: string, data: any) {
 export async function addData(collectionName: string, data: any) {
   // Add a new document with a generated id.
   const docRef = await addDoc(collection(db, collectionName), data)
-  console.log('Document written with ID: ', docRef.id)
+  return docRef
+  // console.log('Document written with ID: ', docRef.id)
 }
 
 export async function getData(collectionName: string) {
