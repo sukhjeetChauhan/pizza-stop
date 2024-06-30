@@ -28,9 +28,9 @@ export default function CtaReview() {
   }
 
   return (
-    <div className="flex h-[35rem] max-w-screen-xl mx-auto my-20 lg:my-24 rounded overflow-hidden">
-      <div className="w-1/2 h-full bg-[url('/images/roberto-valdivia-rcUw6b4iYe0-unsplash.jpg')] bg-cover bg-center"></div>
-      <div className="w-1/2 h-full bg-gradient-to-tl from-limeGreen to-lime-500">
+    <div className="flex flex-col sm:flex-row h-[70rem] sm:h-[39rem] max-w-screen-xl mx-auto my-20 lg:my-24 rounded overflow-hidden">
+      <div className=" w-full sm:w-1/2 h-full bg-[url('/images/roberto-valdivia-rcUw6b4iYe0-unsplash.jpg')] bg-cover bg-center"></div>
+      <div className="w-full sm:w-1/2 h-full bg-gradient-to-tl from-limeGreen to-lime-500 p-4">
         <h3 className="text-white text-3xl font-bold mt-8">
           Please help your local business by giving us feedback.
         </h3>
@@ -38,7 +38,7 @@ export default function CtaReview() {
           className="w-full flex flex-col items-center gap-4 mt-8"
           onSubmit={handleSubmit}
         >
-          <div className="flex">
+          <div className="flex flex-col lg:flex-row">
             <label className="text-white text-2xl w-[6rem]" htmlFor="name">
               Name :
             </label>
@@ -51,7 +51,7 @@ export default function CtaReview() {
               onChange={handleChange}
             />
           </div>
-          <div className="flex">
+          <div className="flex flex-col lg:flex-row">
             <label className="text-white text-2xl w-[6rem]" htmlFor="review">
               Review :
             </label>
