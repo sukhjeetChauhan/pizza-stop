@@ -36,38 +36,48 @@ export default function Landing() {
   }
 
   async function handleOption() {
-    const storageObj = {
-      address: deliverStatus ? address : '',
-      order: deliverStatus ? 'Deliver' : 'Pickup',
-      deliveryFee: deliverStatus ? 5.99 : 0,
-    }
-    if (deliverStatus && address !== '') {
-      const coords = await getCoords(address)
-      const distance = calculateAddressDistance(coords)
-      if (distance > 20) {
-        alert(`We are not able to deliver that far`)
-      } else if (distance > 5) {
-        storageObj.deliveryFee = Number((5.99 + (distance - 5)).toFixed(2))
-        alert(
-          `Please beware your delivery cost will be ${storageObj.deliveryFee.toFixed(
-            2
-          )}`
-        )
+    try {
+      const storageObj = {
+        address: deliverStatus ? address : '',
+        order: deliverStatus ? 'Deliver' : 'Pickup',
+        deliveryFee: deliverStatus ? 5.99 : 0,
+      }
+
+      if (deliverStatus) {
+        if (address === '') {
+          alert('Please enter an address or choose pickup')
+          return
+        }
+
+        const coords = await getCoords(address)
+        const distance = calculateAddressDistance(coords)
+
+        if (distance > 20) {
+          alert('We are not able to deliver that far')
+          return
+        }
+
+        if (distance > 5) {
+          storageObj.deliveryFee = Number((5.99 + (distance - 5)).toFixed(2))
+          alert(
+            `Please beware your delivery cost will be ${storageObj.deliveryFee.toFixed(
+              2
+            )}`
+          )
+        }
+
         storage.setLocalStorage(storageObj)
         setModalStatus(false)
       } else {
-        console.log(storageObj)
         storage.setLocalStorage(storageObj)
         setModalStatus(false)
       }
-    }
-    if (deliverStatus && address === '') {
-      alert('Please enter an address or choose pickup')
-    }
-
-    if (!deliverStatus) {
-      storage.setLocalStorage(storageObj)
-      setModalStatus(false)
+      console.log(storageObj)
+    } catch (error) {
+      console.error('Error handling option:', error)
+      alert(
+        'An error occurred while processing your request. Please try again.'
+      )
     }
   }
 
