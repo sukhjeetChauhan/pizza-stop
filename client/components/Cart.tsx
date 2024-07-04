@@ -50,37 +50,54 @@ export default function Cart() {
   }
 
   async function handleAddress(): Promise<void> {
-    if (address === '') {
-      alert('please enter an address')
-    } else {
-      const coords = await getCoords(address)
-      const distance = calculateAddressDistance(coords)
-      if (distance > 20) {
-        alert(`We are not able to deliver that far`)
-      } else if (distance > 5) {
-        const delivery = Number((5.99 + (distance - 5)).toFixed(2))
-        alert(`Please beware your delivery cost will be ${delivery.toFixed(2)}`)
-        setLocalStorage({
-          ...order,
-          address: address,
-          order: 'Deliver',
-          deliveryFee: delivery,
-        })
-        setOrderStatus('Deliver')
-        setIsopen(false)
+    try {
+      if (address === '') {
+        alert('please enter an address')
       } else {
-        setLocalStorage({
-          ...order,
-          address: address,
-          order: 'Deliver',
-          deliveryFee: 5.99,
-        })
-        setOrderStatus('Deliver')
-        setIsopen(false)
+        const coords = await getCoords(address)
+        const distance = calculateAddressDistance(coords)
+        if (distance > 20) {
+          alert(`We are not able to deliver that far`)
+        } else if (distance > 5) {
+          const delivery = Number((5.99 + (distance - 5)).toFixed(2))
+          alert(
+            `Please beware your delivery cost will be ${delivery.toFixed(2)}`
+          )
+          setLocalStorage({
+            ...order,
+            address: address,
+            order: 'Deliver',
+            deliveryFee: delivery,
+          })
+          setOrderStatus('Deliver')
+          setIsopen(false)
+        } else {
+          setLocalStorage({
+            ...order,
+            address: address,
+            order: 'Deliver',
+            deliveryFee: 5.99,
+          })
+          setOrderStatus('Deliver')
+          setIsopen(false)
+        }
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error handling option:', error)
+        if (error.message === 'Load failed') {
+          setLocalStorage({
+            ...order,
+            address: address,
+            order: 'Deliver',
+            deliveryFee: 5.99,
+          })
+          setOrderStatus('Deliver')
+          setIsopen(false)
+        }
       }
     }
   }
-  
 
   return (
     <>

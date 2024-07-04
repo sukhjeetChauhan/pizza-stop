@@ -74,10 +74,17 @@ export default function Landing() {
       }
       console.log(storageObj)
     } catch (error) {
-      console.error('Error handling option:', error)
-      alert(
-        `An error occurred while processing your request. Please try again: ${error}`
-      )
+      if (error instanceof Error) {
+        console.error('Error handling option:', error)
+        if (error.message === 'Load failed') {
+          const storageObj = {
+            address: deliverStatus ? address : '',
+            order: deliverStatus ? 'Deliver' : 'Pickup',
+            deliveryFee: deliverStatus ? 5.99 : 0,
+          }
+          storage.setLocalStorage(storageObj)
+        }
+      }
     }
   }
 
