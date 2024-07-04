@@ -83,6 +83,7 @@ export default function Landing() {
             deliveryFee: deliverStatus ? 5.99 : 0,
           }
           storage.setLocalStorage(storageObj)
+          setModalStatus(false)
         }
       }
     }
