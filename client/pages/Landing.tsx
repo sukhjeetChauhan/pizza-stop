@@ -50,6 +50,7 @@ export default function Landing() {
         }
 
         const coords = await getCoords(address)
+
         const distance = calculateAddressDistance(coords)
 
         if (distance > 20) {

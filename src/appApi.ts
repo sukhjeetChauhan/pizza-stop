@@ -30,26 +30,44 @@ export async function sendmail(email: string, sub: string, content: string) {
 
 export async function getCoords(address: string) {
   let headersList = {
-    Accept: '*/*',
-    'User-Agent': 'Thunder ',
+    Accept: 'application/json',
   }
 
-  let response = await fetch(
-    // `https://nominatim.openstreetmap.org/search?q=${address}&format=json`,
-    `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${
-      import.meta.env.VITE_MAP_API_KEY
-    }`,
-    {
-      method: 'GET',
-      headers: headersList,
+  try {
+    let response = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${
+        import.meta.env.VITE_MAP_API_KEY
+      }`,
+
+      {
+        method: 'GET',
+        headers: headersList,
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error('HTTP error! Status: ${response.status}')
     }
-  )
 
-  let { results } = await response.json()
-  const { geometry } = results[0]
-  const obj = {
-    latitude: geometry.location.lat,
-    longitude: geometry.location.lng,
+    let { results } = await response.json()
+    if (results.length === 0) {
+      throw new Error('No results found for the address')
+    }
+
+    const { geometry } = results[0]
+
+    const obj = {
+      latitude: geometry.location.lat,
+      longitude: geometry.location.lng,
+    }
+
+    return obj
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(
+        `Error fetching coordinates for address '${address}': ${error.message}`
+      )
+    }
+    throw error // Propagate the error to handle it further if needed
   }
-  return obj
 }
