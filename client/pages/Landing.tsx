@@ -76,7 +76,7 @@ export default function Landing() {
     } catch (error) {
       console.error('Error handling option:', error)
       alert(
-        'An error occurred while processing your request. Please try again.'
+        `An error occurred while processing your request. Please try again: ${error}`
       )
     }
   }
