@@ -9,9 +9,13 @@ import DashboardItems from '../utils/DashboardItems'
 export function Dashboard() {
   const [audio] = useState(new Audio('/sound/level-up-191997.mp3'))
   const [mute, setMute] = useState(true)
+  const [viewAll, setViewAll] = useState(false)
   const [newOrders, setNewOrders] = useState<DocumentData[]>([])
   const [pendingOrders, setPendingOrders] = useState<DocumentData[]>([])
   const [completedOrders, setCompletedOrders] = useState<DocumentData[]>([])
+  const [allCompletedOrders, setAllCompletedOrders] = useState<DocumentData[]>(
+    []
+  )
   const checkerRef = useRef<DocumentData[]>([])
 
   audio.muted = mute // assign value of mute variable
@@ -100,6 +104,7 @@ export function Dashboard() {
       }
       // console.log(arr)
       setCompletedOrders(arr)
+      setAllCompletedOrders(sortedOrders)
     }
 
     // Get the initial orders and set up continuous updates
@@ -121,6 +126,8 @@ export function Dashboard() {
     audio.play()
   }
 
+  console.log(viewAll)
+
   return (
     <div className="bg-slate-100 w-full h-full flex flex-col items-center justify-center">
       {/* orders */}
@@ -134,15 +141,24 @@ export function Dashboard() {
           <span className="w-1/5 overflow-hidden text-center">Time</span>
           <span className="w-1/5 overflow-hidden text-center">Status</span>
         </div>
-        <Collapse isOpened={true}>
-          <DashboardItems data={newOrders} />
-        </Collapse>
-        <Collapse isOpened={true}>
-          <DashboardItems data={pendingOrders} />
-        </Collapse>
-        <Collapse isOpened={true}>
-          <DashboardItems data={completedOrders} />
-        </Collapse>
+        {!viewAll && (
+          <>
+            <Collapse isOpened={true} key="newOrders">
+              <DashboardItems data={newOrders} />
+            </Collapse>
+            <Collapse isOpened={true} key="pendingOrders">
+              <DashboardItems data={pendingOrders} />
+            </Collapse>
+            <Collapse isOpened={true} key="completedOrders">
+              <DashboardItems data={completedOrders} />
+            </Collapse>
+          </>
+        )}
+        {viewAll && (
+          <Collapse isOpened={true} key="allCompletedOrders">
+            <DashboardItems data={allCompletedOrders} />
+          </Collapse>
+        )}
         {mute && (
           <button
             className="absolute top-3 right-6 border-2 border-slate-300 p-4 w-[4.5rem]"
@@ -160,6 +176,12 @@ export function Dashboard() {
           </button>
         )}
       </div>
+      <button
+        className="absolute top-3 right-60 border-2 border-slate-300 p-4 w-[12.5rem] text-lg font-bold"
+        onClick={() => setViewAll((viewAll) => !viewAll)}
+      >
+        {viewAll ? `Back to Dashboard` : `View All Orders`}
+      </button>
     </div>
   )
 }
