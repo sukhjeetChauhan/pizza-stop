@@ -1,8 +1,8 @@
 import Button from '../utils/Button'
 import * as Components from '../utils/menuPageUtils'
 import { Container, ContentWithPaddingXl } from '../utils/Containers'
-import { useEffect, useRef, useState } from 'react'
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import { useRef, useState } from 'react'
+// import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import Modal from '../components/Modal'
 import { useContext } from 'react'
 import { CartContext } from './CartProvider'
@@ -24,18 +24,18 @@ export default ({ data, title, type }: MenuProp) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [touchActive, setTouchActive] = useState(false)
 
-  useEffect(() => {
-    if (modalRef.current) {
-      modalStatus
-        ? disableBodyScroll(modalRef.current)
-        : enableBodyScroll(modalRef.current)
-    }
-    return () => {
-      if (modalRef.current) {
-        enableBodyScroll(modalRef.current)
-      }
-    }
-  }, [modalStatus])
+  // useEffect(() => {
+  //   if (modalRef.current) {
+  //     modalStatus
+  //       ? disableBodyScroll(modalRef.current)
+  //       : enableBodyScroll(modalRef.current)
+  //   }
+  //   return () => {
+  //     if (modalRef.current) {
+  //       enableBodyScroll(modalRef.current)
+  //     }
+  //   }
+  // }, [modalStatus])
 
   const cardWidth =
     title === 'deals'

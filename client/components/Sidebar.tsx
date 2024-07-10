@@ -47,7 +47,7 @@ export default function Sidebar({ data }: Props) {
     }
   }
   return (
-    <div className="flex flex-col items-center justify-between h-full bg-white">
+    <div className="flex flex-col items-center justify-between h-screen-10rem md:h-full bg-white">
       <div className="min-w-full p-4 h-full">
         <div className="flex items-center justify-center mt-5 mb-5 lg:text-md text-base">
           <span>---------</span>
