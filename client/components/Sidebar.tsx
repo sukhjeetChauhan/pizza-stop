@@ -54,7 +54,7 @@ export default function Sidebar({ data }: Props) {
           <h2 className="uppercase">Your Cart</h2>
           <span>---------</span>
         </div>
-        <div className="overflow-y-auto h-[28rem]">
+        <div className="overflow-y-auto max-h-[23rem]">
           <Cart />
         </div>
       </div>

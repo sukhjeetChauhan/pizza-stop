@@ -164,7 +164,7 @@ export default function CustomizedOrder({
   }
 
   return (
-    <div className="flex md:w-[45rem] sm:w-[32rem] w-[23rem]">
+    <div className="flex md:w-[45rem] sm:w-[32rem] w-[23rem] overflow-auto h-39rem">
       <div className="w-0 sm:w-1/4 border-r-2 border-slate-300] bg-cover bg-[url('/images/pizzas/Pepperoni-Pizza-Recipe-Sip-Bite-Go.jpg')]">
         {/* <img
           className="w-screen"
@@ -172,7 +172,7 @@ export default function CustomizedOrder({
           alt="modal pizza"
         /> */}
       </div>
-      <div className="w-full h-[40rem] sm:w-3/4 flex flex-col items-center overflow-y-auto">
+      <div className="w-full h-[39rem] sm:w-3/4 flex flex-col items-center overflow-y-auto">
         <div className="w-full p-3 border-b-2 border-slate-300">
           <h1 className="text-3xl font-semibold mb-8">{data.name as string}</h1>
           <p className="mb-8">{data.description}</p>
