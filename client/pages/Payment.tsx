@@ -31,6 +31,7 @@ export default function Payment() {
   const [clientSecret, setClientSecret] = useState('')
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')
+  const [viewDetails, setViewDetails] = useState(false)
   const [userInfo, setUserInfo] = useState<UserInfo>()
   const cart = useContext(CartContext)
   const deliverStatus = getLocalStorage()
@@ -38,43 +39,50 @@ export default function Payment() {
   const userId = user?.uid
   const { data: userData } = useGetDataById('Users', userId as string)
 
+  // useEffect(() => {
+  //   // Create PaymentIntent as soon as the page loads
+  //   fetch(
+  //     // 'https://us-central1-pizza-stop-wellsford.cloudfunctions.net/api/create-payment-intent',
+  //     'http://localhost:3000/create-payment-intent',
+  //     {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({
+  //         userId: userId,
+  //         items: cart.cart,
+  //         order: deliverStatus?.order ? deliverStatus.order : '',
+  //         address: deliverStatus?.address
+  //           ? deliverStatus.address
+  //           : userData?.address
+  //           ? userData?.address
+  //           : '',
+  //         name: userData?.name
+  //           ? userData?.name
+  //           : userInfo?.name
+  //           ? userInfo?.name
+  //           : '',
+  //         number: userData?.phone
+  //           ? userData?.phone
+  //           : userInfo?.number
+  //           ? userInfo?.number
+  //           : '',
+  //         email: userData?.email ? userData?.email : '',
+  //         deliveryFee: deliverStatus?.deliveryFee
+  //           ? deliverStatus?.deliveryFee
+  //           : 0,
+  //       }),
+  //     }
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => setClientSecret(data.clientSecret))
+  // }, [userInfo, userData])
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    fetch(
-      'https://us-central1-pizza-stop-wellsford.cloudfunctions.net/api/create-payment-intent',
-      // 'http://localhost:3000/create-payment-intent',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userId: userId,
-          items: cart.cart,
-          order: deliverStatus?.order ? deliverStatus.order : '',
-          address: deliverStatus?.address
-            ? deliverStatus.address
-            : userData?.address
-            ? userData?.address
-            : '',
-          name: userData?.name
-            ? userData?.name
-            : userInfo?.name
-            ? userInfo?.name
-            : '',
-          number: userData?.phone
-            ? userData?.phone
-            : userInfo?.number
-            ? userInfo?.number
-            : '',
-          email: userData?.email ? userData?.email : '',
-          deliveryFee: deliverStatus?.deliveryFee
-            ? deliverStatus?.deliveryFee
-            : 0,
-        }),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret))
+    if (userData?.name || userInfo?.name) {
+      setViewDetails(true)
+    }
   }, [userInfo, userData])
+
+  // console.log(viewDetails)
 
   const appearance = {
     theme: 'stripe' as 'stripe', // Ensure theme is one of the allowed values
@@ -83,12 +91,59 @@ export default function Payment() {
     clientSecret,
     appearance,
   }
-
+  console.log(viewDetails)
   function handleSubmit() {
     setUserInfo({ name: name, number: number })
     setName('')
     setNumber('')
+    setViewDetails(true)
   }
+
+  function handlePayment() {
+    fetchIntent()
+    setViewDetails(false)
+  }
+
+  function fetchIntent() {
+    {
+      // Create PaymentIntent as soon as the page loads
+      fetch(
+        'https://us-central1-pizza-stop-wellsford.cloudfunctions.net/api/create-payment-intent',
+        // 'http://localhost:3000/create-payment-intent',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: userId,
+            items: cart.cart,
+            order: deliverStatus?.order ? deliverStatus.order : '',
+            address: deliverStatus?.address
+              ? deliverStatus.address
+              : userData?.address
+              ? userData?.address
+              : '',
+            name: userData?.name
+              ? userData?.name
+              : userInfo?.name
+              ? userInfo?.name
+              : '',
+            number: userData?.phone
+              ? userData?.phone
+              : userInfo?.number
+              ? userInfo?.number
+              : '',
+            email: userData?.email ? userData?.email : '',
+            deliveryFee: deliverStatus?.deliveryFee
+              ? deliverStatus?.deliveryFee
+              : 0,
+          }),
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => setClientSecret(data.clientSecret))
+    }
+  }
+  console.log(userData, userInfo)
 
   return (
     <div className="payment">
@@ -99,8 +154,31 @@ export default function Payment() {
         />
         <h1 className="text-5xl text-red-700 font-bold">Secure checkout</h1>
       </div>
+      {viewDetails && (
+        <div className="self-center flex flex-col bg-sky-100 p-12 m-4 md:p-8 rounder shadow-lg gap-4 md:gap-8 w-96">
+          <h3 className="text-lg font-bold">Here are your details :</h3>
+          <p>{`Name: ${
+            userData?.name
+              ? userData?.name
+              : userInfo?.name
+              ? userInfo?.name
+              : ''
+          }`}</p>
+          <p>{`Phone: ${
+            userData?.phone
+              ? userData?.phone
+              : userInfo?.number
+              ? userInfo?.number
+              : ''
+          }`}</p>
+          <div className="flex gap-2">
+            <button onClick={handlePayment}>Confirm and Pay</button>
+            {/* <button onClick={handlePayment}>Confirm</button> */}
+          </div>
+        </div>
+      )}
       <div className="flex flex-col md:flex-row item-center justify-center md:gap-20">
-        {userData?.name === undefined && (
+        {userData?.name === undefined && userInfo === undefined && (
           <div className="flex flex-col bg-sky-100 p-4 m-4 md:p-8 rounder shadow-lg gap-4 md:gap-8">
             <h2 className="text-lg font-bold">
               We need little more detail to process your order
@@ -150,6 +228,7 @@ export default function Payment() {
             )}
           </div>
         )}
+
         <div>
           {clientSecret && (
             <Elements options={options} stripe={stripePromise}>

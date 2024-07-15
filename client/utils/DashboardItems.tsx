@@ -19,8 +19,6 @@ const calculateOrderAmount = (items: CartItemWithId[]) => {
   return total.toFixed(2)
 }
 
-0
-
 export default function DashboardItems({ data }: DataProp) {
   const [id, setId] = useState('')
 
@@ -77,8 +75,8 @@ export default function DashboardItems({ data }: DataProp) {
   function choicesAvailable(item: CartItemWithId) {
     if (item.choice) {
       const choiceKeys = Object.keys(item.choice)
-      const lengthArr = choiceKeys.map((key) => item.choice[key].length)
-      return lengthArr.some((item) => item !== 0)
+      const arr = choiceKeys.map((key) => item.choice[key])
+      return arr.some((item) => item.length > 0 && item[0] !== '')
     }
   }
 

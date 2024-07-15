@@ -107,8 +107,13 @@ export default function ManageProducts() {
       </div>
       <div className="bg-white w-[95%] h-[34.5rem] p-4 shadow-md overflow-y-scroll">
         {types?.map((item, i) => (
-          <div className="mb-6" key={i}>
-            <h1 className="font-bold text-3xl text-limeGreen mb-4">{item}</h1>
+          <div className="mb-12" key={i}>
+            <div className="flex justify-between mb-6">
+              <h1 className="font-bold text-3xl text-limeGreen mb-4">{item}</h1>
+              <button className="px-3 py-1 rounded-full bg-red-500 text-sm text-white">
+                ADD
+              </button>
+            </div>
             {data && (
               <AdminProducts
                 data={data[item]}
