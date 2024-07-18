@@ -4,11 +4,14 @@ import { useGetData } from '../../data/hooks'
 
 import AdminProducts from '../utils/AdminProducts'
 import Spinner from '../utils/Spinner'
+import Modal from './Modal'
 
 export default function ManageProducts() {
   const [data, setData] = useState(null)
   const [types, setTypes] = useState<string[]>()
   const [product, setProduct] = useState('')
+  const [modalStatus, setModalStatus] = useState(false)
+  const [category, setCategory] = useState('')
 
   const {
     data: pizzas,
@@ -92,39 +95,75 @@ export default function ManageProducts() {
     }
   }
 
+  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
+    throw new Error('Function not implemented.')
+  }
+
+  function openAddWindow(item: string): void {
+    setCategory(item)
+    setModalStatus(true)
+  }
+
   return (
-    <div className="flex flex-col items-center gap-3 ">
-      <div className="flex p-3 bg-white gap-4 border-b-2 border-slate-300 w-full">
-        {productType.map((item, i) => (
-          <button
-            key={i}
-            className="rounded bg-red-500 text-white font-bold text-lg hover:bg-red-700 px-4 py-2"
-            onClick={() => showData(item)}
-          >
-            {item}
-          </button>
-        ))}
-      </div>
-      <div className="bg-white w-[95%] h-[34.5rem] p-4 shadow-md overflow-y-scroll">
-        {types?.map((item, i) => (
-          <div className="mb-12" key={i}>
-            <div className="flex justify-between mb-6">
-              <h1 className="font-bold text-3xl text-limeGreen mb-4">{item}</h1>
-              <button className="px-3 py-1 rounded-full bg-red-500 text-sm text-white">
-                ADD
-              </button>
+    <>
+      {modalStatus && (
+        <>
+          <div className="fixed top-0 left-0 z-10 h-screen w-screen bg-gray-800 opacity-50"></div>
+          <Modal>
+            <div className="p-4">
+              <h3>{`Category: ${category}`}</h3>
+              <form
+                className="flex flex-col items-center justify-center"
+                onSubmit={handleSubmit}
+              >
+                <input type="text" placeholder="Product Name" />
+                <input type="text" placeholder="Product Decription" />
+                <input type="text" placeholder="Product Price" />
+
+                <button type="submit">Add Item</button>
+              </form>
             </div>
-            {data && (
-              <AdminProducts
-                data={data[item]}
-                type={product}
-                refetchObj={refetchObj}
-                showData={showData}
-              />
-            )}
-          </div>
-        ))}
+          </Modal>
+        </>
+      )}
+      <div className="flex flex-col items-center gap-3 ">
+        <div className="flex p-3 bg-white gap-4 border-b-2 border-slate-300 w-full">
+          {productType.map((item, i) => (
+            <button
+              key={i}
+              className="rounded bg-red-500 text-white font-bold text-lg hover:bg-red-700 px-4 py-2"
+              onClick={() => showData(item)}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+        <div className="bg-white w-[95%] h-[34.5rem] p-4 shadow-md overflow-y-scroll">
+          {types?.map((item, i) => (
+            <div className="mb-12" key={i}>
+              <div className="flex justify-between mb-6">
+                <h1 className="font-bold text-3xl text-limeGreen mb-4">
+                  {item}
+                </h1>
+                <button
+                  className="px-3 py-1 rounded-full bg-red-500 text-sm text-white"
+                  onClick={() => openAddWindow(item)}
+                >
+                  ADD
+                </button>
+              </div>
+              {data && (
+                <AdminProducts
+                  data={data[item]}
+                  type={product}
+                  refetchObj={refetchObj}
+                  showData={showData}
+                />
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
