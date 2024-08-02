@@ -7,10 +7,14 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as storage from '../../data/localStorage'
 import ContentWrapper from '../utils/ContentWrapper'
+import { getCoords } from '../../src/appApi'
+import calculateAddressDistance from '../../src/geoLib'
+import CtaReview from '../components/CtaReview'
 export default function Landing() {
   const [modalStatus, setModalStatus] = useState(true)
   const [deliverStatus, setDeliverStatus] = useState(true)
   const [address, setAddress] = useState<string>('')
+
   const modalRef = useRef(null)
   useEffect(() => {
     if (modalRef.current) {
@@ -31,22 +35,58 @@ export default function Landing() {
     setAddress(e.target.value)
   }
 
-  function handleOption() {
-    const storageObj = {
-      address: deliverStatus ? address : '',
-      order: deliverStatus ? 'Deliver' : 'Pickup',
-    }
-    if (deliverStatus && address !== '') {
-      storage.setLocalStorage(storageObj)
-      setModalStatus(false)
-    }
-    if (deliverStatus && address === '') {
-      alert('Please enter an address or choose pickup')
-    }
+  async function handleOption() {
+    try {
+      const storageObj = {
+        address: deliverStatus ? address : '',
+        order: deliverStatus ? 'Deliver' : 'Pickup',
+        deliveryFee: deliverStatus ? 5.99 : 0,
+      }
 
-    if (!deliverStatus) {
-      storage.setLocalStorage(storageObj)
-      setModalStatus(false)
+      if (deliverStatus) {
+        if (address === '') {
+          alert('Please enter an address or choose pickup')
+          return
+        }
+
+        const coords = await getCoords(address)
+
+        const distance = calculateAddressDistance(coords)
+
+        if (distance > 20) {
+          alert('We are not able to deliver that far')
+          return
+        }
+
+        if (distance > 5) {
+          storageObj.deliveryFee = Number((5.99 + (distance - 5)).toFixed(2))
+          alert(
+            `Please beware your delivery cost will be ${storageObj.deliveryFee.toFixed(
+              2
+            )}`
+          )
+        }
+
+        storage.setLocalStorage(storageObj)
+        setModalStatus(false)
+      } else {
+        storage.setLocalStorage(storageObj)
+        setModalStatus(false)
+      }
+      console.log(storageObj)
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error handling option:', error)
+        if (error.message === 'Load failed') {
+          const storageObj = {
+            address: deliverStatus ? address : '',
+            order: deliverStatus ? 'Deliver' : 'Pickup',
+            deliveryFee: deliverStatus ? 5.99 : 0,
+          }
+          storage.setLocalStorage(storageObj)
+          setModalStatus(false)
+        }
+      }
     }
   }
 
@@ -75,6 +115,7 @@ export default function Landing() {
                   How would you like to proceed?
                 </h1>
               </div>
+
               <div className="p-7 w-full flex flex-col items-center gap-4">
                 <div className="flex bg-slate-300 rounded-full w-48 justify-between p-1">
                   <button
@@ -96,7 +137,7 @@ export default function Landing() {
                   >
                     <div className="flex flex-col items-center">
                       <span className="font-semibold">Pick Up</span>
-                      <span className="text-xs">25 mins</span>
+                      <span className="text-xs">20 mins</span>
                     </div>
                   </button>
                 </div>
@@ -120,7 +161,7 @@ export default function Landing() {
               </div>
               <div>
                 <Button
-                  className="p-3 w-72 bg-green-500 text-white my-2 text-base"
+                  className="p-3 w-72 bg-limeGreen text-white my-2 text-base"
                   onClick={handleOption}
                 >
                   Done
@@ -138,7 +179,7 @@ export default function Landing() {
           </Link>
         </div>
         <Features />
-        {/* <RegistrationForm /> */}
+        <CtaReview />
       </div>
     </ContentWrapper>
   )

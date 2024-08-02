@@ -1,31 +1,36 @@
 import { Link, useLocation } from 'react-router-dom'
 import Button from '../utils/Button'
 import { useEffect, useState } from 'react'
+import { auth } from '../../src/firebase.config'
 
-const pages = ['pizzas', 'sides', 'desserts', 'drinks']
+const pages = ['pizzas', 'sides', 'desserts', 'drinks', 'deals']
 
 interface activeLink {
   pizzas: boolean
-  mealdeals: boolean
+  deals: boolean
   sides: boolean
   desserts: boolean
   drinks: boolean
-  catering: boolean
+  // catering: boolean
+  dashboard: boolean
   [key: string]: boolean
 }
 
 const initialState = {
   pizzas: false,
-
+  dashboard: false,
   sides: false,
   desserts: false,
   drinks: false,
-  mealdeals: false,
-  catering: false,
+  deals: false,
+  // catering: false,
 } as activeLink
 
 export default function Navigation() {
   const [active, setActive] = useState(initialState)
+  const user = auth.currentUser
+  const userId = user?.uid
+
   let location = useLocation()
 
   useEffect(() => {
@@ -61,7 +66,7 @@ export default function Navigation() {
 
   return (
     <div className="border border-slate-300">
-      <ul className="flex list-none ml-20 ">
+      <ul className="flex list-none sm:ml-20 ml-5 flex-wrap">
         {pages.map((item) => (
           <li
             key={item}
@@ -78,11 +83,31 @@ export default function Navigation() {
                 }`}
                 onClick={() => handleClick(item)}
               >
-                {item}
+                {item === 'deals' ? 'Meal Deals' : item}
               </Button>
             </Link>
           </li>
         ))}
+        {userId === 'sq5tfS5JPyVIRinIc9XsBN1PlmY2' && (
+          <li
+            className={`p-3 border border-slate-300  ${
+              active.dashboard
+                ? 'bg-red-500 text-white'
+                : 'bg-white hover:text-red-500'
+            }`}
+          >
+            <Link to={`/admin/dashboard`}>
+              <Button
+                className={`uppercase text-xl ${
+                  active.dashboard ? 'bg-red-500 text-white' : 'bg-white'
+                }`}
+                onClick={() => handleClick('dashboard')}
+              >
+                dashboard
+              </Button>
+            </Link>
+          </li>
+        )}
       </ul>
     </div>
   )

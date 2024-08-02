@@ -118,7 +118,7 @@
 @media (max-width: 750px) {
   .container__slider {
     /* position: relative; */
-    width: 50%;
+    width: 100%;
   }
 }
 

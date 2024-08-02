@@ -24,7 +24,7 @@ export const Card = styled(motion.a)`
   display: block;
   max-width: 20rem;
   margin: auto;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   @media (min-width: 640px) {
     max-width: none;
     margin-left: 0;
@@ -33,7 +33,7 @@ export const Card = styled(motion.a)`
 `
 export const CardImageContainer = styled.div<CardImageContainerProps>`
   background-image: ${(props) => `url('${props.imagesrc}')`};
-  height: 14rem; /* Equivalent to h-56 */
+  height: 11rem; /* Equivalent to h-??*/
   @media (min-width: 1280px) {
     height: 16rem; /* Equivalent to xl:h-64 */
   }
@@ -71,6 +71,7 @@ export const CardHoverOverlay = styled(motion.div)`
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `
@@ -80,7 +81,7 @@ export const CardReview: React.FC<Props> = ({ children }) => (
 )
 
 export const CardText: React.FC<Props> = ({ children }) => (
-  <div className="p-4 text-white bg-limeGreen h-32">{children}</div>
+  <div className="p-4 text-white bg-limeGreen  h-40 xl:h-32">{children}</div>
 )
 
 export const CardTitle: React.FC<Props> = ({ children }) => (

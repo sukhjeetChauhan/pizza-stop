@@ -6,32 +6,83 @@ import CheckoutForm from '../components/CheckoutForm'
 import '../styles/Payment.css'
 import { CartContext } from '../components/CartProvider'
 import { getLocalStorage } from '../../data/localStorage'
+import { auth } from '../../src/firebase.config'
+import { useGetDataById } from '../../data/hooks'
+
+const stripeKey = import.meta.env.VITE_STRIPE_KEY
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
+// const stripePromise = loadStripe(
+//   'pk_live_51MR5xTIP5GR2cuzx36SURQMsXwpnz346yJGBKErRXv7dEGWPCBW6tN1T5B5vt0zQ1SimGnUgHA5WoRlvt00x3mRz00S3Ciuge1'
+// )
+const stripePromise = loadStripe(stripeKey)
 // This is your test publishable API key.
-const stripePromise = loadStripe(
-  'pk_live_51MR5xTIP5GR2cuzx36SURQMsXwpnz346yJGBKErRXv7dEGWPCBW6tN1T5B5vt0zQ1SimGnUgHA5WoRlvt00x3mRz00S3Ciuge1'
-)
+// const stripePromise = loadStripe(
+//   'pk_test_51PLgjzK3nDwi1iFQFXCVEUyURYb88KGNqu0T1CF1ndZPHXuzFQoDlz845Kw7Ui5YUyMHItCWGBlmNEoCjs8r7kY200XEcGW366'
+// )
+
+interface UserInfo {
+  name: string
+  number: string
+}
 
 export default function Payment() {
   const [clientSecret, setClientSecret] = useState('')
+  const [name, setName] = useState('')
+  const [number, setNumber] = useState('')
+  const [viewDetails, setViewDetails] = useState(false)
+  const [userInfo, setUserInfo] = useState<UserInfo>()
   const cart = useContext(CartContext)
   const deliverStatus = getLocalStorage()
+  const user = auth.currentUser
+  const userId = user?.uid
+  const { data: userData } = useGetDataById('Users', userId as string)
 
+  // useEffect(() => {
+  //   // Create PaymentIntent as soon as the page loads
+  //   fetch(
+  //     // 'https://us-central1-pizza-stop-wellsford.cloudfunctions.net/api/create-payment-intent',
+  //     'http://localhost:3000/create-payment-intent',
+  //     {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({
+  //         userId: userId,
+  //         items: cart.cart,
+  //         order: deliverStatus?.order ? deliverStatus.order : '',
+  //         address: deliverStatus?.address
+  //           ? deliverStatus.address
+  //           : userData?.address
+  //           ? userData?.address
+  //           : '',
+  //         name: userData?.name
+  //           ? userData?.name
+  //           : userInfo?.name
+  //           ? userInfo?.name
+  //           : '',
+  //         number: userData?.phone
+  //           ? userData?.phone
+  //           : userInfo?.number
+  //           ? userInfo?.number
+  //           : '',
+  //         email: userData?.email ? userData?.email : '',
+  //         deliveryFee: deliverStatus?.deliveryFee
+  //           ? deliverStatus?.deliveryFee
+  //           : 0,
+  //       }),
+  //     }
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => setClientSecret(data.clientSecret))
+  // }, [userInfo, userData])
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    fetch(
-      'https://us-central1-pizza-stop-wellsford.cloudfunctions.net/api/create-payment-intent',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cart.cart, order: deliverStatus.order }),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret))
-  }, [])
+    if (userData?.name || userInfo?.name) {
+      setViewDetails(true)
+    }
+  }, [userInfo, userData])
+
+  // console.log(viewDetails)
 
   const appearance = {
     theme: 'stripe' as 'stripe', // Ensure theme is one of the allowed values
@@ -40,21 +91,152 @@ export default function Payment() {
     clientSecret,
     appearance,
   }
+  console.log(viewDetails)
+  function handleSubmit() {
+    setUserInfo({ name: name, number: number })
+    setName('')
+    setNumber('')
+    setViewDetails(true)
+  }
+
+  function handlePayment() {
+    fetchIntent()
+    setViewDetails(false)
+  }
+
+  function fetchIntent() {
+    {
+      // Create PaymentIntent as soon as the page loads
+      fetch(
+        'https://us-central1-pizza-stop-wellsford.cloudfunctions.net/api/create-payment-intent',
+        // 'http://localhost:3000/create-payment-intent',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: userId,
+            items: cart.cart,
+            order: deliverStatus?.order ? deliverStatus.order : '',
+            address: deliverStatus?.address
+              ? deliverStatus.address
+              : userData?.address
+              ? userData?.address
+              : '',
+            name: userData?.name
+              ? userData?.name
+              : userInfo?.name
+              ? userInfo?.name
+              : '',
+            number: userData?.phone
+              ? userData?.phone
+              : userInfo?.number
+              ? userInfo?.number
+              : '',
+            email: userData?.email ? userData?.email : '',
+            deliveryFee: deliverStatus?.deliveryFee
+              ? deliverStatus?.deliveryFee
+              : 0,
+          }),
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => setClientSecret(data.clientSecret))
+    }
+  }
+  console.log(userData, userInfo)
 
   return (
     <div className="payment">
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex flex-col items-center justify-center gap-4">
         <img
           className="w-20 h-20"
           src="/images/Logo/android-chrome-192x192.png"
         />
         <h1 className="text-5xl text-red-700 font-bold">Secure checkout</h1>
       </div>
-      {clientSecret && (
-        <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
-        </Elements>
+      {viewDetails && (
+        <div className="self-center flex flex-col bg-sky-100 p-12 m-4 md:p-8 rounder shadow-lg gap-4 md:gap-8 w-96">
+          <h3 className="text-lg font-bold">Here are your details :</h3>
+          <p>{`Name: ${
+            userData?.name
+              ? userData?.name
+              : userInfo?.name
+              ? userInfo?.name
+              : ''
+          }`}</p>
+          <p>{`Phone: ${
+            userData?.phone
+              ? userData?.phone
+              : userInfo?.number
+              ? userInfo?.number
+              : ''
+          }`}</p>
+          <div className="flex gap-2">
+            <button onClick={handlePayment}>Confirm and Pay</button>
+            {/* <button onClick={handlePayment}>Confirm</button> */}
+          </div>
+        </div>
       )}
+      <div className="flex flex-col md:flex-row item-center justify-center md:gap-20">
+        {userData?.name === undefined && userInfo === undefined && (
+          <div className="flex flex-col bg-sky-100 p-4 m-4 md:p-8 rounder shadow-lg gap-4 md:gap-8">
+            <h2 className="text-lg font-bold">
+              We need little more detail to process your order
+            </h2>
+            <div className="flex w-full items-center justify-between">
+              <label
+                className="md:text-xl text-red-500 font-bold"
+                htmlFor="name"
+              >
+                Name:
+              </label>
+
+              <input
+                id="name"
+                type="text"
+                value={name}
+                className="w-auto p-1 rounded text-xl border-2"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="flex w-full items-center justify-between">
+              <label
+                className="md:text-xl text-red-500 font-bold"
+                htmlFor="number"
+              >
+                Phone:
+              </label>
+
+              <input
+                id="number"
+                type="text"
+                value={number}
+                className="w-auto p-1 rounded text-xl border-2"
+                onChange={(e) => setNumber(e.target.value)}
+              />
+            </div>
+            <button onClick={handleSubmit}>Submit</button>
+            {userInfo && (
+              <div>
+                <p className="text-xl font-bold text-sky-500">
+                  Thank you for the information.
+                </p>
+                <p className="text-xl font-bold text-sky-500">
+                  Please proceed to Payment.
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+
+        <div>
+          {clientSecret && (
+            <Elements options={options} stripe={stripePromise}>
+              <CheckoutForm />
+            </Elements>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

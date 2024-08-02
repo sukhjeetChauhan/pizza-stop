@@ -64,69 +64,72 @@ function CustomCarousel({ data }: CustomCarouselProps) {
       setSlideDone(true)
     }
   }
-
-  return (
-    <div
-      className="container__slider"
-      onMouseEnter={AutoPlayStop}
-      onMouseLeave={AutoPlayStart}
-    >
-      {data.map((product, index) => {
-        return (
-          <div
-            className={'slider__item slider__item-active-' + (activeIndex + 1)}
-            key={index}
-          >
-            <div key={`${product.name} ${index}`} className="max-w-full flex">
-              <div className="w-1/3">
-                <img
-                  key={index}
-                  src={product.imgUrl}
-                  alt={product.name}
-                  className="w-full h-full"
-                />
-              </div>
-              <div className="bg-lime-50 w-2/3 flex items-center">
-                <div className="w-2/3">
-                  <p className="text-sm font-medium p-2 max-w-full">
-                    {product.name}
-                  </p>
-                  <p className="p-2">{product.price}</p>
+  if (data) {
+    return (
+      <div
+        className="container__slider"
+        onMouseEnter={AutoPlayStop}
+        onMouseLeave={AutoPlayStart}
+      >
+        {data.map((product, index) => {
+          return (
+            <div
+              className={
+                'slider__item slider__item-active-' + (activeIndex + 1)
+              }
+              key={index}
+            >
+              <div key={`${product.name} ${index}`} className="max-w-full flex">
+                <div className="w-1/3">
+                  <img
+                    key={index}
+                    src={product.imgUrl}
+                    alt={product.name}
+                    className="w-full h-full"
+                  />
                 </div>
-                <div className="mt-2 ">
-                  <Button
-                    onClick={() => cart.addToCart(product)}
-                    className="bg-limeGreen p-2 text-white"
-                  >
-                    Add
-                  </Button>
+                <div className="bg-lime-50 w-2/3 flex items-center">
+                  <div className="w-2/3">
+                    <p className="text-sm font-medium p-2 min-w-full">
+                      {product.name}
+                    </p>
+                    <p className="p-2 text-sm">{product.price}</p>
+                  </div>
+                  <div className="mt-2 ">
+                    <Button
+                      onClick={() => cart.addToCart(product)}
+                      className="bg-limeGreen p-2 text-white text-sm"
+                    >
+                      Add
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
 
-      <button
-        className="slider__btn-next text-limeGreen font-bold "
-        onClick={(e) => {
-          e.preventDefault()
-          slideNext()
-        }}
-      >
-        {'>'}
-      </button>
-      <button
-        className="slider__btn-prev text-limeGreen font-bold"
-        onClick={(e) => {
-          e.preventDefault()
-          slidePrev()
-        }}
-      >
-        {'<'}
-      </button>
-    </div>
-  )
+        <button
+          className="slider__btn-next text-limeGreen font-bold "
+          onClick={(e) => {
+            e.preventDefault()
+            slideNext()
+          }}
+        >
+          {'>'}
+        </button>
+        <button
+          className="slider__btn-prev text-limeGreen font-bold"
+          onClick={(e) => {
+            e.preventDefault()
+            slidePrev()
+          }}
+        >
+          {'<'}
+        </button>
+      </div>
+    )
+  }
 }
 
 export default CustomCarousel

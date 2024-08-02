@@ -88,14 +88,14 @@ const PopularEvents = () => {
         ' As a locally-owned business, we pride ourselves on excellent customer service and a cozy atmosphere, making us a beloved spot for families and friends in Wellsford. Join us and feel like part of the family.',
     },
     {
-      imageSrc: '/images/klara-kulikova-QATxlTPJImo-unsplash.jpg',
+      imageSrc: '/images/front.jpg',
       // subtitle: 'Free',
       title: 'Variety of Options',
       description:
         ' Whether you are a fan of classic Margherita or crave unique gourmet toppings, our diverse menu caters to all tastes, including vegan and gluten-free options. You will always find something new to love.',
     },
     {
-      imageSrc: '/images/roberto-valdivia-rcUw6b4iYe0-unsplash.jpg',
+      imageSrc: '/images/side.jpg',
       // subtitle: 'Exclusive',
       title: 'Fresh Ingredients',
       description:

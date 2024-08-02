@@ -1,29 +1,39 @@
 import { useState } from 'react'
-import { signUp } from '../../src/authentication.ts'
-import { Form, Input, Button, message } from 'antd'
-// import { addData, getData } from '../../src/db.ts'
+import { Form, Input, Button, message, Checkbox } from 'antd'
+import { SignIn } from '../../src/authentication'
+import { useNavigate } from 'react-router-dom'
+import 'tailwindcss/tailwind.css' // Ensure Tailwind CSS is imported
+import Spinner from '../utils/Spinner'
 
 const RegistrationForm = () => {
-  const [registered, SetRegistered] = useState(false)
   const [form] = Form.useForm()
+  const [isHovered, setIsHovered] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
-  const handleLogin = async (values: any) => {
-    console.log('Received values of form: ', values)
-    message.success('Registration successful!')
-  }
-  const handleRegister = async (values: {
+  const handleLogin = async (values: {
     email: string
     password: string
+    remember: boolean
   }) => {
-    // console.log('Received values of form: ', values)
-    signUp(values.email, values.password)
-    message.success('Registration successful!')
+    setLoading(true) // Show the spinner
+    const output = (await SignIn(
+      values.email,
+      values.password
+    )) as unknown as string
+    setLoading(false) // Hide the spinner
+    if (output === 'success') {
+      message.success('Logged In!')
+      navigate('/')
+    } else {
+      message.error('Login error, try again')
+    }
   }
 
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
-      sm: { span: 6 },
+      sm: { span: 8 },
     },
     wrapperCol: {
       xs: { span: 24 },
@@ -43,25 +53,23 @@ const RegistrationForm = () => {
     },
   }
 
-  function setLogin() {
-    SetRegistered(false)
+  const handleMouseEnter = () => {
+    setIsHovered(true)
   }
 
-  function setRegister() {
-    SetRegistered(true)
+  const handleMouseLeave = () => {
+    setIsHovered(false)
   }
 
   return (
-    <div>
-      <div className="flex items-center justify-center gap-4">
-        <Button onClick={setLogin}>Login</Button>
-        <p>-----OR------</p>
-        <Button onClick={setRegister}>Register</Button>
-      </div>
-
-      {!registered && (
+    <div className="flex flex-col items-center justify-center gap-24 bg-[url('/images/marble-back.jpeg')] bg-repeat min-h-screen">
+      {loading && <Spinner />}
+      <div className="p-6 md:p-16 bg-gray-100 w-[20rem] md:w-[30rem] rounded shadow-lg mt-20">
         <Form
           {...formItemLayout}
+          initialValues={{
+            remember: true,
+          }}
           form={form}
           name="register"
           onFinish={handleLogin}
@@ -69,7 +77,17 @@ const RegistrationForm = () => {
         >
           <Form.Item
             name="email"
-            label="E-mail"
+            label={
+              <label
+                style={{
+                  color: '#F44336',
+                  fontWeight: 'bold',
+                  fontSize: '1.25rem',
+                }}
+              >
+                Email
+              </label>
+            }
             rules={[
               {
                 type: 'email',
@@ -81,12 +99,22 @@ const RegistrationForm = () => {
               },
             ]}
           >
-            <Input />
+            <Input style={{ width: '90%' }} />
           </Form.Item>
 
           <Form.Item
             name="password"
-            label="Password"
+            label={
+              <label
+                style={{
+                  color: '#F44336',
+                  fontWeight: 'bold',
+                  fontSize: '1.25rem',
+                }}
+              >
+                Password
+              </label>
+            }
             rules={[
               {
                 required: true,
@@ -95,75 +123,43 @@ const RegistrationForm = () => {
             ]}
             hasFeedback
           >
-            <Input.Password />
+            <Input.Password style={{ width: '90%' }} />
+          </Form.Item>
+
+          <Form.Item
+            {...tailFormItemLayout}
+            name="remember"
+            valuePropName="checked"
+          >
+            <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button
+              className="bg-limeGreen text-xl md:w-56 h-auto"
+              type="primary"
+              htmlType="submit"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                backgroundColor: isHovered ? '#84cc16' : '#70a401', // Change colors as per your need
+              }}
+            >
               Login
             </Button>
           </Form.Item>
         </Form>
-      )}
-      {registered && (
-        <Form
-          {...formItemLayout}
-          form={form}
-          name="register"
-          onFinish={handleRegister}
-          scrollToFirstError
+      </div>
+
+      <div className="flex items-center justify-center gap-4 p-8">
+        <p>Dont have a login? Click here to Register</p>
+        <Button
+          className="bg-limeGreen text-white"
+          onClick={() => navigate('/signUp')}
         >
-          <Form.Item
-            name="email"
-            label="E-mail"
-            rules={[
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            name="password"
-            label="Password"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your password!',
-              },
-            ]}
-            hasFeedback
-          >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            name="address"
-            label="Address"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your address!',
-              },
-            ]}
-          >
-            <Input.TextArea />
-          </Form.Item>
-
-          <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
-              Register
-            </Button>
-          </Form.Item>
-        </Form>
-      )}
+          Register
+        </Button>
+      </div>
     </div>
   )
 }

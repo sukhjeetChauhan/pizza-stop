@@ -11,7 +11,7 @@ export interface menuItem {
 
 export interface MenuItem {
   [x: string]: string | number
-  id: number
+  id: string
   name: string
   price: number
   rating: number
