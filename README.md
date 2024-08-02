@@ -1,30 +1,13 @@
 # React + TypeScript + Vite
+## PizzaStop Website
+Check out live site on www.pizzastopwellsford.co.nz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Technologies used
+React, typescript, tailwind, antd for front end
+Firebase firestore was used to store the data for the project.
+Firebase cloud functions were used to handle backend functions and api calls to perform curd operations and handle stripe functions.
+Stripe api was used to include payment system within the website where payment is recieved and customer recieves email of their order being accepted.
+Created order manager for client  to accept the orders placed by their customers. Once the order is accepted customer recieves the email of order being accepted and once the order is prepared the customer recieves another email to let them know the order has been prepared.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
