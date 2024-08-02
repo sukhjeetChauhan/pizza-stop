@@ -95,7 +95,7 @@ export default function ManageProducts() {
     }
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
+  function handleSubmit(): void {
     throw new Error('Function not implemented.')
   }
 
