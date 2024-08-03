@@ -110,18 +110,44 @@ export default function ManageProducts() {
         <>
           <div className="fixed top-0 left-0 z-10 h-screen w-screen bg-gray-800 opacity-50"></div>
           <Modal>
-            <div className="p-4">
-              <h3>{`Category: ${category}`}</h3>
+            <div className="p-6">
+              <h3 className="text-xl mb-8 text-bold mt-6">{`Category: ${category}`}</h3>
               <form
                 className="flex flex-col items-center justify-center"
                 onSubmit={handleSubmit}
               >
-                <input type="text" placeholder="Product Name" />
-                <input type="text" placeholder="Product Decription" />
-                <input type="text" placeholder="Product Price" />
+                <input
+                  className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4"
+                  type="text"
+                  placeholder="Product Name"
+                  aria-label="name"
+                />
+                <input
+                  className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4"
+                  type="text"
+                  placeholder="Product Decription"
+                  aria-label="description"
+                />
+                <input
+                  className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4"
+                  type="text"
+                  placeholder="Product Price"
+                  aria-label="price"
+                />
 
-                <button type="submit">Add Item</button>
+                <button
+                  className="bg-red-500 px-2 py-4 text-white text-bold rounded w-full"
+                  type="submit"
+                >
+                  Add Item
+                </button>
               </form>
+              <button
+                onClick={() => setModalStatus(false)}
+                className="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 absolute top-2 right-2"
+              >
+                X
+              </button>
             </div>
           </Modal>
         </>

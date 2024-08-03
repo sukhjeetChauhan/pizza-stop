@@ -16,7 +16,7 @@ const calculateOrderAmount = (items: CartItemWithId[]) => {
     },
     0
   )
-  return total.toFixed(2)
+  return Number(total.toFixed(2))
 }
 
 export default function DashboardItems({ data }: DataProp) {
@@ -79,6 +79,7 @@ export default function DashboardItems({ data }: DataProp) {
       return arr.some((item) => item.length > 0 && item[0] !== '')
     }
   }
+  console.log(data)
 
   return (
     <div>
@@ -210,10 +211,14 @@ export default function DashboardItems({ data }: DataProp) {
                   </p>
                   <p>
                     <span className="font-bold">Total Cost:</span>
-                    {` $${
-                      Number(calculateOrderAmount(JSON.parse(order.cart))) +
-                      (order.orderType === 'Deliver' ? 5.99 : 0)
-                    }`}
+                    {` $${(
+                      calculateOrderAmount(JSON.parse(order.cart)) +
+                      (order.orderType === 'Deliver'
+                        ? order.deliveryFee
+                          ? order.deliveryFee
+                          : 5.99
+                        : 0)
+                    ).toFixed(2)}`}
                   </p>
                 </div>
                 <div className="h-full flex gap-2 items-center self-center">

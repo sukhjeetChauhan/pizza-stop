@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { auth } from '../../src/firebase.config'
 
 const pages = ['pizzas', 'sides', 'desserts', 'drinks', 'deals']
+const userKey = import.meta.env.VITE_DASHBOARD_KEY
 
 interface activeLink {
   pizzas: boolean
@@ -88,7 +89,7 @@ export default function Navigation() {
             </Link>
           </li>
         ))}
-        {userId === 'sq5tfS5JPyVIRinIc9XsBN1PlmY2' && (
+        {userId === userKey && (
           <li
             className={`p-3 border border-slate-300  ${
               active.dashboard
