@@ -108,6 +108,8 @@ export default function ManageProducts() {
     setModalStatus(true)
   }
 
+  console.log(name)
+
   return (
     <>
       {modalStatus && (
@@ -126,6 +128,7 @@ export default function ManageProducts() {
                   placeholder="Product Name"
                   aria-label="name"
                   value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
                 <input
                   className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4"
@@ -133,6 +136,7 @@ export default function ManageProducts() {
                   placeholder="Product Decription"
                   aria-label="description"
                   value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 />
                 <input
                   className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4"
@@ -140,6 +144,7 @@ export default function ManageProducts() {
                   placeholder="Product Price"
                   aria-label="price"
                   value={price}
+                  onChange={(e) => setPrice(e.target.value)}
                 />
 
                 <button
