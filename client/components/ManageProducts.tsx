@@ -5,7 +5,6 @@ import { useGetData } from '../../data/hooks'
 import AdminProducts from '../utils/AdminProducts'
 import Spinner from '../utils/Spinner'
 import Modal from './Modal'
-import { CardPrice } from '../utils/menuPageUtils'
 
 export default function ManageProducts() {
   const [data, setData] = useState(null)
@@ -63,16 +62,20 @@ export default function ManageProducts() {
   const sortedDrinks = drinks ? sortBasedOnType(drinks) : undefined
 
   useEffect(() => {
-    if (data === null) {
-      if (product === '') {
-        showData('pizzas')
-      }
+    // if (data === null) {
+    //   if (product === '') {
+    //     showData('pizzas')
+    //   }
+    // }
+    if (product === '') {
+      showData('pizzas')
     }
-  }, [data])
+  }, [])
 
   if (pizzasLoading) {
     return <Spinner />
   }
+  console.log(product, data, sortedPizzas)
 
   function showData(item: string) {
     setProduct(item)
@@ -107,8 +110,6 @@ export default function ManageProducts() {
     setCategory(item)
     setModalStatus(true)
   }
-
-  console.log(name)
 
   return (
     <>
