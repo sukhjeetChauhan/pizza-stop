@@ -5,6 +5,7 @@ import { useGetData } from '../../data/hooks'
 import AdminProducts from '../utils/AdminProducts'
 import Spinner from '../utils/Spinner'
 import Modal from './Modal'
+import { CardPrice } from '../utils/menuPageUtils'
 
 export default function ManageProducts() {
   const [data, setData] = useState(null)
@@ -12,6 +13,9 @@ export default function ManageProducts() {
   const [product, setProduct] = useState('')
   const [modalStatus, setModalStatus] = useState(false)
   const [category, setCategory] = useState('')
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState('')
 
   const {
     data: pizzas,
@@ -121,18 +125,21 @@ export default function ManageProducts() {
                   type="text"
                   placeholder="Product Name"
                   aria-label="name"
+                  value={name}
                 />
                 <input
                   className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4"
                   type="text"
                   placeholder="Product Decription"
                   aria-label="description"
+                  value={description}
                 />
                 <input
                   className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4"
                   type="text"
                   placeholder="Product Price"
                   aria-label="price"
+                  value={price}
                 />
 
                 <button
