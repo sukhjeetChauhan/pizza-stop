@@ -79,7 +79,6 @@ export default function DashboardItems({ data }: DataProp) {
       return arr.some((item) => item.length > 0 && item[0] !== '')
     }
   }
-  console.log(data)
 
   return (
     <div>

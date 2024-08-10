@@ -42,7 +42,6 @@ any) {
   }, [modalStatus])
 
   function handleClick(item: any) {
-    console.log(item.name)
     setModalStatus(true)
     setProduct(item)
   }

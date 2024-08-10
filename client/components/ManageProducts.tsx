@@ -66,11 +66,12 @@ export default function ManageProducts() {
 
   useEffect(() => {
     if (data === null) {
-      if (product === '') {
-        showData('pizzas')
-      }
+      // if (product === '') {
+      //   showData('pizzas')
+      // }
+      showData('pizzas')
     }
-  }, [])
+  }, [pizzas, sides, desserts, drinks])
 
   if (pizzasLoading) {
     return <Spinner />

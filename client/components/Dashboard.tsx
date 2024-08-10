@@ -126,8 +126,6 @@ export function Dashboard() {
     audio.play()
   }
 
-  console.log(viewAll)
-
   return (
     <div className="bg-slate-100 w-full h-full flex flex-col items-center justify-center">
       {/* orders */}
