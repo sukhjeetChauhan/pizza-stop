@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import Modal from '../components/Modal'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import { MenuItem } from '../../types/menu'
-// import { updateData } from '../../src/db'
+import { deleteProduct } from '../../src/db'
 import editLogo from '/editing.png'
 import useUpdateData from '../../data/hooks'
 
@@ -67,6 +67,11 @@ any) {
   function openEdit(field: string): void {
     setEditMode(true)
     setEditfield(field)
+  }
+
+  async function handleDelete(id: string | undefined): Promise<void> {
+    const productId = id as string
+    await deleteProduct(collection, productId)
   }
 
   return (
@@ -156,6 +161,12 @@ any) {
                       )}
                     </div>
                   </div>
+                  <button
+                    className="rounded bg-red-500 text-white font-bold text-lg hover:bg-red-700 px-4 py-2"
+                    onClick={() => handleDelete(product?.id)}
+                  >
+                    Delete
+                  </button>
                 </div>
               )}
               {editmode && (
