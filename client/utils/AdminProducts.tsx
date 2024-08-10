@@ -72,6 +72,7 @@ any) {
   async function handleDelete(id: string | undefined): Promise<void> {
     const productId = id as string
     await deleteProduct(collection, productId)
+    setModalStatus(false)
   }
 
   return (
