@@ -10,7 +10,7 @@ import {
   CartItem,
   CartItemWithId,
   ChoiceItem,
-} from './CartProvider'
+} from '../Providers/CartProvider'
 import SidesOPtions from './SidesOptions'
 import ChoiceSelection from '../utils/ChoiceSelection'
 

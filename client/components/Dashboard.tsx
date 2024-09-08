@@ -1,10 +1,14 @@
 import { Collapse } from 'react-collapse'
-// import { useGetData } from '../../data/hooks'
+
 // import Spinner from '../utils/Spinner'
 import { getUpdatedOrder } from '../../src/db'
 import { DocumentData } from 'firebase/firestore'
 import { useEffect, useRef, useState } from 'react'
 import DashboardItems from '../utils/DashboardItems'
+import {
+  DeliveryController,
+  OnlineOrderingController,
+} from '../utils/Controllers'
 
 export function Dashboard() {
   const [audio] = useState(new Audio('/sound/level-up-191997.mp3'))
@@ -16,6 +20,7 @@ export function Dashboard() {
   const [allCompletedOrders, setAllCompletedOrders] = useState<DocumentData[]>(
     []
   )
+
   const checkerRef = useRef<DocumentData[]>([])
 
   audio.muted = mute // assign value of mute variable
@@ -58,8 +63,7 @@ export function Dashboard() {
     // Define the callback to handle updates
     const handleOrderUpdate = (updatedOrders: DocumentData[]) => {
       setNewOrders(sortArray(updatedOrders))
-      // console.log(checkerRef.current)
-      // console.log(updatedOrders)
+
       if (
         // JSON.stringify(checkerRef.current) !== JSON.stringify(newOrders)
         updatedOrders.length > checkerRef.current.length
@@ -180,6 +184,8 @@ export function Dashboard() {
       >
         {viewAll ? `Back to Dashboard` : `View All Orders`}
       </button>
+      <DeliveryController />
+      <OnlineOrderingController />
     </div>
   )
 }

@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { MenuItem } from '../../types/menu'
 import '../styles/CustomCorousel.css'
 import Button from '../utils/Button'
-import { CartContext } from './CartProvider'
+import { CartContext } from '../Providers/CartProvider'
 // import { Data } from '../models/models'
 
 // type ShowModalFunction = (data: Data) => void

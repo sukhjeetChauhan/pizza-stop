@@ -4,7 +4,7 @@ import { Elements } from '@stripe/react-stripe-js'
 
 import CheckoutForm from '../components/CheckoutForm'
 import '../styles/Payment.css'
-import { CartContext } from '../components/CartProvider'
+import { CartContext } from '../Providers/CartProvider'
 import { getLocalStorage } from '../../data/localStorage'
 import { auth } from '../../src/firebase.config'
 import { useGetDataById } from '../../data/hooks'
@@ -16,11 +16,11 @@ const stripeKey = import.meta.env.VITE_STRIPE_KEY
 // const stripePromise = loadStripe(
 //   'pk_live_51MR5xTIP5GR2cuzx36SURQMsXwpnz346yJGBKErRXv7dEGWPCBW6tN1T5B5vt0zQ1SimGnUgHA5WoRlvt00x3mRz00S3Ciuge1'
 // )
-const stripePromise = loadStripe(stripeKey)
+// const stripePromise = loadStripe(stripeKey)
 // This is your test publishable API key.
-// const stripePromise = loadStripe(
-//   'pk_test_51PLgjzK3nDwi1iFQFXCVEUyURYb88KGNqu0T1CF1ndZPHXuzFQoDlz845Kw7Ui5YUyMHItCWGBlmNEoCjs8r7kY200XEcGW366'
-// )
+const stripePromise = loadStripe(
+  'pk_test_51PLgjzK3nDwi1iFQFXCVEUyURYb88KGNqu0T1CF1ndZPHXuzFQoDlz845Kw7Ui5YUyMHItCWGBlmNEoCjs8r7kY200XEcGW366'
+)
 
 interface UserInfo {
   name: string
@@ -108,8 +108,8 @@ export default function Payment() {
     {
       // Create PaymentIntent as soon as the page loads
       fetch(
-        'https://us-central1-pizza-stop-wellsford.cloudfunctions.net/api/create-payment-intent',
-        // 'http://localhost:3000/create-payment-intent',
+        // 'https://us-central1-pizza-stop-wellsford.cloudfunctions.net/api/create-payment-intent',
+        'http://localhost:3000/create-payment-intent',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

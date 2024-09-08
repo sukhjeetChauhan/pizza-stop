@@ -3,17 +3,20 @@ import Features from '../components/Features'
 import Button from '../utils/Button'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import Modal from '../components/Modal'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as storage from '../../data/localStorage'
 import ContentWrapper from '../utils/ContentWrapper'
 import { getCoords } from '../../src/appApi'
 import calculateAddressDistance from '../../src/geoLib'
 import CtaReview from '../components/CtaReview'
+import { ControllerContext } from '../Providers/ControllerProvider'
+
 export default function Landing() {
   const [modalStatus, setModalStatus] = useState(true)
-  const [deliverStatus, setDeliverStatus] = useState(true)
+  const [deliverStatus, setDeliverStatus] = useState(false)
   const [address, setAddress] = useState<string>('')
+  const { controllers } = useContext(ControllerContext)
 
   const modalRef = useRef(null)
   useEffect(() => {
@@ -53,13 +56,14 @@ export default function Landing() {
 
         const distance = calculateAddressDistance(coords)
 
-        if (distance > 20) {
+        if (distance > 10) {
           alert('We are not able to deliver that far')
           return
         }
 
         if (distance > 5) {
-          storageObj.deliveryFee = Number((5.99 + (distance - 5)).toFixed(2))
+          const extraDeliveryFee = 2 * (distance - 5)
+          storageObj.deliveryFee = Number((5.99 + extraDeliveryFee).toFixed(2))
           alert(
             `Please beware your delivery cost will be ${storageObj.deliveryFee.toFixed(
               2
@@ -91,7 +95,13 @@ export default function Landing() {
   }
 
   function setDelivery() {
-    setDeliverStatus(true)
+    // first check if delivery is turned on
+    if (!controllers.deliveryState) {
+      alert('We are not delivering right now')
+      setDeliverStatus(false)
+    } else {
+      setDeliverStatus(true)
+    }
   }
   function setPickUp() {
     setDeliverStatus(false)
@@ -171,9 +181,17 @@ export default function Landing() {
           </Modal>
         )}
 
-        <div className="h-screen-minus-header bg-[url('/images/background.jpg')] bg-cover bg-center flex items-center justify-center">
+        <div className="h-screen-minus-header bg-[url('/images/background.jpg')] bg-cover bg-center flex flex-col items-center justify-center">
+          <div className="self-start ml-32 w-96 mt-12">
+            <p className="text-white text-5xl uppercase font-bold mb-10">
+              Craving pizza?
+            </p>
+            <p className="text-white text-2xl font-bold">
+              Order online now or call us at 096016100 to place your order!
+            </p>
+          </div>
           <Link to="/order/pizzas">
-            <Button className="bg-white uppercase lato-700 text-red-500 text-xl p-4 mt-40 w-80 hover:shadow-2xl hover:bg-gray-200">
+            <Button className="bg-white uppercase lato-700 text-red-500 text-xl p-4 mt-24 w-80 hover:shadow-2xl hover:bg-gray-200">
               Order Now
             </Button>
           </Link>

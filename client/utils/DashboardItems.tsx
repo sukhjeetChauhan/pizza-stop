@@ -1,6 +1,6 @@
 import { Collapse } from 'react-collapse'
 import { DocumentData } from 'firebase/firestore'
-import { CartItemWithId } from '../components/CartProvider'
+import { CartItemWithId } from '../Providers/CartProvider'
 import { sendmail } from '../../src/appApi'
 import { updateData } from '../../src/db'
 import { useState } from 'react'
