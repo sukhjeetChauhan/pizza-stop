@@ -1,7 +1,7 @@
 import { Collapse } from 'react-collapse'
 import { DocumentData } from 'firebase/firestore'
 import { CartItemWithId } from '../Providers/CartProvider'
-import { sendmail } from '../../src/appApi'
+import { refund, sendmail } from '../../src/appApi'
 import { updateData } from '../../src/db'
 import { useState } from 'react'
 
@@ -26,6 +26,8 @@ export default function DashboardItems({ data }: DataProp) {
     const res =
       item.status === 'ordered'
         ? 'bg-red-200'
+        : item.status === 'rejected'
+        ? 'bg-gray-400'
         : item.status === 'preparing'
         ? 'bg-yellow-200'
         : item.status === 'completed'
@@ -33,6 +35,26 @@ export default function DashboardItems({ data }: DataProp) {
         : ''
     return res
   }
+
+  // function to reject order
+  async function rejectOrder(
+    paymentId: string,
+    id: string,
+    customerEmail: string,
+    name: string
+  ): Promise<void> {
+    const email = customerEmail
+    const content = `Dear ${name},\nWe are sorry to inform you that your online order at PizzaStop Wellsford has been rejected.\nPlease contact us at 096016100 for further enquiries`
+    const sub = 'Order Rejected'
+    setId('')
+    await refund(paymentId)
+    if (email !== '' && email !== undefined) {
+      await sendmail(email, sub, content)
+    }
+    await updateData('orders', id, { status: 'rejected' })
+  }
+
+  // function to accept orders
 
   async function acceptOrder(
     id: string,
@@ -49,6 +71,8 @@ export default function DashboardItems({ data }: DataProp) {
     }
     await updateData('orders', id, { status: 'preparing' })
   }
+
+  // function to complete accepted orders
   async function completeOrder(
     id: string,
     customerEmail: string,
@@ -65,6 +89,8 @@ export default function DashboardItems({ data }: DataProp) {
     await updateData('orders', id, { status: 'completed' })
   }
 
+  // function to open order detail window
+
   function handleDetailWindow(orderId: string): void {
     if (id === orderId) {
       setId('')
@@ -72,6 +98,8 @@ export default function DashboardItems({ data }: DataProp) {
       setId(orderId)
     }
   }
+
+  // this function checks if order consists any choices input by user
   function choicesAvailable(item: CartItemWithId) {
     if (item.choice) {
       const choiceKeys = Object.keys(item.choice)
@@ -223,7 +251,17 @@ export default function DashboardItems({ data }: DataProp) {
                 <div className="h-full flex gap-2 items-center self-center">
                   {order.status === 'ordered' && (
                     <>
-                      <button className="bg-red-500 rounded py-4 px-5 text-white font-bold text-lg">
+                      <button
+                        onClick={() =>
+                          rejectOrder(
+                            order.paymentId,
+                            order.id,
+                            order.email,
+                            order.name
+                          )
+                        }
+                        className="bg-red-500 rounded py-4 px-5 text-white font-bold text-lg"
+                      >
                         Reject
                       </button>
                       <button

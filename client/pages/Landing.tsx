@@ -182,9 +182,9 @@ export default function Landing() {
         )}
 
         <div className="h-screen-minus-header bg-[url('/images/background.jpg')] bg-cover bg-center flex flex-col items-center justify-center">
-          <div className="self-start ml-32 w-96 mt-12">
-            <p className="text-white text-5xl uppercase font-bold mb-10">
-              Craving pizza?
+          <div className="md:self-start md:ml-32 w-96 mt-12">
+            <p className="text-white text-5xl capitalize font-bold mb-10">
+              Ready for a slice of perfection?
             </p>
             <p className="text-white text-2xl font-bold">
               Order online now or call us at 096016100 to place your order!

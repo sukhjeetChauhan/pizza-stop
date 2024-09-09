@@ -71,3 +71,31 @@ export async function getCoords(address: string) {
     throw error // Propagate the error to handle it further if needed
   }
 }
+
+export async function refund(Id: string) {
+  const url =
+    'https://us-central1-pizza-stop-wellsford.cloudfunctions.net/api/refund'
+
+  const data = {
+    id: Id,
+  }
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
+    }
+
+    const result = await response.json()
+    console.log('Success:', result)
+  } catch (error) {
+    console.error('Error:', error)
+  }
+}
