@@ -1,10 +1,14 @@
 import { useState } from 'react'
 import { addData } from '../../src/db'
+import Star from '../utils/StarSvg'
 
 export default function CtaReview() {
   const [nameText, setNameText] = useState('')
   const [reviewText, setReviewText] = useState('')
   const [status, setStatus] = useState(false)
+  const [ratings, setRatings] = useState(5)
+
+  const ratingsArr = [1, 2, 3, 4, 5]
 
   function handleChange(
     e:
@@ -21,9 +25,14 @@ export default function CtaReview() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    await addData('Reviews', { name: nameText, review: reviewText })
+    await addData('Reviews', {
+      name: nameText,
+      ratings: ratings,
+      review: reviewText,
+    })
     setNameText('')
     setReviewText('')
+    setRatings(5)
     setStatus(true)
   }
 
@@ -35,11 +44,11 @@ export default function CtaReview() {
           Please help your local business by giving us feedback.
         </h3>
         <form
-          className="w-full flex flex-col items-center gap-4 mt-8"
+          className="w-full flex flex-col items-start md:pl-10 gap-6 mt-8"
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col lg:flex-row">
-            <label className="text-white text-2xl w-[6rem]" htmlFor="name">
+            <label className="text-white text-2xl w-[6rem] pb-4" htmlFor="name">
               Name :
             </label>
             <input
@@ -51,8 +60,26 @@ export default function CtaReview() {
               onChange={handleChange}
             />
           </div>
+          <div className="flex gap-3 justify-start">
+            <p className="text-white text-2xl w-[6rem]">Ratings :</p>
+            {ratingsArr.map((rating) => (
+              <div
+                key={rating}
+                onClick={() => setRatings(rating)}
+                className="cursor-pointer"
+              >
+                <Star
+                  starColor={rating <= ratings ? 'gold' : 'grey'}
+                  width={32}
+                />
+              </div>
+            ))}
+          </div>
           <div className="flex flex-col lg:flex-row">
-            <label className="text-white text-2xl w-[6rem]" htmlFor="review">
+            <label
+              className="text-white text-2xl w-[6rem] pb-4"
+              htmlFor="review"
+            >
               Review :
             </label>
             <textarea
@@ -62,7 +89,7 @@ export default function CtaReview() {
               onChange={handleChange}
             />
           </div>
-          <button className="bg-white rounded text-limeGreen font-bold text-xl px-4 py-2 w-52 border-2 border-limeGreen hover:bg-gray-200">
+          <button className="bg-white rounded text-limeGreen font-bold text-xl px-4 py-2 w-full mt-4 w-52 border-2 border-limeGreen hover:bg-gray-200">
             Submit
           </button>
         </form>
