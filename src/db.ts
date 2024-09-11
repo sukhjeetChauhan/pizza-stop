@@ -5,6 +5,7 @@ import {
   getDocs,
   getDoc,
   doc,
+  deleteDoc,
   where,
   query,
   onSnapshot,
@@ -86,4 +87,8 @@ export async function updateData(collection: string, id: string, data: any) {
   const dataRef = doc(db, collection, id)
 
   await updateDoc(dataRef, data)
+}
+
+export async function deleteProduct(collection: string, id: string) {
+  await deleteDoc(doc(db, collection, id))
 }

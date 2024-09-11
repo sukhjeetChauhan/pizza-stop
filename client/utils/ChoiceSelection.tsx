@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { ChoiceItem } from '../components/CartProvider'
+import { ChoiceItem } from '../Providers/CartProvider'
 
 import { MenuItem } from '../../types/menu'
 import { Combos, Combo, Choices, Sorted } from '../../types/deals'

@@ -1,14 +1,16 @@
 import { useContext, useState } from 'react'
 import { Collapse } from 'react-collapse'
-import { CartContext } from './CartProvider'
+import { CartContext } from '../Providers/CartProvider'
 import '../styles/Cart.css'
 import CartItemDetails from '../utils/CartItemDetails'
 import { getLocalStorage, setLocalStorage } from '../../data/localStorage'
 import { getCoords } from '../../src/appApi'
 import calculateAddressDistance from '../../src/geoLib'
+import { ControllerContext } from '../Providers/ControllerProvider'
 
 export default function Cart() {
   const cart = useContext(CartContext)
+  const { controllers } = useContext(ControllerContext)
   let order = getLocalStorage()
   const [window, setWindow] = useState('')
   const [address, setAddress] = useState<string>('')
@@ -45,7 +47,12 @@ export default function Cart() {
       setOrderStatus('Pickup')
     }
     if (order?.order === 'Pickup') {
-      setIsopen(true)
+      // first check if delivery is turned on
+      if (!controllers.deliveryState) {
+        alert('We are not delivering right now')
+      } else {
+        setIsopen(true)
+      }
     }
   }
 
@@ -56,10 +63,11 @@ export default function Cart() {
       } else {
         const coords = await getCoords(address)
         const distance = calculateAddressDistance(coords)
-        if (distance > 20) {
+        if (distance > 10) {
           alert(`We are not able to deliver that far`)
         } else if (distance > 5) {
-          const delivery = Number((5.99 + (distance - 5)).toFixed(2))
+          const extraDeliveryFee = 2 * (distance - 5)
+          const delivery = Number((5.99 + extraDeliveryFee).toFixed(2))
           alert(
             `Please beware your delivery cost will be ${delivery.toFixed(2)}`
           )

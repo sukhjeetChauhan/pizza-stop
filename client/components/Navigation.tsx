@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { auth } from '../../src/firebase.config'
 
 const pages = ['pizzas', 'sides', 'desserts', 'drinks', 'deals']
+const userKey = import.meta.env.VITE_DASHBOARD_KEY
 
 interface activeLink {
   pizzas: boolean
@@ -65,7 +66,7 @@ export default function Navigation() {
   }
 
   return (
-    <div className="border border-slate-300">
+    <div className="flex justify-between items-center border border-slate-300">
       <ul className="flex list-none sm:ml-20 ml-5 flex-wrap">
         {pages.map((item) => (
           <li
@@ -88,7 +89,7 @@ export default function Navigation() {
             </Link>
           </li>
         ))}
-        {userId === 'sq5tfS5JPyVIRinIc9XsBN1PlmY2' && (
+        {userId === userKey && (
           <li
             className={`p-3 border border-slate-300  ${
               active.dashboard
@@ -109,6 +110,11 @@ export default function Navigation() {
           </li>
         )}
       </ul>
+      {location.pathname !== '/' && (
+        <p key="phone" className="text-red-500 text-xl mr-4 font-bold">
+          09 601 6100
+        </p>
+      )}
     </div>
   )
 }

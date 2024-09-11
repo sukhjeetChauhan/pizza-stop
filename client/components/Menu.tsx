@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 // import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import Modal from '../components/Modal'
 import { useContext } from 'react'
-import { CartContext } from './CartProvider'
+import { CartContext } from '../Providers/CartProvider'
 import { MenuItem } from '../../types/menu'
 import CustomizedOrder from './CustomizedOrder'
 

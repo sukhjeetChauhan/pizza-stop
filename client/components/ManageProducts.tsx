@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { sortBasedOnType } from '../../data/data_manipulation'
 import { useGetData } from '../../data/hooks'
-
+import { NewMenuItem } from '../../types/menu'
 import AdminProducts from '../utils/AdminProducts'
 import Spinner from '../utils/Spinner'
 import Modal from './Modal'
+import { addData } from '../../src/db'
 
 export default function ManageProducts() {
   const [data, setData] = useState(null)
@@ -12,6 +13,11 @@ export default function ManageProducts() {
   const [product, setProduct] = useState('')
   const [modalStatus, setModalStatus] = useState(false)
   const [category, setCategory] = useState('')
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [price, setPrice] = useState('')
+  const [priceSmall, setPriceSmall] = useState('')
+  const [priceLarge, setPriceLarge] = useState('')
 
   const {
     data: pizzas,
@@ -60,11 +66,12 @@ export default function ManageProducts() {
 
   useEffect(() => {
     if (data === null) {
-      if (product === '') {
-        showData('pizzas')
-      }
+      // if (product === '') {
+      //   showData('pizzas')
+      // }
+      showData('pizzas')
     }
-  }, [data])
+  }, [pizzas, sides, desserts, drinks])
 
   if (pizzasLoading) {
     return <Spinner />
@@ -95,8 +102,30 @@ export default function ManageProducts() {
     }
   }
 
-  function handleSubmit(): void {
-    throw new Error('Function not implemented.')
+  async function handleSubmit(e: {
+    preventDefault: () => void
+  }): Promise<void> {
+    e.preventDefault()
+    const newProduct: NewMenuItem = {
+      name: name,
+      description: description,
+      imgUrl: '/images/front.jpg',
+      type: category,
+    }
+    if (product === 'pizzas') {
+      newProduct.price_large = priceLarge
+      newProduct.price_small = priceSmall
+    } else {
+      newProduct.price = price
+    }
+
+    await addData(product, newProduct)
+    setName('')
+    setDescription('')
+    setPrice('')
+    setPriceSmall('')
+    setPriceLarge('')
+    setModalStatus(false)
   }
 
   function openAddWindow(item: string): void {
@@ -110,18 +139,76 @@ export default function ManageProducts() {
         <>
           <div className="fixed top-0 left-0 z-10 h-screen w-screen bg-gray-800 opacity-50"></div>
           <Modal>
-            <div className="p-4">
-              <h3>{`Category: ${category}`}</h3>
+            <div className="p-8">
+              <h3 className="text-xl mb-8 text-bold mt-6">{`Category: ${category}`}</h3>
               <form
                 className="flex flex-col items-center justify-center"
                 onSubmit={handleSubmit}
               >
-                <input type="text" placeholder="Product Name" />
-                <input type="text" placeholder="Product Decription" />
-                <input type="text" placeholder="Product Price" />
+                <input
+                  className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4"
+                  type="text"
+                  placeholder="Product Name"
+                  aria-label="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
 
-                <button type="submit">Add Item</button>
+                {product === 'pizzas' ? (
+                  <div
+                    key="pizza-prices"
+                    className="flex flex-col items-center justify-center"
+                  >
+                    <input
+                      className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4"
+                      type="text"
+                      placeholder="Product Price_small"
+                      aria-label="price_small"
+                      value={priceSmall}
+                      onChange={(e) => setPriceSmall(e.target.value)}
+                    />
+                    <input
+                      className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4"
+                      type="text"
+                      placeholder="Product Price_large"
+                      aria-label="price_large"
+                      value={priceLarge}
+                      onChange={(e) => setPriceLarge(e.target.value)}
+                    />
+                  </div>
+                ) : (
+                  <div key="general-prices">
+                    <input
+                      className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4"
+                      type="text"
+                      placeholder="Product Price"
+                      aria-label="price"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                    />
+                  </div>
+                )}
+                <textarea
+                  className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4 h-[150px]"
+                  placeholder="Product Decription"
+                  aria-label="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+
+                <button
+                  className="bg-red-500 px-2 py-4 text-white text-bold rounded w-full"
+                  type="submit"
+                >
+                  Add Item
+                </button>
               </form>
+              <button
+                onClick={() => setModalStatus(false)}
+                className="px-4 py-2 rounded-full bg-gray-100 hover:bg-gray-200 absolute top-2 right-2"
+              >
+                X
+              </button>
             </div>
           </Modal>
         </>

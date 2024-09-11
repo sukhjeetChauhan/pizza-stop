@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from 'react'
-import { CartContext } from './CartProvider'
+import { CartContext } from '../Providers/CartProvider'
 import cartSVG from '/images/cart.svg'
 import { auth } from '../../src/firebase.config'
 import { onAuthStateChanged } from 'firebase/auth'

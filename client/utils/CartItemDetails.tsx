@@ -1,4 +1,4 @@
-import { CartItem } from '../components/CartProvider'
+import { CartItem } from '../Providers/CartProvider'
 
 export default function CartItemDetails({ item }: { item: CartItem }) {
   function choicesAvailable() {

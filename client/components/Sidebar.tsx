@@ -5,7 +5,8 @@ import { MenuItem } from '../../types/menu'
 import { useContext, useEffect, useState } from 'react'
 import Cart from './Cart'
 import { useNavigate } from 'react-router-dom'
-import { CartContext } from './CartProvider'
+import { CartContext } from '../Providers/CartProvider'
+import { ControllerContext } from '../Providers/ControllerProvider'
 
 type Props = {
   data: MenuItem[]
@@ -13,8 +14,11 @@ type Props = {
 
 export default function Sidebar({ data }: Props) {
   const cart = useContext(CartContext)
+  const { controllers } = useContext(ControllerContext)
   const navigate = useNavigate()
   const [isEmpty, setIsEmpty] = useState(true)
+
+  const acceptingOrders = controllers.orderState
 
   useEffect(() => {
     if (cart.cart.length === 0) setIsEmpty(true)
@@ -29,21 +33,25 @@ export default function Sidebar({ data }: Props) {
     const currentMins = now.getMinutes()
     const currentTimeInMinutes = currentHour * 60 + currentMins
 
-    const openingTime = 11 * 60 + 30
-    const closingTime = 20 * 60 + 45
-    // const openingTime = 0
-    // const closingTime = 24 * 60
-    if (isEmpty === true) {
-      alert('your cart seems to be empty')
-    } else if (
-      openingTime < currentTimeInMinutes &&
-      currentTimeInMinutes < closingTime
-    ) {
-      if (isEmpty === false) {
-        navigate('/payment')
+    // const openingTime = 11 * 60 + 30
+    // const closingTime = 20 * 60 + 45
+    const openingTime = 0
+    const closingTime = 24 * 60
+    if (acceptingOrders) {
+      if (isEmpty === true) {
+        alert('your cart seems to be empty')
+      } else if (
+        openingTime < currentTimeInMinutes &&
+        currentTimeInMinutes < closingTime
+      ) {
+        if (isEmpty === false) {
+          navigate('/payment')
+        }
+      } else {
+        alert('Sorry, We only accept orders between 11:30am and 8:45pm')
       }
     } else {
-      alert('Sorry, We only accept orders between 11:30am and 8:45pm')
+      alert('We are not accepting online orders right now')
     }
   }
   return (
@@ -55,14 +63,23 @@ export default function Sidebar({ data }: Props) {
           <span>---------</span>
         </div>
         <div className="overflow-y-auto max-h-[23rem]">
-          <Cart />
+          {acceptingOrders ? (
+            <Cart />
+          ) : (
+            <p className="text-base font-bold mt-10">
+              We are not accepting online orders right now. Please call us on
+              <span className="text-red-500"> 09 601 6100 </span> to Order.
+            </p>
+          )}
         </div>
       </div>
       <div className="flex flex-col items-center max-w-full">
         <CustomCarousel data={data} />
         <Button
           onClick={handleCheckout}
-          className="p-3 w-72 max-w-full bg-limeGreen text-white mb-2"
+          className={`p-3 w-72 max-w-full ${
+            controllers.orderState ? 'bg-limeGreen' : 'bg-gray-700'
+          } text-white mb-2`}
         >
           Checkout
         </Button>

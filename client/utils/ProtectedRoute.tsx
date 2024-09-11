@@ -1,6 +1,6 @@
 import React, { ReactElement, useContext } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
-import { CartContext } from '../components/CartProvider' // Adjust the import according to your context setup
+import { CartContext } from '../Providers/CartProvider' // Adjust the import according to your context setup
 
 interface ProtectedRouteProps {
   element: ReactElement

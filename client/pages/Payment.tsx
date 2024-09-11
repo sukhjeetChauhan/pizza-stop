@@ -4,7 +4,7 @@ import { Elements } from '@stripe/react-stripe-js'
 
 import CheckoutForm from '../components/CheckoutForm'
 import '../styles/Payment.css'
-import { CartContext } from '../components/CartProvider'
+import { CartContext } from '../Providers/CartProvider'
 import { getLocalStorage } from '../../data/localStorage'
 import { auth } from '../../src/firebase.config'
 import { useGetDataById } from '../../data/hooks'
