@@ -24,7 +24,7 @@ const accountNav: Nav[] = [
 export default function Footer() {
   return (
     <footer className="text-white">
-      <div className="bg-black flex justify-center">
+      <div className="bg-lime-950 flex justify-center">
         <div className="container px-10 pt-14 pb-12 grid grid-cols-9 gap-5 md:gap-10 justify-between md:justify-start">
           <div className="space-y-3 md:space-y-6 text-center xl:text-left col-span-12 xl:col-span-4">
             <h5 className="text-xl font-medium">Order Online</h5>
@@ -88,7 +88,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="bg-gray-900 flex justify-center">
+      <div className="bg-lime-950 flex justify-center border-t border-slate-500">
         <div className="container py-5 flex items-center justify-center md:justify-between flex-wrap gap-5">
           <p className="text-sm text-gray-400 md:text-start text-center">
             &copy; {new Date().getFullYear()} All Rights Reserved. Developed by

@@ -33,10 +33,10 @@ export default function Sidebar({ data }: Props) {
     const currentMins = now.getMinutes()
     const currentTimeInMinutes = currentHour * 60 + currentMins
 
-    const openingTime = 11 * 60 + 30
-    const closingTime = 20 * 60 + 45
-    // const openingTime = 0
-    // const closingTime = 24 * 60
+    // const openingTime = 11 * 60 + 30
+    // const closingTime = 20 * 60 + 45
+    const openingTime = 0
+    const closingTime = 24 * 60
     if (acceptingOrders) {
       if (isEmpty === true) {
         alert('your cart seems to be empty')

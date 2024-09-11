@@ -55,13 +55,13 @@ export default function CheckoutForm() {
 
     setIsLoading(true)
 
-    const { error } = await stripe.confirmPayment({
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: 'https://pizzastopwellsford.co.nz/success',
+        // Remove the return_url here
         // receipt_email: email,
       },
+      redirect: 'if_required', // Prevents auto-redirect, handle it manually
     })
 
     // This point will only be reached if there is an immediate error when
@@ -69,10 +69,15 @@ export default function CheckoutForm() {
     // your `return_url`. For some payment methods like iDEAL, your customer will
     // be redirected to an intermediate site first to authorize the payment, then
     // redirected to the `return_url`.
-    if (error.type === 'card_error' || error.type === 'validation_error') {
-      setMessage(error.message as string)
-    } else {
-      setMessage('An unexpected error occurred.')
+    if (error) {
+      if (error.type === 'card_error' || error.type === 'validation_error') {
+        setMessage(error.message as string)
+      } else {
+        setMessage('An unexpected error occurred.')
+      }
+    } else if (paymentIntent?.status === 'succeeded') {
+      // Redirect the user to a success page, but without sensitive info
+      window.location.href = '/success'
     }
 
     setIsLoading(false)
