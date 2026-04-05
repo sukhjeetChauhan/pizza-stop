@@ -8,6 +8,8 @@ import {
   deleteDoc,
   where,
   query,
+  orderBy,
+  limit,
   onSnapshot,
   DocumentData,
   updateDoc,
@@ -55,9 +57,14 @@ export async function getDataById(collectionName: string, id: string) {
 
 export function getUpdatedOrder(
   onupdate: (arg0: DocumentData[]) => void,
-  status: string
+  status: string,
 ) {
-  const q = query(collection(db, 'orders'), where('status', '==', status))
+  const q = query(
+    collection(db, 'orders'),
+    where('status', '==', status),
+    orderBy('timestamp', 'desc'),
+    limit(400),
+  )
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const orders: DocumentData[] = []
     querySnapshot.forEach((doc) => {

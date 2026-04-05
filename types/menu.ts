@@ -23,6 +23,7 @@ export interface NewMenuItem {
   price?: string
   price_small?: string
   price_large?: string
+  price_Xl?: string
   type: string
   imgUrl: string
   description: string

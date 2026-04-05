@@ -55,22 +55,22 @@ export default function CustomizedOrder({
   const [toppingsChoice, setToppingsChoice] = useState<string[]>([])
   const [swirlsChoice, setSwirlsChoice] = useState<string[]>([])
   const [dealChoices, setDealChoices] = useState<ChoiceItem>({
-    pizzas: [''],
-    sides: [''],
-    drinks: [''],
-    desserts: [''],
+    pizzas: [],
+    sides: [],
+    drinks: [],
+    desserts: [],
   })
   const cart = useContext(CartContext)
 
   const filteredUpgrades = upgrades?.filter(
-    (item: any) => item.name !== 'Toppings' && item.name !== 'Extra Swirl'
+    (item: any) => item.name !== 'Toppings' && item.name !== 'Extra Swirl',
   )
   const toppingsArr = upgrades?.filter(
-    (item: any) => item.name === 'Toppings'
+    (item: any) => item.name === 'Toppings',
   )[0].Toppings
 
   const swirlsArr = upgrades?.filter(
-    (item: any) => item.name === 'Extra Swirl'
+    (item: any) => item.name === 'Extra Swirl',
   )[0].swirls
 
   if (isLoading) {
@@ -108,7 +108,7 @@ export default function CustomizedOrder({
 
     const arr = Object.values(dealChoices)
     const allEmpty = arr.every(
-      (item) => JSON.stringify(item) == JSON.stringify([''])
+      (item) => JSON.stringify(item) == JSON.stringify(['']),
     )
 
     if (data.type === 'deals' && allEmpty) {
@@ -136,7 +136,7 @@ export default function CustomizedOrder({
         }
       } else {
         const newUpgradeCart = upgradeCart.filter(
-          (i: Upgrade) => i.name !== upgradeItem.name
+          (i: Upgrade) => i.name !== upgradeItem.name,
         )
         setUpgradeCart(newUpgradeCart)
       }
@@ -195,17 +195,31 @@ export default function CustomizedOrder({
             </h2>
             <Collapse isOpened={true}>
               <div className="flex gap-4">
-                <div className="p-2 bg-gray-100 flex gap-2 rounded">
-                  <input
-                    type="radio"
-                    name="size_choice"
-                    value={data.price_large}
-                    onChange={handleCart}
-                  />
-                  <label htmlFor="size_choice">{`Large ${data.price_large}`}</label>
-                </div>
+                {data.price_Xl && (
+                  <div className="p-2 bg-gray-100 flex gap-2 rounded">
+                    <input
+                      type="radio"
+                      name="size_choice"
+                      value={data.price_Xl}
+                      onChange={handleCart}
+                    />
+                    <label htmlFor="size_choice">{`X-Large ${data.price_Xl}`}</label>
+                  </div>
+                )}
+                {data.price_large && (
+                  <div className="p-2 bg-gray-100 flex gap-2 rounded">
+                    <input
+                      type="radio"
+                      name="size_choice"
+                      value={data.price_large}
+                      onChange={handleCart}
+                    />
+                    <label htmlFor="size_choice">{`Large ${data.price_large}`}</label>
+                  </div>
+                )}
 
-                {data.price_small && (
+                {/* commenting out small size pizza */}
+                {/* {data.price_small && (
                   <div className="p-2 bg-gray-100 flex gap-2 rounded">
                     <input
                       type="radio"
@@ -215,7 +229,7 @@ export default function CustomizedOrder({
                     />
                     <label htmlFor="size_choice">{`Small ${data.price_small}`}</label>
                   </div>
-                )}
+                )} */}
               </div>
             </Collapse>
             <div className="p-3 rounded bg-gray-100 mt-2 flex justify-between">

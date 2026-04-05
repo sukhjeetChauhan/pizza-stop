@@ -118,6 +118,20 @@ any) {
                   <div className="flex w-[35rem] justify-between p-2 bg-gray-200 mb-2">
                     <p className="font-bold text-lg">Price:</p>
                     <div className="flex gap-4">
+                      {product?.price_Xl && (
+                        <div>
+                          <p className="text-limeGreen text-lg">
+                            {product?.price_Xl}
+                          </p>
+                          <p>price Xl</p>
+                          <button
+                            onClick={() => openEdit('price_Xl')}
+                            className="w-5"
+                          >
+                            <img src={editLogo} alt="edit icon" />
+                          </button>
+                        </div>
+                      )}
                       {product?.price_large && (
                         <div>
                           <p className="text-limeGreen text-lg">

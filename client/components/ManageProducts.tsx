@@ -18,6 +18,7 @@ export default function ManageProducts() {
   const [price, setPrice] = useState('')
   const [priceSmall, setPriceSmall] = useState('')
   const [priceLarge, setPriceLarge] = useState('')
+  const [priceXl, setPriceXl] = useState('')
 
   const {
     data: pizzas,
@@ -115,6 +116,7 @@ export default function ManageProducts() {
     if (product === 'pizzas') {
       newProduct.price_large = priceLarge
       newProduct.price_small = priceSmall
+      newProduct.price_Xl = priceXl
     } else {
       newProduct.price = price
     }
@@ -125,6 +127,7 @@ export default function ManageProducts() {
     setPrice('')
     setPriceSmall('')
     setPriceLarge('')
+    setPriceXl('')
     setModalStatus(false)
   }
 
@@ -174,6 +177,14 @@ export default function ManageProducts() {
                       aria-label="price_large"
                       value={priceLarge}
                       onChange={(e) => setPriceLarge(e.target.value)}
+                    />
+                    <input
+                      className="text-lg py-1 px-2 border-2 border-slate-500 rounded mb-4"
+                      type="text"
+                      placeholder="Product Price_Xl"
+                      aria-label="price_Xl"
+                      value={priceXl}
+                      onChange={(e) => setPriceXl(e.target.value)}
                     />
                   </div>
                 ) : (
