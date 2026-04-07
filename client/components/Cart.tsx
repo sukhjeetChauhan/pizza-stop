@@ -67,7 +67,7 @@ export default function Cart() {
           alert(`We are not able to deliver that far`)
         } else if (distance > 5) {
           const extraDeliveryFee = 2 * (distance - 5)
-          const delivery = Number((5.99 + extraDeliveryFee).toFixed(2))
+          const delivery = Number((7.99 + extraDeliveryFee).toFixed(2))
           alert(
             `Please beware your delivery cost will be ${delivery.toFixed(2)}`
           )
@@ -84,7 +84,7 @@ export default function Cart() {
             ...order,
             address: address,
             order: 'Deliver',
-            deliveryFee: 5.99,
+            deliveryFee: 7.99,
           })
           setOrderStatus('Deliver')
           setIsopen(false)
@@ -98,7 +98,7 @@ export default function Cart() {
             ...order,
             address: address,
             order: 'Deliver',
-            deliveryFee: 5.99,
+            deliveryFee: 7.99,
           })
           setOrderStatus('Deliver')
           setIsopen(false)
