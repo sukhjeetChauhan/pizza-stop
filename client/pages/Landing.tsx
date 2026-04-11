@@ -62,7 +62,7 @@ export default function Landing() {
         }
 
         if (distance > 5) {
-          const extraDeliveryFee = 2 * (distance - 5)
+          const extraDeliveryFee = 3 * (distance - 5)
           storageObj.deliveryFee = Number((7.99 + extraDeliveryFee).toFixed(2))
           alert(
             `Please beware your delivery cost will be ${storageObj.deliveryFee.toFixed(

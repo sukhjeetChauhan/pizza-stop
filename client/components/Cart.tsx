@@ -66,7 +66,7 @@ export default function Cart() {
         if (distance > 10) {
           alert(`We are not able to deliver that far`)
         } else if (distance > 5) {
-          const extraDeliveryFee = 2 * (distance - 5)
+          const extraDeliveryFee = 3 * (distance - 5)
           const delivery = Number((7.99 + extraDeliveryFee).toFixed(2))
           alert(
             `Please beware your delivery cost will be ${delivery.toFixed(2)}`
