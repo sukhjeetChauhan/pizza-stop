@@ -2,10 +2,11 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { ChoiceItem } from '../Providers/CartProvider'
 
 import { MenuItem } from '../../types/menu'
-import { Combos, Combo, Choices, Sorted } from '../../types/deals'
+import { Combo, Choices, Sorted } from '../../types/deals'
 import { Collapse } from 'react-collapse'
 import { getDataByType } from '../../src/db'
 import { sortBasedOnType } from '../../data/data_manipulation'
+import { dealsConfig } from '../../data/dealsConfig'
 import Button from './Button'
 
 interface Props {
@@ -25,73 +26,25 @@ export default function ChoiceSelection({ setDealChoices, data }: Props) {
   const [sortedData, setSortedData] = useState<Sorted>({})
   const [active, setActive] = useState(true)
 
-  const choicesObj: Combos = {
-    'The Netflix Night': {
-      choices: {
-        pizzas: { type: 'any', number: 1 },
-      },
-      fixed: {
-        sides: ['garlic bread'],
-        desserts: ['chocolate mousse'],
-        drinks: ['1.5 ltr drink'],
-      },
-    },
-    'The Lunch combo': {
-      choices: {
-        pizzas: { type: 'Value Range', number: 1 },
-      },
-      fixed: {
-        sides: ['chips'],
-        drinks: ['can drink'],
-      },
-    },
-    'Double combo': {
-      choices: {
-        pizzas: { type: 'any', number: 2 },
-      },
-      fixed: {
-        sides: ['garlic bread'],
-        drinks: ['1.5 ltr drink'],
-      },
-    },
-    'The value deal': {
-      choices: {
-        pizzas: { type: 'Value Range', number: 2 },
-      },
-      fixed: {
-        sides: ['garlic bread'],
-        drinks: ['1.5 ltr drink'],
-      },
-    },
-    'Triple combo': {
-      choices: {
-        pizzas: { type: 'any', number: 3 },
-      },
-      fixed: {
-        sides: ['garlic bread'],
-        drinks: ['1.5 ltr drink'],
-      },
-    },
-    'Stuffed crust combo': {
-      choices: {
-        pizzas: { type: 'any', number: 2 },
-        sides: { type: 'regular', number: 2 },
-      },
-      fixed: {},
-    },
-  }
-
   useEffect(() => {
-    if (choicesObj) {
-      const dealType = choicesObj[data.name]
-
+    const dealType = dealsConfig[data.name]
+    if (dealType) {
       setPizzasChoice(dealType.fixed?.pizzas ?? [])
       setSidesChoice(dealType.fixed?.sides ?? [])
       setDrinksChoice(dealType.fixed?.drinks ?? [])
       setDessertChoice(dealType.fixed?.desserts ?? [])
       setDeal(dealType)
     }
-  }, [])
+  }, [data.name])
+
+  useEffect(() => {
+    setDealChoices({
+      pizzas: pizzasChoice,
+      sides: sidesChoice,
+      drinks: drinksChoice,
+      desserts: dessertChoice,
+    })
+  }, [pizzasChoice, sidesChoice, drinksChoice, dessertChoice, setDealChoices])
 
   useEffect(() => {
     async function setData() {
@@ -176,13 +129,6 @@ export default function ChoiceSelection({ setDealChoices, data }: Props) {
   }
 
   function handleAddChoices() {
-    const obj = {
-      pizzas: pizzasChoice,
-      sides: sidesChoice,
-      drinks: drinksChoice,
-      desserts: dessertChoice,
-    }
-    setDealChoices(obj)
     setOpenPizza(false)
     setOpenSide(false)
     setOpenDrinks(false)

@@ -13,6 +13,10 @@ import {
 } from '../Providers/CartProvider'
 import SidesOPtions from './SidesOptions'
 import ChoiceSelection from '../utils/ChoiceSelection'
+import {
+  mergeDealChoiceWithFixed,
+  validateDealChoices,
+} from '../../data/dealsConfig'
 
 interface Upgrade {
   name: string
@@ -94,29 +98,34 @@ export default function CustomizedOrder({
     const swirlsCost = swirlsChoice.length > 0 ? swirlsChoice.length * 0.5 : 0
 
     const otherCost = toppingCost + swirlsCost
+
+    if (data.type === 'deals') {
+      const validationError = validateDealChoices(data.name, dealChoices)
+      if (validationError) {
+        alert(validationError)
+        return
+      }
+    }
+
+    const choice =
+      data.type === 'deals'
+        ? mergeDealChoiceWithFixed(data.name, dealChoices)
+        : dealChoices
+
     const finalCartItem = {
       ...cartItem,
       upgrades: upgradeArr,
       toppings: toppingsChoice,
       swirls: swirlsChoice,
-      choice: dealChoices,
+      choice,
       price:
         data.type === 'Loaded'
           ? Number(cartItem.price) + otherCost
           : (Number(cartItem.price) + upgradeCost + otherCost).toFixed(2),
     }
 
-    const arr = Object.values(dealChoices)
-    const allEmpty = arr.every(
-      (item) => JSON.stringify(item) == JSON.stringify(['']),
-    )
-
-    if (data.type === 'deals' && allEmpty) {
-      alert('Please make sure to choose an item')
-    } else {
-      cart.addToCart(finalCartItem)
-      setModalStatus(false)
-    }
+    cart.addToCart(finalCartItem)
+    setModalStatus(false)
   }
   function handleCart(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.type === 'radio') {
