@@ -4,6 +4,7 @@ import { ProductDataInterface } from '../types/productData'
 
 const pizzas = [
   'Meat Range',
+  'Pulled Pork Range',
   'Chicken Range',
   'Favourite Range',
   'Seafood SaRange',

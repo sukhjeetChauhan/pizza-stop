@@ -43,7 +43,7 @@ export default function Landing() {
       const storageObj = {
         address: deliverStatus ? address : '',
         order: deliverStatus ? 'Deliver' : 'Pickup',
-        deliveryFee: deliverStatus ? 5.99 : 0,
+        deliveryFee: deliverStatus ? 7.99 : 0,
       }
 
       if (deliverStatus) {
@@ -62,8 +62,8 @@ export default function Landing() {
         }
 
         if (distance > 5) {
-          const extraDeliveryFee = 2 * (distance - 5)
-          storageObj.deliveryFee = Number((5.99 + extraDeliveryFee).toFixed(2))
+          const extraDeliveryFee = 3 * (distance - 5)
+          storageObj.deliveryFee = Number((7.99 + extraDeliveryFee).toFixed(2))
           alert(
             `Please beware your delivery cost will be ${storageObj.deliveryFee.toFixed(
               2
@@ -85,7 +85,7 @@ export default function Landing() {
           const storageObj = {
             address: deliverStatus ? address : '',
             order: deliverStatus ? 'Deliver' : 'Pickup',
-            deliveryFee: deliverStatus ? 5.99 : 0,
+            deliveryFee: deliverStatus ? 7.99 : 0,
           }
           storage.setLocalStorage(storageObj)
           setModalStatus(false)
